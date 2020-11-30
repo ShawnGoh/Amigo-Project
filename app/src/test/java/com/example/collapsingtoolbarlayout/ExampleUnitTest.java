@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject;
+package com.example.collapsingtoolbarlayout;
 
 import org.junit.Test;
 
