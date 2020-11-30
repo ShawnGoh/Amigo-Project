@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/active"
+        android:title="Active Projects"
+        android:icon="@drawable/ic_explore"
+        app:cnb_backgroundColor="@color/purple_200"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"/>
+
+    <item
+        android:id="@+id/applied"
+        android:title="Applied/Pending"
+        android:icon="@drawable/ic_chat"
+        app:cnb_backgroundColor="@color/purple_200"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"/>
+
+</menu>

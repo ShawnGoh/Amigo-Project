@@ -10,27 +10,65 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.infosys1d_amigoproject.profilemanagement.profileactivity;
+import com.example.infosys1d_amigoproject.profilemanagement.profilefragment;
 import com.example.infosys1d_amigoproject.signinsignup.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.graphics.Typeface;
+import android.view.Gravity;
+
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    // for testing purposes, Main Activity file should be compiled after every view has been completed.
 
     private static final String TAG = "MainActivity/Homescreen";
     Button signoutbutton, profilepagebutton;
 
-
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
+
+    ListView suggestedListView;
+    List suggestedList = new ArrayList();
+    ArrayAdapter adapter;
+    ChipNavigationBar menu_bottom;
+    FragmentManager fragmentManager;
+    private Button seeAllButton;
+
+    String s1[] = {"Learn Python with Me :)", "two", "three", "four", "five"};
+    String s2[] = {"one", "two", "three", "four", "five"};
+
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // use this to switch between activity views
+        //this.setTitle("Explore");
+
 
         signoutbutton = findViewById(R.id.signoutbutton);
-        profilepagebutton = findViewById(R.id.profilebutton);
+
+        menu_bottom = findViewById(R.id.navigation);
+        seeAllButton = findViewById(R.id.seeAllButton);
+        recyclerView = findViewById(R.id.suggestedRecycler);
+
+        MyAdapter myAdapter = new MyAdapter(s1,s2);
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         setupfirebaseauth();
 
@@ -42,18 +80,70 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+//
+//        profilepagebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(), profileactivity.class));
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            }
+//        });
 
-        profilepagebutton.setOnClickListener(new View.OnClickListener() {
+
+        seeAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), profileactivity.class));
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ExploreProjectListings.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
-    }
 
-    //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------
+        menu_bottom.setItemSelected(0, true);
+
+        if (savedInstanceState == null){
+            menu_bottom.setItemSelected(R.id.explore, true);
+            fragmentManager = getSupportFragmentManager();
+            DiscoverFragment discoverFragment = new DiscoverFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, discoverFragment)
+                    .commit();
+        }
+
+
+        menu_bottom.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int id) {
+                Fragment fragment = null;
+                switch(id) {
+                    case R.id.explore:
+                        fragment = new DiscoverFragment();
+                        break;
+                    case R.id.chats:
+                        fragment = new ChatsFragment();
+                        break;
+                    case R.id.projects:
+                        fragment = new MyProjectsFragment();
+                        break;
+                    case R.id.profile:
+                        fragment = new profilefragment();
+                        break;
+                }
+
+                if (fragment != null){
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
+                }
+                else {
+                    Log.e(TAG, "Error in creating fragment");
+                }
+            }
+        });
+
+
+    }
 
     @Override
     protected void onStart() {
@@ -71,8 +161,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void openProjectListings() {
+        Intent intent = new Intent(this, ExploreProjectListings.class);
+        startActivity(intent);
 
-    //FirebaseAuth
+    }
+
+    public void setTitle(String title){
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView textView = new TextView(this);
+        textView.setText(title);
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(textView);
+    }
+
+
     private void setupfirebaseauth(){
         Log.d(TAG, "Setup FirebaseAuth");
         mAuth = FirebaseAuth.getInstance();
@@ -97,4 +206,91 @@ public class MainActivity extends AppCompatActivity {
         };
 
     }
+
 }
+//
+//
+//public class MainActivity extends AppCompatActivity {
+//
+//    private static final String TAG = "MainActivity/Homescreen";
+//    Button signoutbutton, profilepagebutton;
+//
+//
+//
+//    private FirebaseAuth mAuth;
+//    private FirebaseAuth.AuthStateListener mAuthstatelistner;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        signoutbutton = findViewById(R.id.signoutbutton);
+//        profilepagebutton = findViewById(R.id.profilebutton);
+//
+//        setupfirebaseauth();
+//
+//        signoutbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mAuth.signOut();
+//                startActivity(new Intent(getApplicationContext(), SignIn.class));
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            }
+//        });
+//
+//        profilepagebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(), profileactivity.class));
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            }
+//        });
+//
+//    }
+//
+//    //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        mAuth.addAuthStateListener(mAuthstatelistner);
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if(mAuthstatelistner!=null){
+//            mAuth.removeAuthStateListener(mAuthstatelistner);
+//        }
+//    }
+//
+//
+//
+//    //FirebaseAuth
+//    private void setupfirebaseauth(){
+//        Log.d(TAG, "Setup FirebaseAuth");
+//        mAuth = FirebaseAuth.getInstance();
+//
+//        //check if user is sign in
+//        mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user  = firebaseAuth.getCurrentUser();
+//
+//
+//                if(user !=null){
+//                    //user is signed in
+//                    Log.d(TAG, "onAuthStateChanged: signed_in" +user.getUid());
+//                }
+//                else{
+//                    //user is signed out
+//                    Log.d(TAG, "onAuthStateChanged: signed_out");
+//                }
+//
+//            }
+//        };
+//
+//    }
+//}

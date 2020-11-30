@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ExploreProjectListings">
+<!--    load background
+android:background=""-->
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@color/cardview_dark_background">
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:text="All Projects"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="22sp"-->
+<!--            tools:layout_centerInParent="true" />-->
+
+        <!-- load profile picture, can be in profile page-->
+        <!--            <de.hdodenhof.circleimageview.CircleImageView-->
+        <!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--                android:id="@+id/profile_image"-->
+        <!--                android:layout_width="96dp"-->
+        <!--                android:layout_height="96dp"-->
+        <!--                android:src="@drawable/amigoprofilepic"-->
+        <!--                android:layout_alignParentRight="true"-->
+        <!--                app:civ_border_width="1dp"-->
+        <!--                app:civ_border_color="#FF000000"/>-->
+
+    </RelativeLayout>
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/searchbarbg"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Search Projects by Name.." />
+
+    <ListView
+        android:id="@+id/suggestedListView"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:padding="20dp" />
+
+
+    <!--        <GridLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            <HorizontalScrollView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"></HorizontalScrollView>-->
+
+</LinearLayout>
+
+<com.ismaeldivita.chipnavigation.ChipNavigationBar
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/cardview_dark_background"
+    app:cnb_menuResource="@menu/menu_bottom"
+
+
+    />
+
+
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hello World!"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+</RelativeLayout>
