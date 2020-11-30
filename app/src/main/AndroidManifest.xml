@@ -8,14 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.InfoSys1D_AmigoProject">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme">
+        <activity android:name=".profilemanagement.profileactivity">
+        </activity>
+        <activity android:name=".profilesetup.ProfileSetupSkills" />
+        <activity android:name=".profilesetup.ProfileSetupProfilePic" />
+        <activity android:name=".profilesetup.ProfileSetupLookingFor" />
+        <activity android:name=".profilesetup.ProfileSetupAboutMe">
+        </activity>
+        <activity android:name=".profilesetup.ProfileSetupBio" />
+        <activity android:name=".signinsignup.SignIn" />
+        <activity android:name=".signinsignup.SignUp" />
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".onboarding.Onboarding" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

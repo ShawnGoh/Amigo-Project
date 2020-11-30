@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signinsignup.SignUp"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:padding="20dp"
+    android:id="@+id/signupscreen"
+    android:transitionName="screentransit"
+    android:theme="@style/SignupinTheme">
+
+    <ImageView
+        android:id="@+id/logoimagesignup"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/amigologosmallest"
+        android:transitionName="LogoSignInUp" />
+
+    <TextView
+        android:id="@+id/welcomesignup"
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Welcome"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:transitionName="WelcomeSignInUp"/>
+
+    <TextView
+        android:id="@+id/instrusignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up to start collaborating now!"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:transitionName="InstruSignInUp" />
+
+    <LinearLayout
+        android:id="@+id/signuptextinputs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/FirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:paddingTop="10dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/LastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:paddingTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Emailsignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:paddingTop="10dp"
+            android:transitionName="emailtrans">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Passwordsignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:passwordToggleEnabled="true"
+            android:transitionName="passwordtrans">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="By creating this account, I have read and accepted AmigoProject's general terms and privacy policy"
+                android:textSize="10sp"
+                android:layout_gravity="center"/>
+
+            <CheckBox
+                android:layout_weight="0.3"
+                android:id="@+id/termscheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/signupconfirmbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="20dp"
+            android:text="Sign up"
+            android:background="@drawable/roundedrectangleblack"
+            android:layout_gravity="end"
+            android:textColor="@color/white"
+            android:elevation="3dp"
+            android:transitionName="signupsigninbutton"
+            />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/alreadyhaveaccount"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="30sp"
+            android:text="ALREADY HAVE AN ACCOUNT? SIGN IN"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            android:paddingRight="7dp"
+            android:layout_centerInParent="true"
+            android:transitionName="LoginLogouttoggle"/>
+
+    <ProgressBar
+        android:id="@+id/signuploadingbar"
+
+        android:indeterminateDrawable="@drawable/progressbarstyle"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+
+</LinearLayout>

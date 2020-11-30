@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signinsignup.SignIn"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:padding="20dp"
+    android:id="@+id/signinscreen"
+    android:transitionName="screentransit"
+    android:theme="@style/SignupinTheme">
+
+    <ImageView
+        android:id="@+id/logoimagesignin"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:src="@drawable/amigologosmallest"
+        android:transitionName="LogoSignInUp"/>
+
+    <TextView
+        android:id="@+id/welcomesignin"
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Hello there,\nWelcome back"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:transitionName="WelcomeSignInUp"/>
+
+    <TextView
+        android:id="@+id/instrusignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign in to continue where you left off!"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:transitionName="InstruSignInUp"/>
+
+
+    <LinearLayout
+        android:id="@+id/signintextinputs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Emailsignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:paddingTop="10dp"
+        android:transitionName="emailtrans">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Passwordsignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:passwordToggleEnabled="true"
+        android:transitionName="passwordtrans">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signinconfirmbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Sign In"
+        android:background="@drawable/roundedrectangleblack"
+        android:layout_gravity="end"
+        android:textColor="@color/white"
+        android:elevation="3dp"
+        android:transitionName="signupsigninbutton"
+        />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/donthaveaccount"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="30sp"
+        android:text="DON'T HAVE AN ACCOUNT? SIGN UP"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:paddingRight="7dp"
+        android:layout_centerInParent="true"
+        android:transitionName="LoginLogouttoggle"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+
+        android:indeterminateDrawable="@drawable/progressbarstyle"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
