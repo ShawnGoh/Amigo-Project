@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SignupinTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiscoverFragment"
-    style="@style/SignupinTheme"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".DiscoverFragment">
     <!--    load background
     android:background=""-->
 
@@ -17,9 +16,11 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -110,6 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:layout_marginBottom="10dp"
             android:text="See all projects" />
 
         <TextView
@@ -124,12 +126,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedRecycler"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -141,21 +145,9 @@
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/cardview_dark_background"
-        app:cnb_menuResource="@menu/menu_bottom"
-
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

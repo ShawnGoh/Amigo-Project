@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeScreen"></activity>
         <activity android:name=".profilemanagement.profileactivity"></activity>
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
