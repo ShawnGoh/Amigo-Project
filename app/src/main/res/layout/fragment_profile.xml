@@ -16,8 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="410dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/black"
+            app:contentScrim="@color/white"
             app:expandedTitleTextAppearance="@color/black"
+            app:collapsedTitleTextAppearance="@color/white"
+            app:title="Yan Qi"
+            app:collapsedTitleGravity="center"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -32,6 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="none"
+                app:titleTextColor="@color/white"
+                android:tooltipText="hi"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 />
 
