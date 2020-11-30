@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "InfoSys1D_AmigoProject"
+rootProject.name = "infosys1d_amigoproject"
