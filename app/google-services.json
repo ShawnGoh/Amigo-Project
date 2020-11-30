@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "502987750637",
+    "firebase_url": "https://infosys1d-amigoproject.firebaseio.com",
+    "project_id": "infosys1d-amigoproject",
+    "storage_bucket": "infosys1d-amigoproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502987750637:android:3d36909c0e26f4bcc5a0e4",
+        "android_client_info": {
+          "package_name": "com.example.infosys1d_amigoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502987750637-rh49lropfhegcsakmgccvsrav41tu3a9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaS4hge4X6r30xOo9grRSWsnG8BECrMQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502987750637-rh49lropfhegcsakmgccvsrav41tu3a9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

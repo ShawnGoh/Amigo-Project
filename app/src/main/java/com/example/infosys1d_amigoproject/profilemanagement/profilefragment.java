@@ -79,7 +79,7 @@ public class profilefragment extends Fragment {
                 Log.d(TAG, "onClick, navigating to : edit profile fragment");
                 editprofilefragment fragment = new editprofilefragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.profilecontainer, fragment);
+                transaction.replace(R.id.fragment_container, fragment);
                 transaction.addToBackStack("editprofilefragment");
                 transaction.commit();
             }
