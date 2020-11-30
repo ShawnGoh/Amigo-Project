@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/explore"
+        android:title="Explore"
+        android:icon="@drawable/ic_explore"
+        app:cnb_backgroundColor="@color/purple_200"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"/>
+
+    <item
+        android:id="@+id/chats"
+        android:title="Chats"
+        android:icon="@drawable/ic_chat"
+        app:cnb_backgroundColor="@color/purple_200"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"/>
+
+    <item
+        android:id="@+id/projects"
+        android:title="My Projects"
+        android:icon="@drawable/ic_projects"
+        app:cnb_backgroundColor="@color/purple_200"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"/>
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile"
+        app:cnb_backgroundColor="@color/purple_200"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"/>
+
+</menu>

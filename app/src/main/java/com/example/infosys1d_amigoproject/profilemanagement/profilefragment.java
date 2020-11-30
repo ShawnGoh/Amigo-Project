@@ -43,7 +43,6 @@ public class profilefragment extends Fragment {
     private Button backtohomebutton;
     private ChipGroup mskills;
 
-
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
     private DatabaseReference myRef;
@@ -68,7 +67,6 @@ public class profilefragment extends Fragment {
         muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
         backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
-
         mskills = view.findViewById(R.id.profileskillchipsgroup);
         Log.d(TAG, "onCreateView: widgets inited");
 

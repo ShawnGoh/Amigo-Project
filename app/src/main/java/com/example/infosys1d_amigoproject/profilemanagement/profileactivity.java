@@ -16,19 +16,12 @@ import com.example.infosys1d_amigoproject.R;
 public class profileactivity extends AppCompatActivity {
 
     private static final String TAG = "profileactivity";
-
     private Context mcontext = profileactivity.this;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profileactivity);
-
-//
-//
-
-
 
         init();
     }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".onboarding.Onboarding"
+    android:background="#fff">
+
+  <androidx.viewpager2.widget.ViewPager2
+      android:id="@+id/OnboardingScroller"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.473"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.327" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/constraintLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="32dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/OnboardingPageIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@drawable/tabselector"
+        app:tabIndicatorHeight="0dp"
+        app:tabRippleColor="#fff">
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/OnboardingPageIndicator"
+        app:layout_constraintStart_toStartOf="@+id/OnboardingPageIndicator"
+        app:layout_constraintTop_toBottomOf="@+id/OnboardingPageIndicator">
+
+      <Button
+          android:id="@+id/OnboardingSigninButton"
+          style="?android:attr/borderlessButtonStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="55dp"
+          android:background="@drawable/rippleeffectraised"
+          android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+          android:drawableTint="@color/gradient_start"
+          android:padding="10dp"
+          android:paddingLeft="0dp"
+          android:paddingRight="15dp"
+          android:text="SIGN IN"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+          android:textColor="@color/gradient_start"
+          android:textSize="18dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toEndOf="@+id/OnboardingSignupButton"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <Button
+          android:id="@+id/OnboardingSignupButton"
+          style="?android:attr/borderlessButtonStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/rippleeffectraised"
+          android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+          android:drawableTint="@color/gradient_start"
+          android:padding="10dp"
+          android:paddingLeft="15dp"
+          android:paddingRight="0dp"
+          android:text="SIGN UP"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+          android:textColor="@color/gradient_start"
+          android:textSize="18dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

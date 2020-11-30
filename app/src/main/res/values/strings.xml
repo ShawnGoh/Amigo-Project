@@ -1,12 +1,12 @@
 <resources>
-<<<<<<< Updated upstream
+
     <string name="app_name">collapsing toolbar layout</string>
     <string name="recent_news">DO president so UPS</string>
     <string name="in_news">loremasdfkljaherg aspofdgihsopg asodpifgjjaporig a sga;oif paf  </string>
     <string name="publish_date">9 paril </string>
 
 
-=======
+
     <string name="app_name">InfoSys1D_AmigoProject</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -21,6 +21,7 @@
 
     <string name="db_usersdisplay">"users_display"</string>
     <string name="db_usersprivate">"users_private"</string>
+
     <string name="field_name">name</string>
     <string name="field_bio">bio</string>
     <string name="field_aboutme">about_me</string>
@@ -28,5 +29,5 @@
     <string name="field_skills">skills</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
->>>>>>> Stashed changes
+
 </resources>
