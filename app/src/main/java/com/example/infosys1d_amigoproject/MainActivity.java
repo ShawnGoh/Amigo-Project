@@ -9,8 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.infosys1d_amigoproject.profilemanagement.profileactivity;
 import com.example.infosys1d_amigoproject.profilemanagement.profilefragment;
+import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
+import com.example.infosys1d_amigoproject.projectmanagement.MyProjectsFragment;
 import com.example.infosys1d_amigoproject.signinsignup.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,7 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Typeface;
 import android.view.Gravity;

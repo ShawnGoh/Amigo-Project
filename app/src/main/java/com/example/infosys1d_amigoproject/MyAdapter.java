@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
+
 public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> {
     String data1[], data2[];
 

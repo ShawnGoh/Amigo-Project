@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".projectmanagement.CreateNewProject"></activity>
+        <activity android:name=".profilemanagement.profileactivity"></activity>
         <activity android:name=".profilemanagement.profileactivity"></activity>
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
@@ -19,8 +21,8 @@
         <activity android:name=".profilesetup.ProfileSetupBio" />
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
-        <activity android:name=".ExploreProjectListings" />
-        <activity android:name=".ProjectDetails" />
+        <activity android:name=".projectmanagement.ExploreProjectListings" />
+        <activity android:name=".projectmanagement.ProjectDetails" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

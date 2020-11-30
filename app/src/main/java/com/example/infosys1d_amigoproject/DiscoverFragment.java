@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DiscoverFragment#newInstance} factory method to

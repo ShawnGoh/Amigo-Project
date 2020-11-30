@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject;
+package com.example.infosys1d_amigoproject.projectmanagement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.infosys1d_amigoproject.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link com.example.infosys1d_amigoproject.MyProjectsFragment#newInstance} factory method to
+ * Use the {@link MyProjectsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MyProjectsFragment extends Fragment {
@@ -36,8 +38,8 @@ public class MyProjectsFragment extends Fragment {
      * @return A new instance of fragment MyProjectsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static com.example.infosys1d_amigoproject.MyProjectsFragment newInstance(String param1, String param2) {
-        com.example.infosys1d_amigoproject.MyProjectsFragment fragment = new com.example.infosys1d_amigoproject.MyProjectsFragment();
+    public static MyProjectsFragment newInstance(String param1, String param2) {
+        MyProjectsFragment fragment = new MyProjectsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
