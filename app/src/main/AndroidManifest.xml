@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infosys1d_amigoproject">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".profilemanagement.profileactivity">
-        </activity>
+        <activity android:name=".HomeScreen"></activity>
+        <activity android:name=".profilemanagement.profileactivity"></activity>
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
-        <activity android:name=".profilesetup.ProfileSetupAboutMe">
-        </activity>
+        <activity android:name=".profilesetup.ProfileSetupAboutMe"></activity>
         <activity android:name=".profilesetup.ProfileSetupBio" />
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
