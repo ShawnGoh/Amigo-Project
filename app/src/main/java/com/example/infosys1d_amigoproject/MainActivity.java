@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter adapter;
     ChipNavigationBar menu_bottom;
     FragmentManager fragmentManager;
-    private Button seeAllButton;
-
-    String s1[] = {"Learn Python with Me :)", "two", "three", "four", "five"};
-    String s2[] = {"one", "two", "three", "four", "five"};
 
     RecyclerView recyclerView;
 
@@ -63,12 +59,6 @@ public class MainActivity extends AppCompatActivity {
         signoutbutton = findViewById(R.id.signoutbutton);
 
         menu_bottom = findViewById(R.id.navigation);
-        seeAllButton = findViewById(R.id.seeAllButton);
-        recyclerView = findViewById(R.id.suggestedRecycler);
-
-        MyAdapter myAdapter = new MyAdapter(s1,s2);
-        recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         setupfirebaseauth();
 
@@ -77,23 +67,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), SignIn.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
-        });
-//
-//        profilepagebutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), profileactivity.class));
-//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//            }
-//        });
-
-
-        seeAllButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ExploreProjectListings.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
@@ -208,89 +181,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-//
-//
-//public class MainActivity extends AppCompatActivity {
-//
-//    private static final String TAG = "MainActivity/Homescreen";
-//    Button signoutbutton, profilepagebutton;
-//
-//
-//
-//    private FirebaseAuth mAuth;
-//    private FirebaseAuth.AuthStateListener mAuthstatelistner;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        signoutbutton = findViewById(R.id.signoutbutton);
-//        profilepagebutton = findViewById(R.id.profilebutton);
-//
-//        setupfirebaseauth();
-//
-//        signoutbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mAuth.signOut();
-//                startActivity(new Intent(getApplicationContext(), SignIn.class));
-//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//            }
-//        });
-//
-//        profilepagebutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), profileactivity.class));
-//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//            }
-//        });
-//
-//    }
-//
-//    //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        mAuth.addAuthStateListener(mAuthstatelistner);
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if(mAuthstatelistner!=null){
-//            mAuth.removeAuthStateListener(mAuthstatelistner);
-//        }
-//    }
-//
-//
-//
-//    //FirebaseAuth
-//    private void setupfirebaseauth(){
-//        Log.d(TAG, "Setup FirebaseAuth");
-//        mAuth = FirebaseAuth.getInstance();
-//
-//        //check if user is sign in
-//        mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user  = firebaseAuth.getCurrentUser();
-//
-//
-//                if(user !=null){
-//                    //user is signed in
-//                    Log.d(TAG, "onAuthStateChanged: signed_in" +user.getUid());
-//                }
-//                else{
-//                    //user is signed out
-//                    Log.d(TAG, "onAuthStateChanged: signed_out");
-//                }
-//
-//            }
-//        };
-//
-//    }
-//}
