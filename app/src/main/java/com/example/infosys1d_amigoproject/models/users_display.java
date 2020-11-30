@@ -16,6 +16,7 @@ public class users_display {
     private ArrayList<String> skills = new ArrayList<>();
     private boolean compeletedsetup = false;
 
+
     public users_display(String about_me, String bio, ArrayList<String> chats, String looking_for, String name, String profile_picture, long projects_completed, ArrayList<String> projects_completed_list, ArrayList<String> current_projects, ArrayList<String> skills) {
         this.about_me = about_me;
         this.bio = bio;
