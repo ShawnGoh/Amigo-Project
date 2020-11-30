@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FirebaseMethods {
 
@@ -46,6 +48,52 @@ public class FirebaseMethods {
             userID = mAuth.getCurrentUser().getUid();
         }
     }
+
+    public void updateName(String displayName){
+        Log.d(TAG, "updateName: updating name to: " + displayName);
+        myRef.child(mContext.getString(R.string.db_usersdisplay))
+                .child(userID)
+                .child(mContext.getString(R.string.field_name))
+                .setValue(displayName);
+    }
+
+    public void updateBio(String Bio){
+        Log.d(TAG, "updateName: updating name to: " + Bio);
+        myRef.child(mContext.getString(R.string.db_usersdisplay))
+                .child(userID)
+                .child(mContext.getString(R.string.field_bio))
+                .setValue(Bio);
+    }
+    public void updateAboutMe(String aboutMe){
+        Log.d(TAG, "updateName: updating name to: " + aboutMe);
+        myRef.child(mContext.getString(R.string.db_usersdisplay))
+                .child(userID)
+                .child(mContext.getString(R.string.field_aboutme))
+                .setValue(aboutMe);
+    }
+    public void updateLookingFor(String lookingfor){
+        Log.d(TAG, "updateName: updating name to: " + lookingfor);
+        myRef.child(mContext.getString(R.string.db_usersdisplay))
+                .child(userID)
+                .child(mContext.getString(R.string.field_lookingfor))
+                .setValue(lookingfor);
+    }
+
+    public void updateSkillChips(String skillChipsString){
+        Log.d(TAG, "updateName: updating name to: " + skillChipsString);
+        String str[] = skillChipsString.split(" ");
+        List<String> al = new ArrayList<String>();
+        al = Arrays.asList(str);
+
+        myRef.child(mContext.getString(R.string.db_usersdisplay))
+                .child(userID)
+                .child(mContext.getString(R.string.field_skills))
+                .setValue(al);
+    }
+
+
+
+
 
 
     public boolean checkifemailexists(String email, DataSnapshot dataSnapshot){
