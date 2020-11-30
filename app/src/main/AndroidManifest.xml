@@ -20,6 +20,8 @@
         <activity android:name=".profilesetup.ProfileSetupBio" />
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
+        <activity android:name=".ExploreProjectListings" />
+        <activity android:name=".ProjectDetails" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

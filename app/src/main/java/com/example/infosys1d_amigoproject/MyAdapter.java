@@ -50,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), ProjectDetails.class);
-                    //startActivity(view.getContext(),intent,);
+                    view.getContext().startActivity(intent);
                 }
             });
         }
