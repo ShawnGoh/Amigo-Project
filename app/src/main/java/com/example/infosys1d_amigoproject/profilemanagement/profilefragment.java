@@ -39,7 +39,7 @@ public class profilefragment extends Fragment {
     private TextView mName, mBio, mAboutme, mlookingfor, mcurrentproject, muserid, memail;
     private ImageView mProfilepic;
     private Context mcontext;
-    private Button backtohomebutton;
+    //private Button backtohomebutton;
     private ChipGroup mskills;
 
     //Firebase Database
@@ -57,27 +57,27 @@ public class profilefragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
         Log.d(TAG, "onCreateView: init widgets");
         mName = view.findViewById(R.id.profilenametextview);
-        mBio = view.findViewById(R.id.profilebiotextview);
+        //mBio = view.findViewById(R.id.profilebiotextview);
         mAboutme = view.findViewById(R.id.profileaboutmetextview);
         mlookingfor = view.findViewById(R.id.profilelookingfortextview);
         mcurrentproject = view.findViewById(R.id.profilecurrentprojectstextview);
         mProfilepic = view.findViewById(R.id.profilepic);
         mcontext = getActivity();
-        muserid = view.findViewById(R.id.profileuserid);
+        //muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
-        backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
+        //backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
         mskills = view.findViewById(R.id.profileskillchipsgroup);
         Log.d(TAG, "onCreateView: widgets inited");
 
         firebaseMethods = new FirebaseMethods(mcontext);
         setupfirebaseauth();
 
-        backtohomebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(mcontext, MainActivity.class));
-            }
-        });
+        //backtohomebutton.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+                //startActivity(new Intent(mcontext, MainActivity.class));
+            //}
+        //});
 
         return view;
     }
@@ -90,11 +90,11 @@ public class profilefragment extends Fragment {
         users_private privatedata = userSettings.getUsersprivate();
 
         mName.setText(displaydata.getName());
-        mBio.setText(displaydata.getBio());
+        //mBio.setText(displaydata.getBio());
         mAboutme.setText(displaydata.getAbout_me());
         mlookingfor.setText(displaydata.getLooking_for());
         mcurrentproject.setText(displaydata.getCurrent_projects().toString());
-        muserid.setText(privatedata.getUser_id());
+        //muserid.setText(privatedata.getUser_id());
         memail.setText(privatedata.getEmail());
 
         ArrayList<String> chipslist = displaydata.getSkills();

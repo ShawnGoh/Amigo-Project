@@ -16,7 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="410dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/black"
+            app:contentScrim="@color/white"
+            app:title="Yan Qi"
+            app:collapsedTitleGravity="center"
+            app:collapsedTitleTextAppearance="@color/white"
             app:expandedTitleTextAppearance="@color/black"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -60,53 +63,64 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_personname"
                     android:id="@+id/profilenametextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
                     android:text="Name"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/profilepic"
                     app:layout_constraintStart_toStartOf="@+id/profilepic"
                     app:layout_constraintTop_toBottomOf="@+id/profilepic" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
+
                 <TextView
+                    android:drawableLeft="@drawable/ic_infoaboutme"
                     android:id="@+id/profileaboutmetextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center"
                     android:text="About Me"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/profilenametextview"
                     app:layout_constraintStart_toStartOf="@+id/profilenametextview"
                     app:layout_constraintTop_toBottomOf="@+id/profilenametextview" />
 
-                <TextView
-                    android:id="@+id/profilebiotextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center"
-                    android:text="Bio"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/profileaboutmetextview"
-                    app:layout_constraintStart_toStartOf="@+id/profileaboutmetextview"
-                    app:layout_constraintTop_toBottomOf="@+id/profileaboutmetextview" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_lookingfor"
                     android:id="@+id/profilelookingfortextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center"
                     android:text="Looking For"
+                    android:textSize="18dp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/profilebiotextview"
-                    app:layout_constraintStart_toStartOf="@+id/profilebiotextview"
-                    app:layout_constraintTop_toBottomOf="@+id/profilebiotextview" />
+                    app:layout_constraintEnd_toEndOf="@+id/profileaboutmetextview"
+                    app:layout_constraintStart_toStartOf="@+id/profileaboutmetextview"
+                    app:layout_constraintTop_toBottomOf="@+id/profileaboutmetextview" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -127,62 +141,54 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="24dp">
 
+
                     </com.google.android.material.chip.ChipGroup>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black"
+                        android:layout_marginTop="10dp"/>
                 </LinearLayout>
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_email"
                     android:id="@+id/profileemailtextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Email"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    app:layout_constraintEnd_toEndOf="@+id/profilecurrentprojectstextview"
-                    app:layout_constraintStart_toStartOf="@+id/profilecurrentprojectstextview"
-                    app:layout_constraintTop_toBottomOf="@+id/profileuserid" />
-
-                <TextView
-                    android:id="@+id/profileuserid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="UID"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     app:layout_constraintEnd_toEndOf="@+id/profilecurrentprojectstextview"
                     app:layout_constraintStart_toStartOf="@+id/profilecurrentprojectstextview"
                     app:layout_constraintTop_toBottomOf="@+id/profilecurrentprojectstextview" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_baseline_work_24"
                     android:id="@+id/profilecurrentprojectstextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center"
                     android:text="My Current Projects"
+                    android:textSize="18dp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/profileuserid"
-                    app:layout_constraintStart_toStartOf="@+id/profileuserid"
-                    app:layout_constraintTop_toBottomOf="@+id/profileuserid" />
-
-                <Button
-                    android:id="@+id/backtohomepagebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Back to Home"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
                     app:layout_constraintEnd_toEndOf="@+id/profileemailtextview"
-                    app:layout_constraintHorizontal_bias="0.511"
                     app:layout_constraintStart_toStartOf="@+id/profileemailtextview"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/profileemailtextview" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="180dp"
                         android:layout_height="180dp"
@@ -191,6 +197,7 @@
                         android:background="@drawable/amigologosmallest"
                         android:scaleType="centerInside"
                         android:src="@drawable/amigologosmallest" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -199,20 +206,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Insert Project Description Here"
-                            android:textSize="11sp"
-                            android:layout_margin="9dp"
-                            android:textColor="#000000"
-
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:layout_margin="9dp"
                             android:text="Insert Project Name Here"
                             android:textColor="#000000"
                             android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Insert Project Description Here"
+                            android:textSize="11sp"
+                            android:layout_margin="9dp"
+                            android:textColor="#000000" />
 
                     </LinearLayout>
                 </LinearLayout>
