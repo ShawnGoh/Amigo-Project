@@ -13,9 +13,15 @@ import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExploreProjectListings extends AppCompatActivity {
     String s1[] = {"one", "two", "three", "four", "five"};
     String s2[] = {"one", "two", "three", "four", "five"};
+
+    Project sampleProject = new Project(null, "Learn Python with Me!", "Hi, I'm Kai Feng", s1, s2, "Kai Feng");
+
 
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
@@ -25,7 +31,7 @@ public class ExploreProjectListings extends AppCompatActivity {
         setContentView(R.layout.activity_explore_project_listings);
 
         //this block of code is for the recycler view
-        MyAdapter myAdapter = new MyAdapter(s1,s2);
+        MyAdapter myAdapter = new MyAdapter(sampleProject);
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -41,8 +47,9 @@ public class ExploreProjectListings extends AppCompatActivity {
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-//            doMySearch(query);
+            String skills_filter = intent.getStringExtra("skills_filter");
+            String text_filter = intent.getStringExtra("text_filter");
+            myAdapter.getFilter().filter(text_filter);
 
         }
     }

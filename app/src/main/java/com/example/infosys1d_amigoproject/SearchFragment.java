@@ -2,6 +2,7 @@ package com.example.infosys1d_amigoproject;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
 
+import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -39,6 +41,8 @@ public class SearchFragment extends Fragment {
     private Context mcontext;
     private ChipGroup mfilters;
     private ArrayList<String> selectedChipData;
+    private String filterString;
+    private Button searchButton;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -102,27 +106,38 @@ public class SearchFragment extends Fragment {
             newChip.setText(text);
             mfilters.addView(newChip);}
 
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager =
-                (SearchManager) mcontext.getSystemService(Context.SEARCH_SERVICE);
-
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
+//        // Associate searchable configuration with the SearchView
+//        SearchManager searchManager =
+//                (SearchManager) mcontext.getSystemService(Context.SEARCH_SERVICE);
+//
+//        searchView.setSearchableInfo(
+//                searchManager.getSearchableInfo(getComponentName()));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                ArrayList<String> filters = submitFilters();
-
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                filterString = newText;
                 return false;
             }
         });
-
+        searchButton = view.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedChipData = new ArrayList<String>();
+                selectedChipData = submitFilters();
+                Intent resultIntent = new Intent(getActivity(), ExploreProjectListings.class);
+                resultIntent.setAction(Intent.ACTION_SEARCH);
+                resultIntent.putExtra("skills_filter", selectedChipData.toString());
+                resultIntent.putExtra("text_filter", filterString);
+                startActivity(resultIntent);
+            }
+        });
         return view;
     }
 

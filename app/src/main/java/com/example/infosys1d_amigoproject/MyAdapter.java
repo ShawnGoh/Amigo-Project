@@ -6,19 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.projectmanagement.Project;
 import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
 
-public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
-    String data1[], data2[];
+import java.util.ArrayList;
+import java.util.List;
 
-    public MyAdapter(String s1[], String s2[]) {
-        data1 = s1;
-        data2 = s2;
+public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
+    private List<Project> projectsList;
+    private List<Project> projectListAll;
+
+    public MyAdapter(List<Project> projectsList) {
+        this.projectsList = projectsList;
+        projectListAll = new ArrayList<>(projectsList);
     }
 
     @NonNull
@@ -31,13 +37,15 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
 
     @Override
     public void onBindViewHolder(@NonNull myholder holder, int position) {
-        holder.mytext1.setText(data1[position]);
-        holder.mytext2.setText(data2[position]);
+        holder.mytext1.setText(projectsList.get(position).getProjectitle());
+        holder.mytext2.setText(projectsList.get(position).getProjectdescription());
+        // set up Picasso
+        // holder.thumbnail.setImageResource(projectsList.get(position).getThumbnail());
     }
 
     @Override
     public int getItemCount() {
-        int length = data1.length;
+        int length = projectsList.size();
         return length;
     }
 
@@ -49,12 +57,35 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
     private Filter projectsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<>
+            List<Project> filteredProjects = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredProjects.addAll(projectListAll);
+            }
+            else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Project project : projectListAll) {
+                    if (project.getProjectitle().toLowerCase().contains(filterPattern)
+                            || project.getProjectdescription().toLowerCase().contains(filterPattern)
+                            || project.getCreatedby().toLowerCase().contains(filterPattern))
+                    {
+                        filteredProjects.add(project);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredProjects;
+
+            return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-
+            projectsList.clear();
+            projectsList.addAll((List) results.values);
+            notifyDataSetChanged();
         }
     };
 
@@ -62,9 +93,11 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
     public class myholder extends RecyclerView.ViewHolder{
 
         TextView mytext1,mytext2;
+        ImageView thumbnail;
 
         public myholder(@NonNull View itemView) {
             super(itemView);
+            thumbnail = itemView.findViewById(R.id.project_picture);
             mytext1 = itemView.findViewById(R.id.info_text);
             mytext2 = itemView.findViewById(R.id.description);
             itemView.setOnClickListener(new View.OnClickListener() {
