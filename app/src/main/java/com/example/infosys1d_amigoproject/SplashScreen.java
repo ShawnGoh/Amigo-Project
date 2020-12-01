@@ -119,6 +119,7 @@ public class SplashScreen extends AppCompatActivity {
     //FirebaseAuth
     private void setupfirebaseauth(){
         Log.d(TAG, "Setup FirebaseAuth");
+
         mAuth = FirebaseAuth.getInstance();
 
         //check if user is sign in
