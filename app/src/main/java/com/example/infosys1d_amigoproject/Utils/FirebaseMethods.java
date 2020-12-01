@@ -57,6 +57,14 @@ public class FirebaseMethods {
                 .setValue(displayName);
     }
 
+    public void updateProfilePicture(String pictureURL){
+        Log.d(TAG, "updateProfilePicture: updating name to: " + pictureURL);
+        myRef.child(mContext.getString(R.string.db_usersdisplay))
+                .child(userID)
+                .child(mContext.getString(R.string.field_name))
+                .setValue(pictureURL);
+    }
+
     public void updateBio(String Bio){
         Log.d(TAG, "updateName: updating name to: " + Bio);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
