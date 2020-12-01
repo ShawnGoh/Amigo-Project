@@ -1,14 +1,10 @@
 package com.example.infosys1d_amigoproject.profilemanagement;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,10 +20,7 @@ import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,16 +29,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +42,6 @@ import static android.app.Activity.RESULT_OK;
 public class editprofilefragment extends Fragment {
     private TextView mName, mBio, mAboutme, mlookingfor, mcurrentproject, muserid, mEmail, mSkills;
     private ImageView mProfilepic;
-    private ImageView backToProfile;
     private TextView mChangeProfilePic;
     private Context mcontext;
     private String userID;
@@ -78,10 +64,6 @@ public class editprofilefragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    FirebaseStorage storage;
-    StorageReference storageref;
-
 
     public editprofilefragment() {
         // Required empty public constructor
@@ -112,42 +94,26 @@ public class editprofilefragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        LayoutInflater inflater2 = LayoutInflater.from(container.getContext());
-        View view =  inflater2.inflate(R.layout.fragment_editprofilefragment, container, false);
-        storage = FirebaseStorage.getInstance();
-        storageref = storage.getReference();
+        View view =  inflater.inflate(R.layout.fragment_editprofilefragment, container, false);
+
         mName = view.findViewById(R.id.name);
-        backToProfile = view.findViewById(R.id.backArrow);
         mBio = view.findViewById(R.id.bio);
         mAboutme = view.findViewById(R.id.aboutme);
         mlookingfor = view.findViewById(R.id.lookingfor);
         mSkills = view.findViewById(R.id.collectionofskillchips);
-
-
+        mProfilepic = view.findViewById(R.id.profile_photo);
+        mChangeProfilePic = view.findViewById(R.id.changeProfilePhoto);
         mEmail = view.findViewById(R.id.email);
         mcontext = getActivity();
         firebaseMethods = new FirebaseMethods(mcontext);
         setupfirebaseauth();
         ImageView checkMark = view.findViewById(R.id.saveChanges);
-
-        backToProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick, navigating to : profile fragment");
-                profilefragment fragment = new profilefragment();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment);
-                transaction.addToBackStack("profilefragment");
-                transaction.commit();
-            }
-        });
         checkMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,11 +121,8 @@ public class editprofilefragment extends Fragment {
                 saveProfileSettings();
             }
         });
-
-
         return view;
     }
-
 
 
     private void setProfileWidgets(Userdataretrieval userSettings){
@@ -186,7 +149,6 @@ public class editprofilefragment extends Fragment {
         final String aboutMe = mAboutme.getText().toString();
         final String lookingFor = mlookingfor.getText().toString();
         final String skillChipsString = mSkills.getText().toString();
-        final String Email = mEmail.getText().toString();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -214,15 +176,12 @@ public class editprofilefragment extends Fragment {
 
                 if (!mUserSettings.getUsersdisplay().getSkills().toString().toString().equals(skillChipsString)){
                     firebaseMethods.updateSkillChips(skillChipsString);
-
+//                    String str[] = skillChipsString.split(", ");
+//                    List<String> al = new ArrayList<String>();
+//                    al = Arrays.asList(str);
+//                    mUserSettings.getUsersdisplay().setSkills((ArrayList<String>) al);
 
                 }
-
-//                if (!mUserSettings.getUsersprivate().getEmail().equals(Email)){
-//                    if(firebaseMethods.checkifemailexists(Email, dataSnapshot)== true){
-//                    firebaseMethods.updateEmail(Email);} else{Toast.makeText(getActivity(), "Email already exists!", Toast.LENGTH_SHORT).show();}
-//                }
-
 
                 Toast.makeText(getActivity(), "Saved Changes", Toast.LENGTH_SHORT).show();
 
