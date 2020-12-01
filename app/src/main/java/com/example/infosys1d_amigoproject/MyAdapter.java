@@ -65,21 +65,10 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
         }
 
         private Filter projectsFilter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                List<Project> filteredProjects = new ArrayList<>();
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Project> filteredProjects = new ArrayList<>();
 
-                if (constraint == null || constraint.length() == 0) {
-                    filteredProjects.addAll(projectListAll);
-                } else {
-                    String filterPattern = constraint.toString().toLowerCase().trim();
-
-                    for (Project project : projectListAll) {
-                        if (project.getProjectitle().toLowerCase().contains(filterPattern)
-                                || project.getProjectdescription().toLowerCase().contains(filterPattern)
-                                || project.getCreatedby().toLowerCase().contains(filterPattern)) {
-                            filteredProjects.add(project);
-                        }
             if (constraint == null || constraint.length() == 0) {
                 filteredProjects.addAll(projectListAll);
             }
@@ -94,26 +83,29 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
 
                 for (Project project : projectListAll) {
                     System.out.println("omG!");
-                    if (project.getProjectitle().toLowerCase().contains(filterPattern))
+                    if (project.getProjectitle().toLowerCase().contains(filterPattern)
+                            || project.getProjectdescription().toLowerCase().contains(filterPattern)
+                            || project.getCreatedby().toLowerCase().contains(filterPattern))
                     {
                         filteredProjects.add(project);
                         System.out.println("This works!");
                     }
                 }
-
-                FilterResults results = new FilterResults();
-                results.values = filteredProjects;
-
-                return results;
             }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                projectsList.clear();
-                projectsList.addAll((List) results.values);
-                notifyDataSetChanged();
-            }
-        };
+            FilterResults results = new FilterResults();
+            results.values = filteredProjects;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            projectsList.clear();
+            projectsList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 
         public class myholder extends RecyclerView.ViewHolder {
