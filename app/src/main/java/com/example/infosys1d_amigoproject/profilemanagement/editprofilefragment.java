@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ import static android.app.Activity.RESULT_OK;
 public class editprofilefragment extends Fragment {
     private TextView mName, mBio, mAboutme, mlookingfor, mcurrentproject, muserid, mEmail, mSkills;
     private ImageView mProfilepic;
+    private ImageView backToProfile;
     private TextView mChangeProfilePic;
     private Context mcontext;
     private String userID;
@@ -122,6 +124,7 @@ public class editprofilefragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageref = storage.getReference();
         mName = view.findViewById(R.id.name);
+        backToProfile = view.findViewById(R.id.backArrow);
         mBio = view.findViewById(R.id.bio);
         mAboutme = view.findViewById(R.id.aboutme);
         mlookingfor = view.findViewById(R.id.lookingfor);
@@ -133,6 +136,18 @@ public class editprofilefragment extends Fragment {
         firebaseMethods = new FirebaseMethods(mcontext);
         setupfirebaseauth();
         ImageView checkMark = view.findViewById(R.id.saveChanges);
+
+        backToProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick, navigating to : profile fragment");
+                profilefragment fragment = new profilefragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack("profilefragment");
+                transaction.commit();
+            }
+        });
         checkMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

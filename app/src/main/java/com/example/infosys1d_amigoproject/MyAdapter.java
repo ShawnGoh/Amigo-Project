@@ -1,6 +1,7 @@
 package com.example.infosys1d_amigoproject;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
 
 public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> {
     String data1[], data2[];
+    private static final String TAG = "myadapter";
 
     public MyAdapter(String s1[], String s2[]) {
         data1 = s1;
@@ -24,6 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
     public myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row,parent,false);
+        Log.d(TAG, "Creating myholder" );
         return new myholder(view);
     }
 

@@ -19,8 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.MainActivity;
+import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
@@ -49,10 +52,11 @@ import static android.app.Activity.RESULT_OK;
 public class profilefragment extends Fragment {
 
     private static final String TAG = "profilefragment";
-    private TextView mName, mBio, mAboutme, mlookingfor, mcurrentproject, muserid, memail;
+    private TextView mName, mBio, mAboutme, mlookingfor,  muserid, memail;
     private ImageView mProfilepic;
     private Button changeProfilePic;
     private Context mcontext;
+    private Context context = getContext();
     private Button backtohomebutton;
     private ChipGroup mskills;
 
@@ -66,21 +70,26 @@ public class profilefragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
     private FirebaseMethods firebaseMethods;
 
+    RecyclerView recyclerView;
+    String s1[];
+    String s2[];
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
         Log.d(TAG, "onCreateView: init widgets");
         mName = view.findViewById(R.id.profilenametextview);
-        mBio = view.findViewById(R.id.profilebiotextview);
+//        mBio = view.findViewById(R.id.profilebiotextview);
         mAboutme = view.findViewById(R.id.profileaboutmetextview);
         mlookingfor = view.findViewById(R.id.profilelookingfortextview);
-        mcurrentproject = view.findViewById(R.id.profilecurrentprojectstextview);
+
         mProfilepic = view.findViewById(R.id.profilepic);
+        recyclerView = view.findViewById(R.id.suggestedRecycler2);
         mcontext = getActivity();
-        muserid = view.findViewById(R.id.profileuserid);
+//        muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
-        backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
+//        backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
         changeProfilePic = view.findViewById(R.id.button2);
         mskills = view.findViewById(R.id.profileskillchipsgroup);
         Log.d(TAG, "onCreateView: widgets inited");
@@ -116,12 +125,13 @@ public class profilefragment extends Fragment {
         });
 
 
-        backtohomebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(mcontext, MainActivity.class));
-            }
-        });
+//        backtohomebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(mcontext, MainActivity.class));
+//            }
+//        });
+
 
 
 
@@ -169,12 +179,14 @@ public class profilefragment extends Fragment {
         users_private privatedata = userSettings.getUsersprivate();
 
         mName.setText(displaydata.getName());
-        mBio.setText(displaydata.getBio());
+//        mBio.setText(displaydata.getBio());
         mAboutme.setText(displaydata.getAbout_me());
         mlookingfor.setText(displaydata.getLooking_for());
-        mcurrentproject.setText(displaydata.getCurrent_projects().toString());
-        muserid.setText(privatedata.getUser_id());
+
+//        muserid.setText(privatedata.getUser_id());
         memail.setText(privatedata.getEmail());
+
+
 
 
 
@@ -239,7 +251,11 @@ public class profilefragment extends Fragment {
                 //retrieve user information from database
                 setProfileWidgets(firebaseMethods.getUserData(snapshot));
                 //retrieve profile pic from database
-
+                s1 = firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectTitle().toArray(new String[firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectTitle().size()]);
+                s2 = firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectDescription().toArray(new String[firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectDescription().size()]);
+                MyAdapter myAdapter = new MyAdapter(s1,s2);
+                recyclerView.setAdapter(myAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
 
             @Override

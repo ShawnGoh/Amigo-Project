@@ -1,153 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    android:theme="@style/SignupinTheme"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/SignupinTheme"
-    android:background="#fff">
+    tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/profilepic"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="142dp"
-        android:layout_height="29dp"
-        android:text="Change Photo"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="@+id/profilepic"
-        app:layout_constraintStart_toStartOf="@+id/profilepic"
-        app:layout_constraintTop_toBottomOf="@+id/profilepic" />
-
-    <TextView
-        android:id="@+id/profilenametextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-    <TextView
-        android:id="@+id/profileaboutmetextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="about me"
-        app:layout_constraintEnd_toEndOf="@+id/profilenametextview"
-        app:layout_constraintStart_toStartOf="@+id/profilenametextview"
-        app:layout_constraintTop_toBottomOf="@+id/profilenametextview" />
-
-    <TextView
-        android:id="@+id/profilebiotextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:text="bio"
-        app:layout_constraintEnd_toEndOf="@+id/profileaboutmetextview"
-        app:layout_constraintStart_toStartOf="@+id/profileaboutmetextview"
-        app:layout_constraintTop_toBottomOf="@+id/profileaboutmetextview" />
-
-    <TextView
-        android:id="@+id/profilelookingfortextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:text="lookingfor"
-        app:layout_constraintEnd_toEndOf="@+id/profilebiotextview"
-        app:layout_constraintStart_toStartOf="@+id/profilebiotextview"
-        app:layout_constraintTop_toBottomOf="@+id/profilebiotextview" />
-
-    <TextView
-        android:id="@+id/profilecurrentprojectstextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="currentprojects"
-        app:layout_constraintEnd_toEndOf="@+id/profilelookingfortextview"
-        app:layout_constraintStart_toStartOf="@+id/profilelookingfortextview"
-        app:layout_constraintTop_toBottomOf="@+id/profilelookingfortextview" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileemailtextview">
+        android:fitsSystemWindows="true">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/profileskillchipsgroup"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="410dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/white"
+            app:title="Yan Qi"
+            app:collapsedTitleGravity="center"
+            app:collapsedTitleTextAppearance="@color/white"
+            app:expandedTitleTextAppearance="@color/black"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/profilepic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/howmuchyanqicanayanqiqi"
+                app:layout_collapseMode="parallax" />
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="none"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            app:cardCornerRadius="8dp">
 
-            >
+            <LinearLayout
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </com.google.android.material.chip.ChipGroup>
-    </LinearLayout>
+                <TextView
+
+                    android:id="@+id/profilenametextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="Name"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/profilepic"
+                    app:layout_constraintStart_toStartOf="@+id/profilepic"
+                    app:layout_constraintTop_toBottomOf="@+id/profilepic" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
+
+                amrish sandhu, [01.12.20 11:41]
+                <TextView
+
+                    android:id="@+id/profileaboutmetextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:text="About Me"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/profilenametextview"
+                    app:layout_constraintStart_toStartOf="@+id/profilenametextview"
+                    app:layout_constraintTop_toBottomOf="@+id/profilenametextview" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+
+                    android:id="@+id/profilelookingfortextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:text="Looking For"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/profileaboutmetextview"
+                    app:layout_constraintStart_toStartOf="@+id/profileaboutmetextview"
+                    app:layout_constraintTop_toBottomOf="@+id/profileaboutmetextview" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profileemailtextview">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/profileskillchipsgroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp">
 
 
-    <TextView
-        android:id="@+id/profileemailtextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Email"
-        app:layout_constraintEnd_toEndOf="@+id/profilecurrentprojectstextview"
-        app:layout_constraintStart_toStartOf="@+id/profilecurrentprojectstextview"
-        app:layout_constraintTop_toBottomOf="@+id/profileuserid" />
+                    </com.google.android.material.chip.ChipGroup>
 
-    <TextView
-        android:id="@+id/profileuserid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="UID"
-        app:layout_constraintEnd_toEndOf="@+id/profilecurrentprojectstextview"
-        app:layout_constraintStart_toStartOf="@+id/profilecurrentprojectstextview"
-        app:layout_constraintTop_toBottomOf="@+id/profilecurrentprojectstextview" />
-
-    <Button
-        android:id="@+id/backtohomepagebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="back to home"
-        app:layout_constraintEnd_toEndOf="@+id/profileemailtextview"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="@+id/profileemailtextview"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <Button
-        android:id="@+id/editprofilebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Edit Profile"
-        app:layout_constraintEnd_toEndOf="@+id/backtohomepagebutton"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="@+id/backtohomepagebutton"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
 
 
+                <TextView
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    android:id="@+id/profileemailtextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Email"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/profilecurrentprojectstextview"
+                    app:layout_constraintStart_toStartOf="@+id/profilecurrentprojectstextview"
+                    app:layout_constraintTop_toBottomOf="@+id/profilecurrentprojectstextview" />
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="142dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center"
+                    android:text="Change Photo"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="@+id/profileemailtextview"
+                    app:layout_constraintStart_toStartOf="@+id/profileemailtextview"
+                    app:layout_constraintTop_toBottomOf="@+id/profileemailtextview" />
+                <Button
+                    android:id="@+id/editprofilebutton"
+                    android:layout_width="142dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center"
+                    android:text="Edit Profile"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="@+id/profileemailtextview"
+                    app:layout_constraintStart_toStartOf="@+id/profileemailtextview"
+                    app:layout_constraintTop_toBottomOf="@+id/profileemailtextview" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/undercurrentprojects"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/suggestedRecycler2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+                </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

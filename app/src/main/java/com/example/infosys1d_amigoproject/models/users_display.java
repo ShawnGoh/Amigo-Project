@@ -15,14 +15,14 @@ public class users_display {
     private String name;
     private String profile_picture;
     private long projects_completed = 0;
-    private ArrayList<String> projects_completed_list = new ArrayList<>();
-    private ArrayList<String> current_projects = new ArrayList<>();
+    private ArrayList<String> projectTitle = new ArrayList<>();
+    private ArrayList<String> projectDescription = new ArrayList<>();
     private ArrayList<String> skills = new ArrayList<>();
     private boolean compeletedsetup = false;
 
 
 
-    public users_display(String about_me, String bio, ArrayList<String> chats, String looking_for, String name, String profile_picture, long projects_completed, ArrayList<String> projects_completed_list, ArrayList<String> current_projects, ArrayList<String> skills) {
+    public users_display(String about_me, String bio, ArrayList<String> chats, String looking_for, String name, String profile_picture, long projects_completed, ArrayList<String> projectTitle, ArrayList<String> projectDescription, ArrayList<String> skills) {
         this.about_me = about_me;
         this.bio = bio;
         this.chats = chats;
@@ -30,8 +30,8 @@ public class users_display {
         this.name = name;
 
         this.projects_completed = projects_completed;
-        this.projects_completed_list = projects_completed_list;
-        this.current_projects = current_projects;
+        this.projectTitle = projectTitle;
+        this.projectDescription = projectDescription;
         this.skills = skills;
         this.profile_picture = profile_picture;
 
@@ -52,9 +52,6 @@ public class users_display {
 
     public void removechat(String s){this.chats.remove(s);}
 
-    public void addproject(String s){this.current_projects.add(s);}
-
-    public void removeproject(String s){this.current_projects.remove(s);}
 
     public void addskills(String s){this.skills.add(s);}
 
@@ -120,20 +117,20 @@ public class users_display {
         this.projects_completed = projects_completed;
     }
 
-    public ArrayList<String> getProjects_completed_list() {
-        return projects_completed_list;
+    public ArrayList<String> getProjectTitle() {
+        return projectTitle;
     }
 
-    public void setProjects_completed_list(ArrayList<String> projects_completed_list) {
-        this.projects_completed_list = projects_completed_list;
+    public void setProjectTitle(ArrayList<String> projectTitle) {
+        this.projectTitle = projectTitle;
     }
 
-    public ArrayList<String> getCurrent_projects() {
-        return current_projects;
+    public ArrayList<String> getProjectDescription() {
+        return projectDescription;
     }
 
-    public void setCurrent_projects(ArrayList<String> current_projects) {
-        this.current_projects = current_projects;
+    public void setProjectDescription(ArrayList<String> projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
     public ArrayList<String> getSkills() {
