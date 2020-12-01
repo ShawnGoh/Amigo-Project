@@ -31,13 +31,13 @@ public class ProjectDetails extends AppCompatActivity {
         imageView = findViewById(R.id.project_picture);
 
         storageReference = FirebaseStorage.getInstance().getReference();
-//        StorageReference profileRef = storageReference.child("users/q3GEpflTAXYMy9KDGh3I8goEh3h1/profile.jpg");
-//        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.get().load(uri).into(imageView);
-//            }
-//        });
+        StorageReference profileRef = storageReference.child("users/q3GEpflTAXYMy9KDGh3I8goEh3h1/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(imageView);
+            }
+        });
 
         setContentView(R.layout.activity_project_details);
         mCollapsingToolbarLayout = findViewById(R.id.collapse);
