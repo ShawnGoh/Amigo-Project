@@ -13,7 +13,7 @@ public class users_display {
     private ArrayList<String> chats = new ArrayList<>();
     private String looking_for = "none";
     private String name;
-    private String profile_picture;
+    private String profile_picture = "none";
     private long projects_completed = 0;
     private ArrayList<String> projectTitle = new ArrayList<>();
     private ArrayList<String> projectDescription = new ArrayList<>();
