@@ -83,10 +83,12 @@ public class CreateNewProject extends AppCompatActivity {
                     }
                 }
 
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), textInputLayoutdescrip.getEditText().getText().toString(),
-                selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), firebaseMethods.getUserID());
 
-               String projectKey = myref.child("Projects").push().getKey();
+
+                String projectKey = myref.child("Projects").push().getKey();
+                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), textInputLayoutdescrip.getEditText().getText().toString(),
+                        selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), firebaseMethods.getUserID(), projectKey);
+
                 myref.child("Projects").child(projectKey).setValue(new_proj);
 
             }

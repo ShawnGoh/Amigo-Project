@@ -13,19 +13,20 @@ public class Project {
     private String projectitle = "nil", projectdescription = "nil";
     private List<String> skillsrequired = new ArrayList<String> (Arrays.asList("nil"));
     private List<String> usersinProject = new ArrayList<String> (Arrays.asList("nil"));
-    private String createdby;
+    private String createdby, projectID;
 
     public Project() {
 
     }
 
-    public Project(String thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<String> usersinProject, String createdby) {
+    public Project(String thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<String> usersinProject, String createdby, String projectID) {
         this.thumbnail = thumbnail;
         this.projectitle = projectitle;
         this.projectdescription = projectdescription;
         this.skillsrequired = skillsrequired;
         this.usersinProject = usersinProject;
         this.createdby = createdby;
+        this.projectID = projectID;
     }
 
     public String getThumbnail() {
@@ -50,5 +51,9 @@ public class Project {
 
     public String getCreatedby() {
         return createdby;
+    }
+
+    public String getProjectID() {
+        return projectID;
     }
 }
