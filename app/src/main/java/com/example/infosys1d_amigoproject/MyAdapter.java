@@ -45,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
     public void onBindViewHolder(@NonNull myholder holder, int position) {
         holder.mytext1.setText(projectsList.get(position).getProjectitle());
         holder.mytext2.setText(projectsList.get(position).getProjectdescription());
-        // set up Picasso
+        // TODO set up Picasso
         // holder.thumbnail.setImageResource(projectsList.get(position).getThumbnail());
     }
 

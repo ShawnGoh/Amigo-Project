@@ -93,8 +93,6 @@ public class SearchFragment extends Fragment {
                 MainActivity.menu_bottom.setVisibility(View.VISIBLE);
             }
         });
-        String filterChipsList = getString(R.string.skill_chips_list);
-        String[] filterSplit = filterChipsList.split(" ");
         mcontext = getActivity();
         String[] filterList = mcontext.getResources().getStringArray(R.array.skills_list);
 

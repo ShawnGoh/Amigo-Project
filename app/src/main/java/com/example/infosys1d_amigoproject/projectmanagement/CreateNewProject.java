@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +18,8 @@ import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +46,12 @@ public class CreateNewProject extends AppCompatActivity {
     DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
 
     FirebaseMethods firebaseMethods;
+
+
+
+    private Context mcontext;
+    private ChipGroup mfilters;
+    private ArrayList<String> selectedChipData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +87,19 @@ public class CreateNewProject extends AppCompatActivity {
                 startActivityForResult(gallery,1);
             }
         });
+
+
+
+        mcontext = getApplicationContext();
+        String[] filterList = mcontext.getResources().getStringArray(R.array.skills_list);
+
+        mfilters = findViewById(R.id.filterChipGroup);
+
+        LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
+        for(String text: filterList){
+            Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
+            newChip.setText(text);
+            mfilters.addView(newChip);}
 
     }
 
