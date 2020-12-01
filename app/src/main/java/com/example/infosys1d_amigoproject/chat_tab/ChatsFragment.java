@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.chat;
+package com.example.infosys1d_amigoproject.chat_tab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -73,7 +73,7 @@ public class ChatsFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewpagerchat);
 
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
 
 
         tabLayout.setupWithViewPager(viewPager);
@@ -96,6 +96,8 @@ public class ChatsFragment extends Fragment {
             this.fragments = new ArrayList<>();
             this.titles = new ArrayList<>();
         }
+
+
 
 
 

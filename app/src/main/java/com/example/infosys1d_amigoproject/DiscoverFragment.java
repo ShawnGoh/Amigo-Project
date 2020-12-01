@@ -2,12 +2,10 @@ package com.example.infosys1d_amigoproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
-import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
-import com.example.infosys1d_amigoproject.projectmanagement.Project;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.ExploreProjectListings;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

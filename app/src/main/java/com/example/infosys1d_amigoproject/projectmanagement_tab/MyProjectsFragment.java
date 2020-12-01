@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.projectmanagement;
+package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.projectmanagement;
+package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,10 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;

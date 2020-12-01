@@ -1,6 +1,5 @@
 package com.example.infosys1d_amigoproject;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.SearchView;
 
-import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.ExploreProjectListings;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
