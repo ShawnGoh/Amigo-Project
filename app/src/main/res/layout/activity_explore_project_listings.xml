@@ -14,23 +14,37 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-        <SearchView
-            android:id="@+id/search"
+<!--        <SearchView-->
+<!--            android:id="@+id/search"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_marginHorizontal="15dp"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:layout_marginBottom="3dp"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:layout_editor_absoluteX="229dp"-->
+<!--            android:queryHint="Hello"-->
+<!--            android:iconifiedByDefault="false"-->
+<!--            android:background="@drawable/searchbarbg"/>-->
+
+        <TextView
+            android:id="@+id/category"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="229dp"
-            android:queryHint="Hello"
-            android:iconifiedByDefault="false"
-            android:background="@drawable/searchbarbg"/>
+            android:textSize="30sp"
+            android:textColor="#FFF"
+            android:text="All Projects"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="@id/search" />
+            app:layout_constraintTop_toTopOf="@id/category" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

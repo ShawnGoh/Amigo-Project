@@ -24,9 +24,6 @@
     </string-array>
     <string name="db_usersdisplay">"users_display"</string>
     <string name="db_usersprivate">"users_private"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="field_name">name</string>
     <string name="field_bio">bio</string>
     <string name="field_aboutme">about_me</string>

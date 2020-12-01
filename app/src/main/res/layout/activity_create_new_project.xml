@@ -55,16 +55,6 @@
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="20dp">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/button_create_project"
         android:layout_width="wrap_content"
@@ -75,16 +65,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:hint="A short description of your project"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        android:layout_marginHorizontal="20dp"
+        tools:layout_editor_absoluteX="20dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="A short description of your project" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
@@ -97,7 +91,7 @@
         app:flexWrap="wrap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_description">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/filterChipGroup"

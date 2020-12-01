@@ -51,6 +51,8 @@ public class DiscoverFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseMethods firebaseMethods;
     DatabaseReference databaseReference;
+    DatabaseReference dbProjects;
+    public List<Project> projectsList;
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -89,7 +91,8 @@ public class DiscoverFragment extends Fragment {
         // Inflate the layout for this fragment
         LayoutInflater inflater2 = LayoutInflater.from(container.getContext());
         View view = inflater2.inflate(R.layout.fragment_discover, container, false);
-
+        dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
+        dbProjects.addListenerForSingleValueEvent(valueEventListener);
         recyclerView = view.findViewById(R.id.suggestedRecycler);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -103,30 +106,9 @@ public class DiscoverFragment extends Fragment {
         });
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projref = databaseReference.child("Projects");
-        ArrayList<Project> projectList = new ArrayList<>();
-        myAdapter = new MyAdapter(projectList);
+        projectsList = new ArrayList<>();
+        myAdapter = new MyAdapter(projectsList);
         recyclerView.setAdapter(myAdapter);
-        projref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                projectList.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
-                    Project project = postSnapshot.getValue(Project.class);
-                    System.out.println(project.getThumbnail());
-                    projectList.add(project);
-
-                    // here you can access to name property like university.name
-
-                }
-                myAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: ");
-            }
-        });
 
      //   Project new_proj = new Project("random url", "test Title", "test description ","userid");
 
@@ -157,4 +139,23 @@ public class DiscoverFragment extends Fragment {
         });
         return view;
     }
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            projectsList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Project project = snapshot.getValue(Project.class);
+                    projectsList.add(project);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 }

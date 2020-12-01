@@ -16,9 +16,10 @@ public class Project {
     private String createdby;
 
     public Project() {
+
     }
 
-    public Project(String thumbnail, String projectitle, String projectdescription, List<String> skillsrequired, List<String> usersinProject, String createdby) {
+    public Project(String thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<String> usersinProject, String createdby) {
         this.thumbnail = thumbnail;
         this.projectitle = projectitle;
         this.projectdescription = projectdescription;

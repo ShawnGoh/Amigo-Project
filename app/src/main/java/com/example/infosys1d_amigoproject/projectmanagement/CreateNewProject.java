@@ -30,6 +30,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class CreateNewProject extends AppCompatActivity {
@@ -41,8 +42,9 @@ public class CreateNewProject extends AppCompatActivity {
     Uri downloadUrl;
     FirebaseStorage storage;
     StorageReference storageRef;
-    TextInputLayout textInputLayout;
-
+    TextInputLayout textInputLayout,textInputLayoutdescrip;
+    String randomKey;
+    ArrayList<String> skills;
     DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
 
     FirebaseMethods firebaseMethods;
@@ -59,20 +61,31 @@ public class CreateNewProject extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageView2);
         textInputLayout = findViewById(R.id.textInputLayout);
+        textInputLayoutdescrip = findViewById(R.id.textInputLayout_description);
         button = findViewById(R.id.button);
         create_project = findViewById(R.id.button_create_project);
         firebaseMethods = new FirebaseMethods(getApplicationContext());
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
+        selectedChipData = new ArrayList<>();
+
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Project new_proj = new Project(downloadUrl.toString(), "test Title", "test description ",
-                new ArrayList<String>(Arrays.asList("hello","java","C++")),
-                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())), firebaseMethods.getUserID());
+                selectedChipData.clear();
+                for(int i = 0; i<mfilters.getChildCount(); i++){
+                    Chip chip = (Chip)mfilters.getChildAt(i);
+                    if(chip.isChecked()){
+                        selectedChipData.add(chip.getText().toString());
+                    }
+                }
 
-                String key = myref.child("Projects").push().getKey();
-                myref.child("Projects").child(key).setValue(new_proj);
+                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), textInputLayoutdescrip.getEditText().getText().toString(),
+                selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), firebaseMethods.getUserID());
+
+               String projectKey = myref.child("Projects").push().getKey();
+                myref.child("Projects").child(projectKey).setValue(new_proj);
 
             }
         });
@@ -98,8 +111,11 @@ public class CreateNewProject extends AppCompatActivity {
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: filterList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
+            System.out.println("skills asdf" + text);
             newChip.setText(text);
             mfilters.addView(newChip);}
+
+
 
     }
 
@@ -114,7 +130,7 @@ public class CreateNewProject extends AppCompatActivity {
     }
 
     private void uploadpicture() {
-        final String randomKey = UUID.randomUUID().toString();
+        randomKey = UUID.randomUUID().toString();
         StorageReference newRef = storageRef.child("images/" + randomKey);
         newRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -124,8 +140,6 @@ public class CreateNewProject extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 downloadUrl = uri;
-                                System.out.println(downloadUrl.toString());
-
                             }
                         });
                         Snackbar.make(findViewById(R.id.upload), "Image Uploaded", Snackbar.LENGTH_LONG).show();
