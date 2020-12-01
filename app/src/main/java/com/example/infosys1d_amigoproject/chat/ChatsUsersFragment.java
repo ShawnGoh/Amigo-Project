@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class UsersFragment extends Fragment {
+public class ChatsUsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
@@ -60,6 +60,11 @@ public class UsersFragment extends Fragment {
 
 
         readUsers(currentuser);
+
+
+
+
+
 
 
         return view;

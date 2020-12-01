@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.infosys1d_amigoproject.R;
-import com.example.infosys1d_amigoproject.chat.ActiveChatsFragment;
-import com.example.infosys1d_amigoproject.chat.UsersFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -81,7 +79,7 @@ public class ChatsFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         viewPagerAdapter.addFragment(new ActiveChatsFragment(), "Chats");
-        viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+        viewPagerAdapter.addFragment(new ChatsUsersFragment(), "Users");
         viewPager.setAdapter(viewPagerAdapter);
 
         return view;
