@@ -57,10 +57,10 @@ public class CreateNewProject extends AppCompatActivity {
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), "test description ",
-                        new ArrayList<String>(Arrays.asList("hello","java","C++")),
-                        new ArrayList <String> (Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
-                        firebaseMethods.getUserID());
+                Project new_proj = new Project(downloadUrl.toString(), "test Title", "test description ",
+                new ArrayList<String>(Arrays.asList("hello","java","C++")),
+                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())), firebaseMethods.getUserID());
+
                 String key = myref.child("Projects").push().getKey();
                 myref.child("Projects").child(key).setValue(new_proj);
 

@@ -5,15 +5,20 @@ import android.net.Uri;
 import com.example.infosys1d_amigoproject.models.users_display;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Project {
-    private String thumbnail;
-    private String projectitle, projectdescription;
-    private ArrayList<String> skillsrequired;
-    private ArrayList<String> usersinProject;
+    private String thumbnail = "nil";
+    private String projectitle = "nil", projectdescription = "nil";
+    private List<String> skillsrequired = new ArrayList<String> (Arrays.asList("nil"));
+    private List<String> usersinProject = new ArrayList<String> (Arrays.asList("nil"));
     private String createdby;
 
-    public Project(String thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<String> usersinProject, String createdby) {
+    public Project() {
+    }
+
+    public Project(String thumbnail, String projectitle, String projectdescription, List<String> skillsrequired, List<String> usersinProject, String createdby) {
         this.thumbnail = thumbnail;
         this.projectitle = projectitle;
         this.projectdescription = projectdescription;
@@ -21,6 +26,7 @@ public class Project {
         this.usersinProject = usersinProject;
         this.createdby = createdby;
     }
+
 
     public String getThumbnail() {
         return thumbnail;
@@ -34,11 +40,11 @@ public class Project {
         return projectdescription;
     }
 
-    public ArrayList<String> getSkillsrequired() {
+    public List<String> getSkillsrequired() {
         return skillsrequired;
     }
 
-    public ArrayList<String> getUsersinProject() {
+    public List<String> getUsersinProject() {
         return usersinProject;
     }
 

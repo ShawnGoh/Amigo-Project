@@ -2,6 +2,7 @@ package com.example.infosys1d_amigoproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
+import com.example.infosys1d_amigoproject.projectmanagement.Project;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +47,10 @@ public class DiscoverFragment extends Fragment {
     private String mParam2;
     private Button seeAllButton;
     private SearchView searchView;
+    MyAdapter myAdapter;
     RecyclerView recyclerView;
+    FirebaseMethods firebaseMethods;
+    DatabaseReference databaseReference;
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -73,7 +89,10 @@ public class DiscoverFragment extends Fragment {
         // Inflate the layout for this fragment
         LayoutInflater inflater2 = LayoutInflater.from(container.getContext());
         View view = inflater2.inflate(R.layout.fragment_discover, container, false);
+
         recyclerView = view.findViewById(R.id.suggestedRecycler);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         seeAllButton = view.findViewById(R.id.seeAllButton1);
         seeAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +101,45 @@ public class DiscoverFragment extends Fragment {
 
             }
         });
-        MyAdapter myAdapter = new MyAdapter(s1,s2);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference projref = databaseReference.child("Projects");
+        ArrayList<Project> projectList = new ArrayList<>();
+        myAdapter = new MyAdapter(projectList);
         recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        projref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                projectList.clear();
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
+                    Project project = postSnapshot.getValue(Project.class);
+                    System.out.println(project.getThumbnail());
+                    projectList.add(project);
+
+                    // here you can access to name property like university.name
+
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: ");
+            }
+        });
+
+     //   Project new_proj = new Project("random url", "test Title", "test description ","userid");
+
+        firebaseMethods = new FirebaseMethods(container.getContext());
+//        Project new_proj = new Project("random url", "test Title", "test description ",
+//                new ArrayList<String>(Arrays.asList("hello","java","C++")),
+//                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
+//                firebaseMethods.getUserID());
+//        MyAdapter myAdapter = new MyAdapter(new ArrayList<Project>(Arrays.asList(new_proj,new_proj)));
+
+
+
+
         searchView = view.findViewById(R.id.searchBarHome);
         searchView.setFocusable(false);
 //        EditText editText = (EditText) searchView.findViewById(R.id.searchBarHome);
