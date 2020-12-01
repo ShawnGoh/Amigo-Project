@@ -62,28 +62,31 @@
 
 
             <TextView
+                android:id="@+id/projectTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 android:text="Project Title"
-                android:textSize="30sp"
                 android:textFontWeight="700"
-                android:id="@+id/projectTitle"/>
+                android:textSize="30sp" />
 
             <TextView
+                android:id="@+id/projectCreator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="Creator"
-                android:textSize="30sp"
                 android:textFontWeight="500"
-                android:id="@+id/projectCreator"/>
+                android:textSize="30sp" />
 
             <TextView
+                android:id="@+id/projectDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 android:text="Project Description"
                 android:textFontWeight="300"
-                android:textSize="30sp"
-                android:id="@+id/projectDescription"/>
+                android:textSize="30sp" />
 
 
         </LinearLayout>
