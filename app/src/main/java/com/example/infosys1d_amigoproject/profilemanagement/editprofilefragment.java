@@ -129,8 +129,8 @@ public class editprofilefragment extends Fragment {
         mAboutme = view.findViewById(R.id.aboutme);
         mlookingfor = view.findViewById(R.id.lookingfor);
         mSkills = view.findViewById(R.id.collectionofskillchips);
-        mProfilepic = view.findViewById(R.id.profile_photo);
-        mChangeProfilePic = view.findViewById(R.id.changeProfilePhoto);
+
+
         mEmail = view.findViewById(R.id.email);
         mcontext = getActivity();
         firebaseMethods = new FirebaseMethods(mcontext);

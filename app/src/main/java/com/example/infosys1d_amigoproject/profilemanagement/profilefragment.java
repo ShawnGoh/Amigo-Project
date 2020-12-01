@@ -29,6 +29,7 @@ import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.example.infosys1d_amigoproject.projectmanagement.Project;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
@@ -50,19 +51,19 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 public class profilefragment extends Fragment {
-
+    MyAdapter myAdapter;
     private static final String TAG = "profilefragment";
     private TextView mName, mBio, mAboutme, mlookingfor,  muserid, memail;
     private ImageView mProfilepic;
     private Button changeProfilePic;
     private Context mcontext;
-    private Context context = getContext();
+
     private Button backtohomebutton;
     private ChipGroup mskills;
 
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
-    private DatabaseReference myRef;
+    private DatabaseReference databaseReference;
     StorageReference storageReference;
 
     //Firebase Auth
@@ -71,8 +72,7 @@ public class profilefragment extends Fragment {
     private FirebaseMethods firebaseMethods;
 
     RecyclerView recyclerView;
-    String s1[];
-    String s2[];
+
 
     @Nullable
     @Override
@@ -86,6 +86,7 @@ public class profilefragment extends Fragment {
 
         mProfilepic = view.findViewById(R.id.profilepic);
         recyclerView = view.findViewById(R.id.suggestedRecycler2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mcontext = getActivity();
 //        muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
@@ -121,6 +122,36 @@ public class profilefragment extends Fragment {
                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent, 1000);
 
+            }
+        });
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference projref = databaseReference.child("Projects");
+        ArrayList<Project> projectList = new ArrayList<>();
+        myAdapter = new MyAdapter(projectList);
+        recyclerView.setAdapter(myAdapter);
+        projref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                projectList.clear();
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
+
+                    Project project = postSnapshot.getValue(Project.class);
+                    for (String userID: project.getUsersinProject()){
+                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() == userID){
+                        System.out.println(project.getThumbnail());
+                        projectList.add(project);}}
+
+
+                    // here you can access to name property like university.name
+
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: ");
             }
         });
 
@@ -224,7 +255,7 @@ public class profilefragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mFirebasedatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebasedatabase.getReference();;
+        databaseReference = mFirebasedatabase.getReference();;
 
         //check if user is sign in
         mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
@@ -245,17 +276,13 @@ public class profilefragment extends Fragment {
             }
         };
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //retrieve user information from database
                 setProfileWidgets(firebaseMethods.getUserData(snapshot));
                 //retrieve profile pic from database
-                s1 = firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectTitle().toArray(new String[firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectTitle().size()]);
-                s2 = firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectDescription().toArray(new String[firebaseMethods.getUserData(snapshot).getUsersdisplay().getProjectDescription().size()]);
-                MyAdapter myAdapter = new MyAdapter(s1,s2);
-                recyclerView.setAdapter(myAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
             }
 
             @Override
