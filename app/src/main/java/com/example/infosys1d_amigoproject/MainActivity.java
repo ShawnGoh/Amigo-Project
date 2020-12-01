@@ -9,9 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.infosys1d_amigoproject.ChatsFragment;
-import com.example.infosys1d_amigoproject.DiscoverFragment;
-import com.example.infosys1d_amigoproject.R;
+import com.example.infosys1d_amigoproject.chat.ChatsFragment;
 import com.example.infosys1d_amigoproject.profilemanagement.profilefragment;
 import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
 import com.example.infosys1d_amigoproject.projectmanagement.MyProjectsFragment;

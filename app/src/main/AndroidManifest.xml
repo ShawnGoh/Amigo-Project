@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".projectmanagement.CreateNewProject"></activity>
         <activity android:name=".profilemanagement.profileactivity"></activity>
-
+        <activity android:name=".chat.MessageActivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
