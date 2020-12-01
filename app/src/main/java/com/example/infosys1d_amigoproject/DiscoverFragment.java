@@ -51,6 +51,9 @@ public class DiscoverFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseMethods firebaseMethods;
     DatabaseReference databaseReference;
+    DatabaseReference dbProjects;
+    public List<Project> projectsList;
+    MyAdapter myAdapter;
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -89,7 +92,8 @@ public class DiscoverFragment extends Fragment {
         // Inflate the layout for this fragment
         LayoutInflater inflater2 = LayoutInflater.from(container.getContext());
         View view = inflater2.inflate(R.layout.fragment_discover, container, false);
-
+        dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
+        dbProjects.addListenerForSingleValueEvent(valueEventListener);
         recyclerView = view.findViewById(R.id.suggestedRecycler);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -105,6 +109,8 @@ public class DiscoverFragment extends Fragment {
         DatabaseReference projref = databaseReference.child("Projects");
         ArrayList<Project> projectList = new ArrayList<>();
         myAdapter = new MyAdapter(projectList);
+        projectsList = new ArrayList<>();
+        myAdapter = new MyAdapter(projectsList);
         recyclerView.setAdapter(myAdapter);
         projref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -157,4 +163,23 @@ public class DiscoverFragment extends Fragment {
         });
         return view;
     }
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            projectsList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Project project = snapshot.getValue(Project.class);
+                    projectsList.add(project);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 }

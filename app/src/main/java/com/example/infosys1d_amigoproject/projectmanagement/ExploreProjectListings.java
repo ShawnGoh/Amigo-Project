@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,11 @@ import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +30,9 @@ public class ExploreProjectListings extends AppCompatActivity {
     FirebaseMethods firebaseMethods;
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
+    DatabaseReference dbProjects;
+    public List<Project> projectsList;
+    MyAdapter myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +43,16 @@ public class ExploreProjectListings extends AppCompatActivity {
 //                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
 //                firebaseMethods.getUserID());
 
+        //code for database query of projects
+        dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
+        dbProjects.addListenerForSingleValueEvent(valueEventListener);
 
         //this block of code is for the recycler view
-//        MyAdapter myAdapter = new MyAdapter(new ArrayList<Project>(Arrays.asList(new_proj,new_proj,new_proj)));
         recyclerView = findViewById(R.id.recycler);
-//        recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        projectsList = new ArrayList<>();
+        myAdapter = new MyAdapter(projectsList);
+        recyclerView.setAdapter(myAdapter);
 
         //this block of code is for the button
         floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -58,6 +71,26 @@ public class ExploreProjectListings extends AppCompatActivity {
 
         }
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            projectsList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Project project = snapshot.getValue(Project.class);
+                    projectsList.add(project);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 
 
 
