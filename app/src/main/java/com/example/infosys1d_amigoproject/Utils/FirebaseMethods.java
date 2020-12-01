@@ -279,6 +279,71 @@ public class FirebaseMethods {
     }
 
 
+
+    public ArrayList<Userdataretrieval> getuserlist(DataSnapshot dataSnapshot){
+        Log.d(TAG, "getUserData: retrieving user information from firebase ");
+
+        ArrayList<Userdataretrieval> result =  new ArrayList<>();
+        ArrayList<users_display> resultpart1 =  new ArrayList<>();
+        ArrayList<users_private> resultpart2 =  new ArrayList<>();
+
+        for(DataSnapshot ds: dataSnapshot.getChildren()){
+            if(ds.getKey().equals("users_display")){
+
+                for(DataSnapshot snap: ds.getChildren()){
+                    users_display display = new users_display();
+
+                    Log.d(TAG, "getUserData: getting display data : datasnapshot: "+ ds);
+                    try {
+                        display.setAbout_me(snap.getValue(users_display.class).getAbout_me());
+                        display.setBio(snap.getValue(users_display.class).getBio());
+                        display.setName(snap.getValue(users_display.class).getName());
+                        display.setProjects_completed(snap.getValue(users_display.class).getProjects_completed());
+                        display.setLooking_for(snap.getValue(users_display.class).getLooking_for());
+                        display.setSkills(snap.getValue(users_display.class).getSkills());
+                        display.setChats(snap.getValue(users_display.class).getChats());
+                        display.setCurrent_projects(snap.getValue(users_display.class).getCurrent_projects());
+                        display.setProjects_completed_list(snap.getValue(users_display.class).getProjects_completed_list());
+                        Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
+                    }catch (NullPointerException E){
+                        Log.d(TAG, "getUserData: null field encountered ");
+                    }
+
+                    resultpart1.add(display);
+                }
+            }}
+        for(DataSnapshot ds: dataSnapshot.getChildren()){
+            if(ds.getKey().equals("users_private")){
+                System.out.println(1);
+
+                for(DataSnapshot prsnap: ds.getChildren()){
+
+                    users_private privatedata = new users_private();
+                    Log.d(TAG, "getUserData: getting private data : datasnapshot: "+ ds);
+                    try {
+                        privatedata.setFirstname(prsnap.getValue(users_private.class).getFirstname());
+                        privatedata.setLastname(prsnap.getValue(users_private.class).getLastname());
+                        privatedata.setEmail(prsnap.getValue(users_private.class).getEmail());
+                        privatedata.setUser_id(prsnap.getValue(users_private.class).getUser_id());
+                        Log.d(TAG, "getUserData: retrieved user private data "+privatedata.toString());
+                    }catch (NullPointerException E){
+                        Log.d(TAG, "getUserData: null field encountered");
+                    }
+
+                    resultpart2.add(privatedata);
+                }
+            }
+
+
+        }
+
+        for(int i =0 ; i<resultpart1.size();i++){
+            users_display displayconsol = resultpart1.get(i);
+            users_private privateconsol = resultpart2.get(i);
+            result.add(new Userdataretrieval(displayconsol, privateconsol));}
+        return result;
+    }
+
     public String getUserID() {
         return userID;
     }

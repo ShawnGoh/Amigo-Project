@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".projectmanagement.CreateNewProject" />
-        <activity android:name=".profilemanagement.profileactivity" />
+        <activity android:name=".projectmanagement.CreateNewProject"></activity>
+        <activity android:name=".profilemanagement.profileactivity"></activity>
+        <activity android:name=".chat.MessageActivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
