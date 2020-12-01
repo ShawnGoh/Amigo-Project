@@ -11,29 +11,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
+import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExploreProjectListings extends AppCompatActivity {
-    String s1[] = {"one", "two", "three", "four", "five"};
-    String s2[] = {"one", "two", "three", "four", "five"};
-
-    Project sampleProject = new Project(null, "Learn Python with Me!", "Hi, I'm Kai Feng", s1, s2, "Kai Feng");
 
 
+    FirebaseMethods firebaseMethods;
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_project_listings);
+        firebaseMethods = new FirebaseMethods(getApplicationContext());
+//        Project new_proj = new Project("random url", "test Title", "test description ",
+//                new ArrayList<String>(Arrays.asList("hello","java","C++")),
+//                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
+//                firebaseMethods.getUserID());
+
 
         //this block of code is for the recycler view
-        MyAdapter myAdapter = new MyAdapter(sampleProject);
+//        MyAdapter myAdapter = new MyAdapter(new ArrayList<Project>(Arrays.asList(new_proj,new_proj,new_proj)));
         recyclerView = findViewById(R.id.recycler);
-        recyclerView.setAdapter(myAdapter);
+//        recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //this block of code is for the button
@@ -49,7 +54,7 @@ public class ExploreProjectListings extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String skills_filter = intent.getStringExtra("skills_filter");
             String text_filter = intent.getStringExtra("text_filter");
-            myAdapter.getFilter().filter(text_filter);
+//            myAdapter.getFilter().filter(text_filter);
 
         }
     }

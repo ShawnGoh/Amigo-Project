@@ -13,6 +13,10 @@ public class Project {
     private ArrayList<String> usersinProject;
     private String createdby;
 
+    public Project() {
+
+    }
+
     public Project(String thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<String> usersinProject, String createdby) {
         this.thumbnail = thumbnail;
         this.projectitle = projectitle;

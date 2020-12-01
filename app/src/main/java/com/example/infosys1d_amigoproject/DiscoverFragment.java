@@ -9,12 +9,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
+import com.example.infosys1d_amigoproject.projectmanagement.Project;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +45,9 @@ public class DiscoverFragment extends Fragment {
     private Button seeAllButton;
     private SearchView searchView;
     RecyclerView recyclerView;
+    DatabaseReference dbProjects;
+    public List<Project> projectsList;
+    MyAdapter myAdapter;
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -73,6 +86,8 @@ public class DiscoverFragment extends Fragment {
         // Inflate the layout for this fragment
         LayoutInflater inflater2 = LayoutInflater.from(container.getContext());
         View view = inflater2.inflate(R.layout.fragment_discover, container, false);
+        dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
+        dbProjects.addListenerForSingleValueEvent(valueEventListener);
         recyclerView = view.findViewById(R.id.suggestedRecycler);
         seeAllButton = view.findViewById(R.id.seeAllButton1);
         seeAllButton.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +97,8 @@ public class DiscoverFragment extends Fragment {
 
             }
         });
-        MyAdapter myAdapter = new MyAdapter(s1,s2);
+        projectsList = new ArrayList<>();
+        myAdapter = new MyAdapter(projectsList);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         searchView = view.findViewById(R.id.searchBarHome);
@@ -102,4 +118,23 @@ public class DiscoverFragment extends Fragment {
         });
         return view;
     }
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            projectsList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Project project = snapshot.getValue(Project.class);
+                    projectsList.add(project);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 }
