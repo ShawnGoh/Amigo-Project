@@ -138,7 +138,7 @@ public class profilefragment extends Fragment {
 
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() == userID){
+                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() != userID){
                         System.out.println(project.getThumbnail());
                         projectList.add(project);}}
 

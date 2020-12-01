@@ -64,7 +64,7 @@
                 android:orientation="vertical">
 
                 <TextView
-
+                    android:drawableLeft="@drawable/ic_display_name"
                     android:id="@+id/profilenametextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,9 +83,8 @@
                     android:background="@color/black"
                     android:layout_marginTop="10dp"/>
 
-                amrish sandhu, [01.12.20 11:41]
                 <TextView
-
+                    android:drawableLeft="@drawable/ic_description"
                     android:id="@+id/profileaboutmetextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +104,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <TextView
-
+                    android:drawableLeft="@drawable/ic_explore"
                     android:id="@+id/profilelookingfortextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,7 +154,7 @@
 
 
                 <TextView
-
+                    android:drawableLeft="@drawable/ic_email"
                     android:id="@+id/profileemailtextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,13 +166,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/profilecurrentprojectstextview"
                     app:layout_constraintStart_toStartOf="@+id/profilecurrentprojectstextview"
                     app:layout_constraintTop_toBottomOf="@+id/profilecurrentprojectstextview" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="10dp"/>
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="142dp"
                     android:layout_height="29dp"
                     android:layout_gravity="center"
-                    android:text="Change Photo"
-                    android:textSize="8sp"
+                    android:text="Change Display Photo"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="@+id/profileemailtextview"
                     app:layout_constraintStart_toStartOf="@+id/profileemailtextview"
                     app:layout_constraintTop_toBottomOf="@+id/profileemailtextview" />
@@ -182,8 +187,8 @@
                     android:layout_width="142dp"
                     android:layout_height="29dp"
                     android:layout_gravity="center"
-                    android:text="Edit Profile"
-                    android:textSize="8sp"
+                    android:text="Edit Profile Details"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="@+id/profileemailtextview"
                     app:layout_constraintStart_toStartOf="@+id/profileemailtextview"
                     app:layout_constraintTop_toBottomOf="@+id/profileemailtextview" />
@@ -195,6 +200,7 @@
                     android:background="@color/black"
                     android:layout_marginTop="10dp"
                     android:id="@+id/undercurrentprojects"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="300dp">
@@ -212,12 +218,12 @@
                     app:layout_constraintTop_toBottomOf="@id/appBarLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
+
+
                 </LinearLayout>
-                </LinearLayout>
 
 
-
-
+            </LinearLayout>
 
 
         </androidx.cardview.widget.CardView>
