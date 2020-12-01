@@ -122,6 +122,7 @@ public class ExploreProjectListings extends AppCompatActivity {
 
                 System.out.println(projectsList);
                 myAdapter.getFilter().filter(text_filter);
+                myAdapter.notifyDataSetChanged();
 
                 if (skills_filter != null && skills_filter.size() != 0) {
                     List<Project> textFilteredProjects = new ArrayList<>();
