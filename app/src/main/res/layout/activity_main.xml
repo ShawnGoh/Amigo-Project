@@ -9,6 +9,17 @@
     <!--    load background
     android:background=""-->
 
+    <Button
+        android:id="@+id/signoutbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:text="Signoout"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"

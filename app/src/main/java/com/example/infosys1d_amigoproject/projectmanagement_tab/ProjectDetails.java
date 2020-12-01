@@ -3,6 +3,8 @@ package com.example.infosys1d_amigoproject.projectmanagement_tab;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -26,14 +28,14 @@ public class ProjectDetails extends AppCompatActivity {
     StorageReference storageReference,projectref;
     DatabaseReference myref;
     ImageView imageView;
+    Button clicktoChat;
+    Button applytoJoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details);
         mCollapsingToolbarLayout = findViewById(R.id.collapse);
-        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
-        mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
 
         imageView = findViewById(R.id.project_picture);
         Intent intent = getIntent();
@@ -45,6 +47,23 @@ public class ProjectDetails extends AppCompatActivity {
                 Project project = snapshot.getValue(Project.class);
                 System.out.println(project.getThumbnail()+"   123456");
                 Picasso.get().load(project.getThumbnail()).into(imageView);
+//        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
+//        mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
+
+        clicktoChat = findViewById(R.id.clicktoChat);
+        clicktoChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // intent to chat with project creator
+            }
+        });
+        applytoJoin = findViewById(R.id.applytoJoin);
+        applytoJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // intent to project application fragment OR fillable dialogue
+            }
+        });
 
             }
             @Override
