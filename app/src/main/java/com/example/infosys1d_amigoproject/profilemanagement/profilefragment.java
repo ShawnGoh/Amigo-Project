@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.R;
@@ -71,13 +72,26 @@ public class profilefragment extends Fragment {
 
         firebaseMethods = new FirebaseMethods(mcontext);
         setupfirebaseauth();
-
+        Button editProfile = (Button) view.findViewById(R.id.editprofilebutton);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick, navigating to : edit profile fragment");
+                editprofilefragment fragment = new editprofilefragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack("editprofilefragment");
+                transaction.commit();
+            }
+        });
         backtohomebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(mcontext, MainActivity.class));
             }
         });
+
+
 
         return view;
     }

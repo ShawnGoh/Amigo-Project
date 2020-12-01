@@ -1,5 +1,6 @@
 package com.example.infosys1d_amigoproject.projectmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,22 +10,62 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.infosys1d_amigoproject.R;
+import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.UUID;
 
 public class CreateNewProject extends AppCompatActivity {
 
     ImageView imageView;
-    Button button;
+    Button button,create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
+    Uri downloadUrl;
+    FirebaseStorage storage;
+    StorageReference storageRef;
+    TextInputLayout textInputLayout;
+
+    DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
+
+    FirebaseMethods firebaseMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageView2);
+        textInputLayout = findViewById(R.id.textInputLayout);
         button = findViewById(R.id.button);
+        create_project = findViewById(R.id.button_create_project);
+        firebaseMethods = new FirebaseMethods(getApplicationContext());
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        create_project.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), "test description ",
+                        new ArrayList<String>(Arrays.asList("hello","java","C++")),
+                        new ArrayList <String> (Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
+                        firebaseMethods.getUserID());
+                String key = myref.child("Projects").push().getKey();
+                myref.child("Projects").child(key).setValue(new_proj);
+
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +77,7 @@ public class CreateNewProject extends AppCompatActivity {
                 startActivityForResult(gallery,1);
             }
         });
+
     }
 
     @Override
@@ -44,6 +86,34 @@ public class CreateNewProject extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData() != null){
             imageUri = data.getData();
             imageView.setImageURI(imageUri);
+            uploadpicture();
         }
+    }
+
+    private void uploadpicture() {
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference newRef = storageRef.child("images/" + randomKey);
+        newRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                downloadUrl = uri;
+                                System.out.println(downloadUrl.toString());
+
+                            }
+                        });
+                        Snackbar.make(findViewById(R.id.upload), "Image Uploaded", Snackbar.LENGTH_LONG).show();
+                    };
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
     }
 }

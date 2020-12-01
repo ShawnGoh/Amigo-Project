@@ -2,27 +2,16 @@ package com.example.infosys1d_amigoproject.projectmanagement;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExploreProjectListings extends AppCompatActivity {
     String s1[] = {"one", "two", "three", "four", "five"};

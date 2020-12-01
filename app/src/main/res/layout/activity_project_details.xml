@@ -25,6 +25,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
+                android:id="@+id/project_picture"
                 android:layout_height="350dp"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"

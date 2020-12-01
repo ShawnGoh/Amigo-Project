@@ -11,10 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/searchable" />
-
         <activity android:name=".projectmanagement.CreateNewProject" />
         <activity android:name=".profilemanagement.profileactivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
