@@ -302,8 +302,7 @@ public class FirebaseMethods {
                         display.setLooking_for(snap.getValue(users_display.class).getLooking_for());
                         display.setSkills(snap.getValue(users_display.class).getSkills());
                         display.setChats(snap.getValue(users_display.class).getChats());
-                        display.setCurrent_projects(snap.getValue(users_display.class).getCurrent_projects());
-                        display.setProjects_completed_list(snap.getValue(users_display.class).getProjects_completed_list());
+
                         Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
                     }catch (NullPointerException E){
                         Log.d(TAG, "getUserData: null field encountered ");
