@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     ListView suggestedListView;
     List suggestedList = new ArrayList();
     ArrayAdapter adapter;
-    ChipNavigationBar menu_bottom;
+    static ChipNavigationBar menu_bottom;
     FragmentManager fragmentManager;
 
     RecyclerView recyclerView;

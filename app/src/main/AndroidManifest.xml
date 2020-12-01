@@ -11,17 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".projectmanagement.CreateNewProject"></activity>
-        <activity android:name=".profilemanagement.profileactivity"></activity>
-
+        <activity android:name=".projectmanagement.CreateNewProject" />
+        <activity android:name=".profilemanagement.profileactivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
-        <activity android:name=".profilesetup.ProfileSetupAboutMe"></activity>
+        <activity android:name=".profilesetup.ProfileSetupAboutMe" />
         <activity android:name=".profilesetup.ProfileSetupBio" />
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
-        <activity android:name=".projectmanagement.ExploreProjectListings" />
+        <activity android:name=".projectmanagement.ExploreProjectListings">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
         <activity android:name=".projectmanagement.ProjectDetails" />
         <activity android:name=".SplashScreen">
             <intent-filter>
