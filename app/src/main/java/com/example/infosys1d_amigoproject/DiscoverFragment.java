@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +33,7 @@ public class DiscoverFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button seeAllButton;
+    private SearchView searchView;
     RecyclerView recyclerView;
     public DiscoverFragment() {
         // Required empty public constructor
@@ -81,6 +85,21 @@ public class DiscoverFragment extends Fragment {
         MyAdapter myAdapter = new MyAdapter(s1,s2);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        searchView = view.findViewById(R.id.searchBarHome);
+        searchView.setFocusable(false);
+//        EditText editText = (EditText) searchView.findViewById(R.id.searchBarHome);
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    SearchFragment searchFragment = new SearchFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, searchFragment);
+                    transaction.commit();
+                    MainActivity.menu_bottom.setVisibility(View.GONE);
+                }
+            }
+        });
         return view;
     }
 }

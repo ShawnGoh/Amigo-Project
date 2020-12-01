@@ -1,5 +1,6 @@
 package com.example.infosys1d_amigoproject.projectmanagement;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -48,6 +49,13 @@ public class ExploreProjectListings extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(),CreateNewProject.class));
             }
         });
+        // Get the intent, verify the action and get the query
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+//            doMySearch(query);
+
+        }
     }
 
 

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
 
-public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> {
+public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
     String data1[], data2[];
 
     public MyAdapter(String s1[], String s2[]) {
@@ -38,6 +40,23 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
         int length = data1.length;
         return length;
     }
+
+    @Override
+    public Filter getFilter() {
+        return projectsFilter;
+    }
+
+    private Filter projectsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<>
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+        }
+    };
 
 
     public class myholder extends RecyclerView.ViewHolder{
