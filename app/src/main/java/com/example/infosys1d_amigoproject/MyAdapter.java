@@ -33,6 +33,10 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
         projectListAll = new ArrayList<>(projectsList);
     }
 
+    public void setProjectListAll(List<Project> projectListAll) {
+        this.projectListAll = projectListAll;
+    }
+
     @NonNull
     @Override
     public myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -79,7 +83,9 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
 
                 for (Project project : projectListAll) {
                     System.out.println("omG!");
-                    if (project.getProjectitle().toLowerCase().contains(filterPattern))
+                    if (project.getProjectitle().toLowerCase().contains(filterPattern)
+                            || project.getProjectdescription().toLowerCase().contains(filterPattern)
+                            || project.getCreatedby().toLowerCase().contains(filterPattern))
                     {
                         filteredProjects.add(project);
                         System.out.println("This works!");

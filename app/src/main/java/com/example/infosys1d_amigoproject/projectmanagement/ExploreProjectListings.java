@@ -1,6 +1,7 @@
 package com.example.infosys1d_amigoproject.projectmanagement;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,7 @@ public class ExploreProjectListings extends AppCompatActivity {
     DatabaseReference dbProjects;
     public List<Project> projectsList;
     private Intent intent;
+    private Context mContext;
     MyAdapter myAdapter;
     TextView projectCategory;
 
@@ -55,12 +57,6 @@ public class ExploreProjectListings extends AppCompatActivity {
         dbProjects.addListenerForSingleValueEvent(valueEventListener);
         System.out.println("helloooooooooooo"+projectsList.toString());
 
-        //this block of code is for the recycler view
-        recyclerView = findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        myAdapter = new MyAdapter(projectsList);
-        recyclerView.setAdapter(myAdapter);
-
         //this block of code is for the button
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +65,8 @@ public class ExploreProjectListings extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(),CreateNewProject.class));
             }
         });
+        recyclerView = findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Get the intent, verify the action and get the query
         intent = getIntent();
 //        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -100,6 +98,9 @@ public class ExploreProjectListings extends AppCompatActivity {
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            //this block of code is for the recycler view
+            myAdapter = new MyAdapter(projectsList);
+            recyclerView.setAdapter(myAdapter);
             projectsList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -108,17 +109,17 @@ public class ExploreProjectListings extends AppCompatActivity {
                 }
                 myAdapter.notifyDataSetChanged();
             }
+            myAdapter.setProjectListAll(projectsList);
 
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
                 String skills_filter = intent.getStringExtra("skills_filter");
                 String text_filter = intent.getStringExtra("text_filter");
+                projectCategory.setText('"'+text_filter+'"');
                 System.out.println("This sends data!");
                 System.out.println(skills_filter);
 
                 System.out.println(projectsList);
                 myAdapter.getFilter().filter(text_filter);
-
-                projectCategory.setText(text_filter);
 
             }
         }
