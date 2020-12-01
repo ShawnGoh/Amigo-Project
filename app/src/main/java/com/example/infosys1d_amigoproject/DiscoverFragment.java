@@ -111,7 +111,7 @@ public class DiscoverFragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 projectList.clear();
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
+                   // System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
                     Project project = postSnapshot.getValue(Project.class);
                     System.out.println(project.getThumbnail());
                     projectList.add(project);
