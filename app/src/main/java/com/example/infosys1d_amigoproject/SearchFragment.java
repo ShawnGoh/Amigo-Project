@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SearchView;
@@ -113,7 +114,7 @@ public class SearchFragment extends Fragment {
 //
 //        searchView.setSearchableInfo(
 //                searchManager.getSearchableInfo(getComponentName()));
-
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -134,7 +135,7 @@ public class SearchFragment extends Fragment {
                 selectedChipData = submitFilters();
                 Intent resultIntent = new Intent(getActivity(), ExploreProjectListings.class);
                 resultIntent.setAction(Intent.ACTION_SEARCH);
-                resultIntent.putExtra("skills_filter", selectedChipData.toString());
+                resultIntent.putExtra("skills_filter", selectedChipData);
                 resultIntent.putExtra("text_filter", filterString);
                 startActivity(resultIntent);
             }

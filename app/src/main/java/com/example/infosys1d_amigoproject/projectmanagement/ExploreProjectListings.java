@@ -112,15 +112,32 @@ public class ExploreProjectListings extends AppCompatActivity {
             myAdapter.setProjectListAll(projectsList);
 
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-                String skills_filter = intent.getStringExtra("skills_filter");
+                ArrayList<String> skills_filter = intent.getStringArrayListExtra("skills_filter");
                 String text_filter = intent.getStringExtra("text_filter");
-                projectCategory.setText('"'+text_filter+'"');
+                if (text_filter != null){
+                    projectCategory.setText('"'+text_filter+'"');
+                }
                 System.out.println("This sends data!");
                 System.out.println(skills_filter);
 
                 System.out.println(projectsList);
                 myAdapter.getFilter().filter(text_filter);
 
+                if (skills_filter != null && skills_filter.size() != 0) {
+                    List<Project> textFilteredProjects = new ArrayList<>();
+                    System.out.println("hello");
+                    for (Project project : projectsList) {
+                        for (String skill : skills_filter) {
+                            System.out.println("Iterating through skills");
+                            if (project.getSkillsrequired().contains(skill)){
+                                textFilteredProjects.add(project);
+                                System.out.println("Adding project with skill");
+                            }
+                        }
+                    }
+                    myAdapter.setProjectListAll(textFilteredProjects);
+                    myAdapter.notifyDataSetChanged();
+                }
             }
         }
 

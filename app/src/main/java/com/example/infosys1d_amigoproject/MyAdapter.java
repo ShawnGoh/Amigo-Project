@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
 import com.example.infosys1d_amigoproject.projectmanagement.Project;
 import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,10 +28,15 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
     public List<Project> projectsList;
     public List<Project> projectListAll;
+    public boolean isEmpty;
 
     public MyAdapter(List<Project> projectsList) {
         this.projectsList = projectsList;
         projectListAll = new ArrayList<>(projectsList);
+    }
+
+    public void setProjectsList(List<Project> projectsList) {
+        this.projectsList = projectsList;
     }
 
     public void setProjectListAll(List<Project> projectListAll) {
@@ -62,6 +68,13 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
     @Override
     public Filter getFilter() {
         return projectsFilter;
+    }
+
+    public boolean checkIsEmpty() {
+        if (isEmpty == true) {
+            System.out.println("HELLO I AM EMPTY LA");
+        }
+        return isEmpty;
     }
 
     private Filter projectsFilter = new Filter() {
@@ -96,6 +109,15 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
             FilterResults results = new FilterResults();
             results.values = filteredProjects;
 
+            System.out.println(filteredProjects);
+
+            //Async task, can't get errorMessage to show up
+
+            if (filteredProjects.isEmpty()) {
+                isEmpty = true;
+                System.out.println("I'm Empty!");
+
+            }
             return results;
         }
 
