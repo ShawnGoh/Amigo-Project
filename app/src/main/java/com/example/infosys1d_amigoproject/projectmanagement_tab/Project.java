@@ -1,8 +1,4 @@
-package com.example.infosys1d_amigoproject.projectmanagement;
-
-import android.net.Uri;
-
-import com.example.infosys1d_amigoproject.models.users_display;
+package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
 import java.util.ArrayList;
 import java.util.Arrays;

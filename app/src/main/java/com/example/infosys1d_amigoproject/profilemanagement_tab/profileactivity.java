@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.profilemanagement;
+package com.example.infosys1d_amigoproject.profilemanagement_tab;
 
 import android.content.Context;
 import android.os.Bundle;

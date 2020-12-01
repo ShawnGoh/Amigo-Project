@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".projectmanagement.CreateNewProject"></activity>
-        <activity android:name=".profilemanagement.profileactivity"></activity>
-        <activity android:name=".chat.MessageActivity" />
+        <activity android:name=".projectmanagement_tab.CreateNewProject"></activity>
+        <activity android:name=".profilemanagement_tab.profileactivity"></activity>
+        <activity android:name=".chat_tab.MessageActivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
@@ -22,8 +22,8 @@
         <activity android:name=".profilesetup.ProfileSetupBio" />
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
-        <activity android:name=".projectmanagement.ExploreProjectListings" />
-        <activity android:name=".projectmanagement.ProjectDetails" />
+        <activity android:name=".projectmanagement_tab.ExploreProjectListings" />
+        <activity android:name=".projectmanagement_tab.ProjectDetails" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.projectmanagement;
+package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

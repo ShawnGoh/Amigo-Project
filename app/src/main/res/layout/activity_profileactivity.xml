@@ -6,7 +6,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 style="@style/SignupinTheme"
 android:background="#fff"
-tools:context=".profilemanagement.profileactivity">
+tools:context=".profilemanagement_tab.profileactivity">
 
 <FrameLayout
     android:layout_width="match_parent"

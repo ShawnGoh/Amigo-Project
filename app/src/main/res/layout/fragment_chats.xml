@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.ActiveChatsFragment"
+    tools:context=".chat_tab.ActiveChatsFragment"
     android:background="@color/white">
 
     <androidx.recyclerview.widget.RecyclerView

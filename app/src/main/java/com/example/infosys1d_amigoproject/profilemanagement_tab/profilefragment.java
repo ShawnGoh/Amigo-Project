@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.profilemanagement;
+package com.example.infosys1d_amigoproject.profilemanagement_tab;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,14 +23,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
-import com.example.infosys1d_amigoproject.projectmanagement.Project;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
+import com.example.infosys1d_amigoproject.signinsignup.SignIn;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
@@ -50,17 +51,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import static android.app.Activity.RESULT_OK;
-
 public class profilefragment extends Fragment {
     MyAdapter myAdapter;
     private static final String TAG = "profilefragment";
     private TextView mName, mBio, mAboutme, mlookingfor,  muserid, memail;
     private ImageView mProfilepic;
-    private Button changeProfilePic;
+    private Button changeProfilePic, signoutbutton;
     private Context mcontext;
-
-    private Button backtohomebutton;
+    private ImageButton editProfile;
     private ChipGroup mskills;
 
     //Firebase Database
@@ -82,22 +80,29 @@ public class profilefragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
+
+
         Log.d(TAG, "onCreateView: init widgets");
+
         mName = view.findViewById(R.id.profilenametextview);
-//        mBio = view.findViewById(R.id.profilebiotextview);
+//      mBio = view.findViewById(R.id.profilebiotextview);
         mAboutme = view.findViewById(R.id.profileaboutmetextview);
         mlookingfor = view.findViewById(R.id.profilelookingfortextview);
-
         mProfilepic = view.findViewById(R.id.profilepic);
         recyclerView = view.findViewById(R.id.suggestedRecycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mcontext = getActivity();
-//        muserid = view.findViewById(R.id.profileuserid);
+//      muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
-//        backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
-        changeProfilePic = view.findViewById(R.id.button2);
+//      backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
+        changeProfilePic = view.findViewById(R.id.Changepicturebutton);
         mskills = view.findViewById(R.id.profileskillchipsgroup);
+        editProfile = view.findViewById(R.id.editprofilebutton);
+        signoutbutton = view.findViewById(R.id.signoutbutton);
+
         Log.d(TAG, "onCreateView: widgets inited");
+
+
         storageReference = FirebaseStorage.getInstance().getReference();
         firebaseMethods = new FirebaseMethods(mcontext);
         StorageReference profileRef = storageReference.child("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid()+"/profile.jpg");
@@ -107,8 +112,22 @@ public class profilefragment extends Fragment {
                 Picasso.get().load(uri).into(mProfilepic);
             }
         });
+
         setupfirebaseauth();
-        Button editProfile = (Button) view.findViewById(R.id.editprofilebutton);
+
+
+        //OnClickListeners
+
+        signoutbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                startActivity(new Intent(mcontext, SignIn.class));
+                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +139,7 @@ public class profilefragment extends Fragment {
                 transaction.commit();
             }
         });
+
         changeProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,11 +150,15 @@ public class profilefragment extends Fragment {
 
             }
         });
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projref = databaseReference.child("Projects");
         ArrayList<Project> projectList = new ArrayList<>();
         myAdapter = new MyAdapter(projectList);
         recyclerView.setAdapter(myAdapter);
+
+
         projref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

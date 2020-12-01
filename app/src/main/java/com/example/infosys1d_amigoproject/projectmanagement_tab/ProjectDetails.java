@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.projectmanagement;
+package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,9 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.example.infosys1d_amigoproject.R;
-import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject.chat;
+package com.example.infosys1d_amigoproject.chat_tab;
 
 import android.content.Context;
 import android.content.Intent;

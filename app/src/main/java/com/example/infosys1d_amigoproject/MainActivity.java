@@ -9,10 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.infosys1d_amigoproject.chat.ChatsFragment;
-import com.example.infosys1d_amigoproject.profilemanagement.profilefragment;
-import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
-import com.example.infosys1d_amigoproject.projectmanagement.MyProjectsFragment;
+import com.example.infosys1d_amigoproject.chat_tab.ChatsFragment;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.profilefragment;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.ExploreProjectListings;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.MyProjectsFragment;
 import com.example.infosys1d_amigoproject.signinsignup.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,20 +63,12 @@ public class MainActivity extends AppCompatActivity {
         myref = FirebaseDatabase.getInstance().getReference();
         myref.child("hello").setValue("yo whats up");
 
-        signoutbutton = findViewById(R.id.signoutbutton);
 
         menu_bottom = findViewById(R.id.navigation);
 
         setupfirebaseauth();
 
-        signoutbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), SignIn.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
-        });
+
 
 
         menu_bottom.setItemSelected(0, true);
