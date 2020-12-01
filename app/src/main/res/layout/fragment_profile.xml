@@ -15,11 +15,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="142dp"
+        android:layout_height="29dp"
+        android:text="Change Photo"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/profilepic"
+        app:layout_constraintStart_toStartOf="@+id/profilepic"
+        app:layout_constraintTop_toBottomOf="@+id/profilepic" />
 
     <TextView
         android:id="@+id/profilenametextview"
@@ -27,9 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Name"
-        app:layout_constraintEnd_toEndOf="@+id/profilepic"
-        app:layout_constraintStart_toStartOf="@+id/profilepic"
-        app:layout_constraintTop_toBottomOf="@+id/profilepic" />
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <TextView
         android:id="@+id/profileaboutmetextview"
@@ -131,11 +141,13 @@
         android:id="@+id/editprofilebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="64dp"
         android:text="Edit Profile"
         app:layout_constraintEnd_toEndOf="@+id/backtohomepagebutton"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="@+id/backtohomepagebutton"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

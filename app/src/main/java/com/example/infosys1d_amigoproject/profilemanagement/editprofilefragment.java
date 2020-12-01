@@ -1,9 +1,12 @@
 package com.example.infosys1d_amigoproject.profilemanagement;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -20,7 +23,10 @@ import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,10 +35,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +77,10 @@ public class editprofilefragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    FirebaseStorage storage;
+    StorageReference storageref;
+
+
     public editprofilefragment() {
         // Required empty public constructor
     }
@@ -94,14 +110,17 @@ public class editprofilefragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_editprofilefragment, container, false);
-
+        LayoutInflater inflater2 = LayoutInflater.from(container.getContext());
+        View view =  inflater2.inflate(R.layout.fragment_editprofilefragment, container, false);
+        storage = FirebaseStorage.getInstance();
+        storageref = storage.getReference();
         mName = view.findViewById(R.id.name);
         mBio = view.findViewById(R.id.bio);
         mAboutme = view.findViewById(R.id.aboutme);
@@ -121,8 +140,11 @@ public class editprofilefragment extends Fragment {
                 saveProfileSettings();
             }
         });
+
+
         return view;
     }
+
 
 
     private void setProfileWidgets(Userdataretrieval userSettings){

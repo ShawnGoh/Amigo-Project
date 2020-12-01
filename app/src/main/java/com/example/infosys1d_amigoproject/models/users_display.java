@@ -1,5 +1,9 @@
 package com.example.infosys1d_amigoproject.models;
 
+import android.net.Uri;
+
+import com.example.infosys1d_amigoproject.R;
+
 import java.util.ArrayList;
 
 public class users_display {
@@ -9,12 +13,14 @@ public class users_display {
     private ArrayList<String> chats = new ArrayList<>();
     private String looking_for = "none";
     private String name;
-    private String profile_picture = "none";
+    private String profile_picture;
     private long projects_completed = 0;
     private ArrayList<String> projects_completed_list = new ArrayList<>();
     private ArrayList<String> current_projects = new ArrayList<>();
     private ArrayList<String> skills = new ArrayList<>();
     private boolean compeletedsetup = false;
+
+
 
     public users_display(String about_me, String bio, ArrayList<String> chats, String looking_for, String name, String profile_picture, long projects_completed, ArrayList<String> projects_completed_list, ArrayList<String> current_projects, ArrayList<String> skills) {
         this.about_me = about_me;
@@ -22,11 +28,13 @@ public class users_display {
         this.chats = chats;
         this.looking_for = looking_for;
         this.name = name;
-        this.profile_picture = profile_picture;
+
         this.projects_completed = projects_completed;
         this.projects_completed_list = projects_completed_list;
         this.current_projects = current_projects;
         this.skills = skills;
+        this.profile_picture = profile_picture;
+
     }
 
     public users_display() {

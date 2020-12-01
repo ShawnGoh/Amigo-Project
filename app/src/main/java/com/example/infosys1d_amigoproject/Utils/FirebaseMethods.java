@@ -236,6 +236,7 @@ public class FirebaseMethods {
                     display.setChats(ds.child(userID).getValue(users_display.class).getChats());
                     display.setCurrent_projects(ds.child(userID).getValue(users_display.class).getCurrent_projects());
                     display.setProjects_completed_list(ds.child(userID).getValue(users_display.class).getProjects_completed_list());
+
                     Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
                 }catch (NullPointerException E){
                     Log.d(TAG, "getUserData: null field encountered ");
