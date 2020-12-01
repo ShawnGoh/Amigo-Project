@@ -7,13 +7,13 @@ import com.example.infosys1d_amigoproject.models.users_display;
 import java.util.ArrayList;
 
 public class Project {
-    private Uri thumbnail;
+    private String thumbnail;
     private String projectitle, projectdescription;
     private ArrayList<String> skillsrequired;
-    private ArrayList<users_display> usersinProject;
-    private users_display createdby;
+    private ArrayList<String> usersinProject;
+    private String createdby;
 
-    public Project(Uri thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<users_display> usersinProject, users_display createdby) {
+    public Project(String thumbnail, String projectitle, String projectdescription, ArrayList<String> skillsrequired, ArrayList<String> usersinProject, String createdby) {
         this.thumbnail = thumbnail;
         this.projectitle = projectitle;
         this.projectdescription = projectdescription;
@@ -22,7 +22,7 @@ public class Project {
         this.createdby = createdby;
     }
 
-    public Uri getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
@@ -38,11 +38,11 @@ public class Project {
         return skillsrequired;
     }
 
-    public ArrayList<users_display> getUsersinProject() {
+    public ArrayList<String> getUsersinProject() {
         return usersinProject;
     }
 
-    public users_display getCreatedby() {
+    public String getCreatedby() {
         return createdby;
     }
 }
