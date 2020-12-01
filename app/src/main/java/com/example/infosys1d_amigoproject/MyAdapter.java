@@ -30,6 +30,7 @@ import static android.content.ContentValues.TAG;
 public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
         private List<Project> projectsList;
         private List<Project> projectListAll;
+        StorageReference storageReference,projectref;
 
         public MyAdapter(List<Project> projectsList) {
             this.projectsList = projectsList;
@@ -49,8 +50,15 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
         public void onBindViewHolder(@NonNull myholder holder, int position) {
             holder.mytext1.setText(projectsList.get(position).getProjectitle());
             holder.mytext2.setText(projectsList.get(position).getProjectdescription());
-            // TODO set up Picasso
-            // holder.thumbnail.setImageResource(projectsList.get(position).getThumbnail());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ProjectDetails.class);
+                    intent.putExtra("ProjectID", projectsList.get(position).getProjectID());
+                    v.getContext().startActivity(intent);
+                }
+            });
+            Picasso.get().load(projectsList.get(position).getThumbnail()).into(holder.thumbnail);
         }
 
         @Override
@@ -118,15 +126,6 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
                 thumbnail = itemView.findViewById(R.id.project_picture);
                 mytext1 = itemView.findViewById(R.id.info_text);
                 mytext2 = itemView.findViewById(R.id.description);
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), ProjectDetails.class);
-                        view.getContext().startActivity(intent);
-                        intent.putExtra("hello", "hai");
-                    }
-                });
-
             }
         }
     }

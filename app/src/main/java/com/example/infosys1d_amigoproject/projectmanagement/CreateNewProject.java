@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -82,15 +83,15 @@ public class CreateNewProject extends AppCompatActivity {
                         selectedChipData.add(chip.getText().toString());
                     }
                 }
-
-
-
                 String projectKey = myref.child("Projects").push().getKey();
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), textInputLayoutdescrip.getEditText().getText().toString(),
-                        selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), firebaseMethods.getUserID(), projectKey);
+                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
+                        textInputLayoutdescrip.getEditText().getText().toString(),
+                        selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
+                        firebaseMethods.getUserID(), projectKey);
 
                 myref.child("Projects").child(projectKey).setValue(new_proj);
-
+                Intent intent1 = new Intent(CreateNewProject.this,MainActivity.class);
+                startActivity(intent1);
             }
         });
 
@@ -100,7 +101,6 @@ public class CreateNewProject extends AppCompatActivity {
                 Intent gallery = new Intent();
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
-
                 startActivityForResult(gallery,1);
             }
         });

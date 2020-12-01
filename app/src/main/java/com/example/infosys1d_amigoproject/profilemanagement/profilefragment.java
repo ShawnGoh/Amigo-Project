@@ -34,6 +34,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +48,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -73,6 +75,8 @@ public class profilefragment extends Fragment {
 
     RecyclerView recyclerView;
 
+
+    private Uri imageUri, downloadUrl;
 
     @Nullable
     @Override
@@ -119,8 +123,10 @@ public class profilefragment extends Fragment {
         changeProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGalleryIntent, 1000);
+                Intent gallery = new Intent();
+                gallery.setType("image/*");
+                gallery.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(gallery,1);
 
             }
         });
@@ -134,17 +140,12 @@ public class profilefragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 projectList.clear();
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
-
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
                         if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() != userID){
-                        System.out.println(project.getThumbnail());
-                        projectList.add(project);}}
-
-
-                    // here you can access to name property like university.name
-
+                            projectList.add(project);
+                        }
+                    }
                 }
                 myAdapter.notifyDataSetChanged();
             }
@@ -154,55 +155,41 @@ public class profilefragment extends Fragment {
                 System.out.println("The read failed: ");
             }
         });
-
-
-//        backtohomebutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(mcontext, MainActivity.class));
-//            }
-//        });
-
-
-
-
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000){
-            if (resultCode == Activity.RESULT_OK){
-                Uri imageUri = data.getData();
-                System.out.println("uri"+imageUri.toString());
-                mProfilepic.setImageURI(imageUri);
-                uploadImageToFirebase(imageUri);
-            }
+        if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData() != null){
+            imageUri = data.getData();
+            mProfilepic.setImageURI(imageUri);
+            uploadpicture();
         }
     }
-
-    private void uploadImageToFirebase(Uri imageUri){
-        StorageReference fileRef = storageReference.child("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid()+"/profile.jpg");
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+    private void uploadpicture() {
+        storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
+        newRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(mProfilepic);
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                downloadUrl = uri;
+                                firebaseMethods.updateProfilePicture(downloadUrl.toString());
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
                     }
                 });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
-
     private void setProfileWidgets(Userdataretrieval userSettings){
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieved from firebase database");
 

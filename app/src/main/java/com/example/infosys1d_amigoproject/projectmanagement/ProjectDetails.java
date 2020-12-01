@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -13,8 +14,11 @@ import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -22,6 +26,7 @@ import com.squareup.picasso.Picasso;
 public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     StorageReference storageReference,projectref;
+    DatabaseReference myref;
     ImageView imageView;
 
     @Override
@@ -32,22 +37,23 @@ public class ProjectDetails extends AppCompatActivity {
         mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
         mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
 
-
-        Intent intent = getIntent();
-        String text = intent.getStringExtra("ProjectID");
         imageView = findViewById(R.id.project_picture);
-
-        storageReference = FirebaseStorage.getInstance().getReference();
-        projectref = storageReference.child("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid()+"/profile.jpg");
-        projectref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        Intent intent = getIntent();
+        String project_id = intent.getStringExtra("ProjectID");
+        myref = FirebaseDatabase.getInstance().getReference().child("Projects").child(project_id);
+        myref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                System.out.println(uri.toString());
-                Picasso.get().load(uri).into(imageView);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Project project = snapshot.getValue(Project.class);
+                System.out.println(project.getThumbnail()+"   123456");
+                Picasso.get().load(project.getThumbnail()).into(imageView);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("errror");
             }
         });
-
-
 
     }
 }

@@ -61,7 +61,7 @@ public class FirebaseMethods {
         Log.d(TAG, "updateProfilePicture: updating name to: " + pictureURL);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
                 .child(userID)
-                .child(mContext.getString(R.string.field_name))
+                .child(mContext.getString(R.string.profile_picture))
                 .setValue(pictureURL);
     }
 
