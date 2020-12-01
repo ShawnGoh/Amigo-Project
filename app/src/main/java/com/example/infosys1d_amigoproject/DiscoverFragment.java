@@ -53,7 +53,6 @@ public class DiscoverFragment extends Fragment {
     DatabaseReference databaseReference;
     DatabaseReference dbProjects;
     public List<Project> projectsList;
-    MyAdapter myAdapter;
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -107,32 +106,9 @@ public class DiscoverFragment extends Fragment {
         });
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projref = databaseReference.child("Projects");
-        ArrayList<Project> projectList = new ArrayList<>();
-        myAdapter = new MyAdapter(projectList);
         projectsList = new ArrayList<>();
         myAdapter = new MyAdapter(projectsList);
         recyclerView.setAdapter(myAdapter);
-        projref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                projectList.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                   // System.out.println("Test 1234556789" + postSnapshot.getValue().toString());
-                    Project project = postSnapshot.getValue(Project.class);
-                    System.out.println(project.getThumbnail());
-                    projectList.add(project);
-
-                    // here you can access to name property like university.name
-
-                }
-                myAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: ");
-            }
-        });
 
      //   Project new_proj = new Project("random url", "test Title", "test description ","userid");
 

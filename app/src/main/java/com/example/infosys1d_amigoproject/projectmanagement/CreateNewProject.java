@@ -67,11 +67,22 @@ public class CreateNewProject extends AppCompatActivity {
         firebaseMethods = new FirebaseMethods(getApplicationContext());
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
+        selectedChipData = new ArrayList<>();
+
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedChipData.clear();
+                for(int i = 0; i<mfilters.getChildCount(); i++){
+                    Chip chip = (Chip)mfilters.getChildAt(i);
+                    if(chip.isChecked()){
+                        selectedChipData.add(chip.getText().toString());
+                    }
+                }
+
                 Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), textInputLayoutdescrip.getEditText().getText().toString(),
-                submitFilters(), new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), firebaseMethods.getUserID());
+                selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), firebaseMethods.getUserID());
 
                String projectKey = myref.child("Projects").push().getKey();
                 myref.child("Projects").child(projectKey).setValue(new_proj);
@@ -99,26 +110,15 @@ public class CreateNewProject extends AppCompatActivity {
 
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: filterList){
-
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
             System.out.println("skills asdf" + text);
             newChip.setText(text);
             mfilters.addView(newChip);}
-        skills = new ArrayList<String>();
 
 
-    }
-    private ArrayList<String> submitFilters() {
-        selectedChipData = new ArrayList<String>();
-        List<Integer> ids = mfilters.getCheckedChipIds();
-        for (Integer id:ids) {
-            System.out.println("asdfasdf "+ mfilters.getCheckedChipId());
-            Chip chip = mfilters.findViewById(id);
-            selectedChipData.add(chip.getText().toString());
-        }
-        return selectedChipData;
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
