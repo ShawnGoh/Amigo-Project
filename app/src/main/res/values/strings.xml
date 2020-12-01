@@ -32,5 +32,6 @@
     <string name="field_aboutme">about_me</string>
     <string name="field_lookingfor">looking_for</string>
     <string name="field_skills">skills</string>
+    <string name="field_email">email</string>
 
 </resources>

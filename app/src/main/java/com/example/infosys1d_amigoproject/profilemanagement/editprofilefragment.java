@@ -186,6 +186,7 @@ public class editprofilefragment extends Fragment {
         final String aboutMe = mAboutme.getText().toString();
         final String lookingFor = mlookingfor.getText().toString();
         final String skillChipsString = mSkills.getText().toString();
+        final String Email = mEmail.getText().toString();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -213,12 +214,15 @@ public class editprofilefragment extends Fragment {
 
                 if (!mUserSettings.getUsersdisplay().getSkills().toString().toString().equals(skillChipsString)){
                     firebaseMethods.updateSkillChips(skillChipsString);
-//                    String str[] = skillChipsString.split(", ");
-//                    List<String> al = new ArrayList<String>();
-//                    al = Arrays.asList(str);
-//                    mUserSettings.getUsersdisplay().setSkills((ArrayList<String>) al);
+
 
                 }
+
+//                if (!mUserSettings.getUsersprivate().getEmail().equals(Email)){
+//                    if(firebaseMethods.checkifemailexists(Email, dataSnapshot)== true){
+//                    firebaseMethods.updateEmail(Email);} else{Toast.makeText(getActivity(), "Email already exists!", Toast.LENGTH_SHORT).show();}
+//                }
+
 
                 Toast.makeText(getActivity(), "Saved Changes", Toast.LENGTH_SHORT).show();
 

@@ -91,6 +91,13 @@ public class FirebaseMethods {
                 .setValue(al);
     }
 
+//    public void updateEmail(String Email){
+//        Log.d(TAG, "updateName: updating Email to: " + Email);
+//        myRef.child(mContext.getString(R.string.db_usersprivate))
+//                .child(userID)
+//                .child(mContext.getString(R.string.field_email))
+//                .setValue(Email);
+//    }
 
 
 
