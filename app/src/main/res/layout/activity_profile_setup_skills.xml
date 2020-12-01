@@ -6,14 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".profilesetup.ProfileSetupSkills"
     android:theme="@style/SignupinTheme"
-    android:background="#fff">>
+    android:background="#fff">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/setupgraphic4"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="54dp">
+
+    </ImageView>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:text="What skills do you have?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
