@@ -18,6 +18,13 @@ import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,6 +33,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     private Context mcontext;
     private ArrayList<Userdataretrieval> mUsers;
     Activity activity;
+    DatabaseReference myref;
 
     public UserAdapter(Context mcontext, ArrayList<Userdataretrieval> mUsers, Activity activity){
         this.mUsers = mUsers;
@@ -64,9 +72,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
         holder.username.setText(userdisplay.getName());
         if(userdisplay.getProfile_picture().equals("none")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+            System.out.println("something to search"+userdisplay.getName()+ userdisplay.getProfile_picture());
         }
         else{
-            Glide.with(mcontext).load(userdisplay.getProfile_picture()).into(holder.profile_image);
+            System.out.println("something to search"+userdisplay.getName()+ userdisplay.getProfile_picture());
+            Picasso.get().load(userdisplay.getProfile_picture()).into(holder.profile_image);
         }
 
 

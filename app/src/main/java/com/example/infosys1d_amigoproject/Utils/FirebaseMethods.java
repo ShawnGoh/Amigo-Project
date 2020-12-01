@@ -310,6 +310,7 @@ public class FirebaseMethods {
                         display.setLooking_for(snap.getValue(users_display.class).getLooking_for());
                         display.setSkills(snap.getValue(users_display.class).getSkills());
                         display.setChats(snap.getValue(users_display.class).getChats());
+                        display.setProfile_picture(snap.getValue(users_display.class).getProfile_picture());
 
                         Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
                     }catch (NullPointerException E){

@@ -51,6 +51,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static android.app.Activity.RESULT_OK;
+
 public class profilefragment extends Fragment {
     MyAdapter myAdapter;
     private static final String TAG = "profilefragment";

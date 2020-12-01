@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.ProjectDetails;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ import static android.content.ContentValues.TAG;
 public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
         private List<Project> projectsList;
         private List<Project> projectListAll;
-        StorageReference storageReference,projectref;
+        private StorageReference storageReference,projectref;
 
         public MyAdapter(List<Project> projectsList) {
             this.projectsList = projectsList;
