@@ -21,7 +21,7 @@
     <item
         android:id="@+id/projects"
         android:title="My Projects"
-        android:icon="@drawable/ic_projects"
+        android:icon="@drawable/ic_baseline_work_24"
         app:cnb_backgroundColor="@color/purple_200"
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#fff"/>

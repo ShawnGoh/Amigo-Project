@@ -7,8 +7,9 @@ import com.example.infosys1d_amigoproject.models.users_display;
 import java.util.ArrayList;
 
 public class Project {
-    private String thumbnail;
-    private String projectitle, projectdescription;
+
+
+    private String projectitle, projectdescription,  thumbnail;
     private ArrayList<String> skillsrequired;
     private ArrayList<String> usersinProject;
     private String createdby;

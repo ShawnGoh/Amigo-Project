@@ -9,9 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.infosys1d_amigoproject.ChatsFragment;
-import com.example.infosys1d_amigoproject.DiscoverFragment;
-import com.example.infosys1d_amigoproject.R;
+import com.example.infosys1d_amigoproject.chat.ChatsFragment;
 import com.example.infosys1d_amigoproject.profilemanagement.profilefragment;
 import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
 import com.example.infosys1d_amigoproject.projectmanagement.MyProjectsFragment;
@@ -30,6 +28,9 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    DatabaseReference myref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // use this to switch between activity views
         //this.setTitle("Explore");
-
+        myref = FirebaseDatabase.getInstance().getReference();
+        myref.child("hello").setValue("yo whats up");
 
         signoutbutton = findViewById(R.id.signoutbutton);
 

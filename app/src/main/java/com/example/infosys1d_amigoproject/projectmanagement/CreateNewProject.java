@@ -1,16 +1,15 @@
 package com.example.infosys1d_amigoproject.projectmanagement;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
@@ -28,19 +27,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
+import com.example.infosys1d_amigoproject.models.users_display;
+
 public class CreateNewProject extends AppCompatActivity {
 
     ImageView imageView;
-    Button button,create_project;
+    TextInputLayout textInputLayout;
+    Button button, create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
-    Uri downloadUrl;
+    public Uri downloadUrl;
     FirebaseStorage storage;
     StorageReference storageRef;
-    TextInputLayout textInputLayout;
-
-    DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
-
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference myref2;
     FirebaseMethods firebaseMethods;
 
     @Override
@@ -49,23 +49,17 @@ public class CreateNewProject extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageView2);
         textInputLayout = findViewById(R.id.textInputLayout);
+
         button = findViewById(R.id.button);
-        create_project = findViewById(R.id.button_create_project);
-        firebaseMethods = new FirebaseMethods(getApplicationContext());
+        create_project = findViewById(R.id.createproject);
+
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-        create_project.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(), "test description ",
-                        new ArrayList<String>(Arrays.asList("hello","java","C++")),
-                        new ArrayList <String> (Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
-                        firebaseMethods.getUserID());
-                String key = myref.child("Projects").push().getKey();
-                myref.child("Projects").child(key).setValue(new_proj);
 
-            }
-        });
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myref2 = firebaseDatabase.getReference();
+        firebaseMethods = new FirebaseMethods(this.getApplicationContext());
+        System.out.println(firebaseMethods.getUserID());
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +71,21 @@ public class CreateNewProject extends AppCompatActivity {
                 startActivityForResult(gallery,1);
             }
         });
-
+        create_project.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Project project = new Project("test", textInputLayout.getEditText().getText().toString(),
+                        "description",new ArrayList<String>(Arrays.asList("Java", "Jsim")),
+                        new ArrayList<String>(Arrays.asList("Yv9FUajYYRM3gFp4rDxClm4XdXM2",firebaseMethods.getUserID())),
+                        firebaseMethods.getUserID());
+                String postId = myref2.child("Projects").push().getKey();
+                myref2.child(postId).setValue(project);
+                myref2.child("Projects").child("test").setValue("123");
+                firebaseMethods.updateName("hello");
+                System.out.println(firebaseMethods.getUserID());
+                System.out.println("test");
+            }
+        });
     }
 
     @Override
