@@ -1,7 +1,6 @@
 package com.example.infosys1d_amigoproject;
 
 import android.content.Intent;
-import android.util.Log;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,50 +20,47 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
+public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
+    public List<Project> projectsList;
+    public List<Project> projectListAll;
 
+    public MyAdapter(List<Project> projectsList) {
+        this.projectsList = projectsList;
+        projectListAll = new ArrayList<>(projectsList);
+    }
 
-public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
-        private List<Project> projectsList;
-        private List<Project> projectListAll;
+    @NonNull
+    @Override
+    public myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.row,parent,false);
+        return new myholder(view);
+    }
 
-        public MyAdapter(List<Project> projectsList) {
-            this.projectsList = projectsList;
-            projectListAll = new ArrayList<>(projectsList);
-        }
+    @Override
+    public void onBindViewHolder(@NonNull myholder holder, int position) {
+        holder.mytext1.setText(projectsList.get(position).getProjectitle());
+        holder.mytext2.setText(projectsList.get(position).getProjectdescription());
+        // TODO set up Picasso
+        // holder.thumbnail.setImageResource(projectsList.get(position).getThumbnail());
+    }
 
-        @NonNull
-        @Override
-        public myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View view = inflater.inflate(R.layout.row, parent, false);
-            Log.d(TAG, "Creating myholder");
-            return new myholder(view);
-        }
+    @Override
+    public int getItemCount() {
+        int length = projectsList.size();
+        return length;
+    }
 
-        @Override
-        public void onBindViewHolder(@NonNull myholder holder, int position) {
-            holder.mytext1.setText(projectsList.get(position).getProjectitle());
-            holder.mytext2.setText(projectsList.get(position).getProjectdescription());
-            // TODO set up Picasso
-            // holder.thumbnail.setImageResource(projectsList.get(position).getThumbnail());
-        }
+    @Override
+    public Filter getFilter() {
+        return projectsFilter;
+    }
 
-        @Override
-        public int getItemCount() {
-            int length = projectsList.size();
-            return length;
-        }
-
-        @Override
-        public Filter getFilter() {
-            return projectsFilter;
-        }
-
-        private Filter projectsFilter = new Filter() {
+    private Filter projectsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Project> filteredProjects = new ArrayList<>();
@@ -83,9 +79,7 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
 
                 for (Project project : projectListAll) {
                     System.out.println("omG!");
-                    if (project.getProjectitle().toLowerCase().contains(filterPattern)
-                            || project.getProjectdescription().toLowerCase().contains(filterPattern)
-                            || project.getCreatedby().toLowerCase().contains(filterPattern))
+                    if (project.getProjectitle().toLowerCase().contains(filterPattern))
                     {
                         filteredProjects.add(project);
                         System.out.println("This works!");
@@ -108,27 +102,25 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
     };
 
 
-        public class myholder extends RecyclerView.ViewHolder {
+    public class myholder extends RecyclerView.ViewHolder{
 
-            TextView mytext1, mytext2;
-            ImageView thumbnail;
+        TextView mytext1,mytext2;
+        ImageView thumbnail;
 
-            public myholder(@NonNull View itemView) {
-                super(itemView);
-                thumbnail = itemView.findViewById(R.id.project_picture);
-                mytext1 = itemView.findViewById(R.id.info_text);
-                mytext2 = itemView.findViewById(R.id.description);
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), ProjectDetails.class);
-                        view.getContext().startActivity(intent);
-                        intent.putExtra("hello", "hai");
-                    }
-                });
+        public myholder(@NonNull View itemView) {
+            super(itemView);
+            thumbnail = itemView.findViewById(R.id.project_picture);
+            mytext1 = itemView.findViewById(R.id.info_text);
+            mytext2 = itemView.findViewById(R.id.description);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), ProjectDetails.class);
+                    view.getContext().startActivity(intent);
+                    intent.putExtra("hello","hai");
+                }
+            });
 
-            }
         }
     }
-
-
+}
