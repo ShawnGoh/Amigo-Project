@@ -78,7 +78,6 @@ public class profilefragment extends Fragment {
                 //startActivity(new Intent(mcontext, MainActivity.class));
             //}
         //});
-
         return view;
     }
 
@@ -104,9 +103,10 @@ public class profilefragment extends Fragment {
             Chip newchip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
             newchip.setText(text);
             mskills.addView(newchip);}
+        }
 
 
-    }
+
 
     //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------
 
