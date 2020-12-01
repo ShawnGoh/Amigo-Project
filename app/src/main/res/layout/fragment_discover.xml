@@ -34,6 +34,7 @@
         </RelativeLayout>
 
         <SearchView
+            android:id="@+id/searchBarHome"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
@@ -42,7 +43,7 @@
             android:background="@drawable/searchbarbg"
             android:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Search Projects by Name.." />
+            android:queryHint="@string/search_hint" />
 
         <TextView
             android:id="@+id/projectCategoriesTitle"

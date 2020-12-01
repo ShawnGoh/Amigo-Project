@@ -4,42 +4,79 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.infosys1d_amigoproject.R;
+import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class CreateNewProject extends AppCompatActivity {
 
     ImageView imageView;
-    Button button;
+    Button button,create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
+    Uri downloadUrl;
     FirebaseStorage storage;
     StorageReference storageRef;
+    TextInputLayout textInputLayout;
+
+    DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
+
+    FirebaseMethods firebaseMethods;
+
+
+
+    private Context mcontext;
+    private ChipGroup mfilters;
+    private ArrayList<String> selectedChipData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageView2);
+        textInputLayout = findViewById(R.id.textInputLayout);
         button = findViewById(R.id.button);
-
+        create_project = findViewById(R.id.button_create_project);
+        firebaseMethods = new FirebaseMethods(getApplicationContext());
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+        create_project.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Project new_proj = new Project(downloadUrl.toString(), "test Title", "test description ",
+                new ArrayList<String>(Arrays.asList("hello","java","C++")),
+                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())), firebaseMethods.getUserID());
+
+                String key = myref.child("Projects").push().getKey();
+                myref.child("Projects").child(key).setValue(new_proj);
+
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +87,20 @@ public class CreateNewProject extends AppCompatActivity {
                 startActivityForResult(gallery,1);
             }
         });
+
+
+
+        mcontext = getApplicationContext();
+        String[] filterList = mcontext.getResources().getStringArray(R.array.skills_list);
+
+        mfilters = findViewById(R.id.filterChipGroup);
+
+        LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
+        for(String text: filterList){
+            Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
+            newChip.setText(text);
+            mfilters.addView(newChip);}
+
     }
 
     @Override
@@ -72,7 +123,7 @@ public class CreateNewProject extends AppCompatActivity {
                         newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                final Uri downloadUrl = uri;
+                                downloadUrl = uri;
                                 System.out.println(downloadUrl.toString());
 
                             }
