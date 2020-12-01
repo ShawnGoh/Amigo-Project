@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
-    private List<Project> projectsList;
-    private List<Project> projectListAll;
+    public List<Project> projectsList;
+    public List<Project> projectListAll;
 
     public MyAdapter(List<Project> projectsList) {
         this.projectsList = projectsList;
@@ -70,13 +70,19 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
             }
             else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
+                System.out.println("HELLOOOOOO!");
+
+                System.out.println(projectsList);
+                System.out.println(projectListAll);
+                System.out.println(filterPattern);
+                System.out.println(filteredProjects);
 
                 for (Project project : projectListAll) {
-                    if (project.getProjectitle().toLowerCase().contains(filterPattern)
-                            || project.getProjectdescription().toLowerCase().contains(filterPattern)
-                            || project.getCreatedby().toLowerCase().contains(filterPattern))
+                    System.out.println("omG!");
+                    if (project.getProjectitle().toLowerCase().contains(filterPattern))
                     {
                         filteredProjects.add(project);
+                        System.out.println("This works!");
                     }
                 }
             }
