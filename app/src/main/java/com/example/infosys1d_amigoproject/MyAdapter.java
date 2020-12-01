@@ -1,15 +1,22 @@
 package com.example.infosys1d_amigoproject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> {
     String data1[], data2[];
@@ -53,8 +60,10 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), ProjectDetails.class);
                     view.getContext().startActivity(intent);
+                    intent.putExtra("hello","hai");
                 }
             });
+
         }
     }
 }
