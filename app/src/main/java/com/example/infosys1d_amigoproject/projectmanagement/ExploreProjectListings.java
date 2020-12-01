@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,11 +34,16 @@ public class ExploreProjectListings extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     DatabaseReference dbProjects;
     public List<Project> projectsList;
+    private Intent intent;
     MyAdapter myAdapter;
+    TextView projectCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_project_listings);
+        projectsList = new ArrayList<>();
+        projectCategory = findViewById(R.id.category);
         firebaseMethods = new FirebaseMethods(getApplicationContext());
 //        Project new_proj = new Project("random url", "test Title", "test description ",
 //                new ArrayList<String>(Arrays.asList("hello","java","C++")),
@@ -46,11 +53,11 @@ public class ExploreProjectListings extends AppCompatActivity {
         //code for database query of projects
         dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
         dbProjects.addListenerForSingleValueEvent(valueEventListener);
+        System.out.println("helloooooooooooo"+projectsList.toString());
 
         //this block of code is for the recycler view
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        projectsList = new ArrayList<>();
         myAdapter = new MyAdapter(projectsList);
         recyclerView.setAdapter(myAdapter);
 
@@ -63,13 +70,31 @@ public class ExploreProjectListings extends AppCompatActivity {
             }
         });
         // Get the intent, verify the action and get the query
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String skills_filter = intent.getStringExtra("skills_filter");
-            String text_filter = intent.getStringExtra("text_filter");
+        intent = getIntent();
+//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            String skills_filter = intent.getStringExtra("skills_filter");
+//            String text_filter = intent.getStringExtra("text_filter");
+//            System.out.println("This sends data!");
+//            System.out.println(skills_filter);
+//
+//            projectsList = new ArrayList<>();
+//            myAdapter = new MyAdapter(projectsList);
+//            System.out.println(projectsList);
+//            dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
+//            dbProjects.addListenerForSingleValueEvent(valueEventListener);
+//            recyclerView = findViewById(R.id.recycler);
+//            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//            recyclerView.setAdapter(myAdapter);
+//
+//
+//            projectCategory.setText(text_filter);
+//            // first, query the database projects data by skills required
+////            Query querySkills = FirebaseDatabase.getInstance().getReference("Projects")
+////                    .orderByChild("skillsrequired").equalTo();
+//
+//
 //            myAdapter.getFilter().filter(text_filter);
-
-        }
+//        }
     }
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -84,6 +109,18 @@ public class ExploreProjectListings extends AppCompatActivity {
                 myAdapter.notifyDataSetChanged();
             }
 
+            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                String skills_filter = intent.getStringExtra("skills_filter");
+                String text_filter = intent.getStringExtra("text_filter");
+                System.out.println("This sends data!");
+                System.out.println(skills_filter);
+
+                System.out.println(projectsList);
+                myAdapter.getFilter().filter(text_filter);
+
+                projectCategory.setText(text_filter);
+
+            }
         }
 
         @Override

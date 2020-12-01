@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SearchView;
 
 import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
@@ -93,8 +94,8 @@ public class SearchFragment extends Fragment {
                 MainActivity.menu_bottom.setVisibility(View.VISIBLE);
             }
         });
-        String filterChipsList = getString(R.string.skill_chips_list);
-        String[] filterSplit = filterChipsList.split(" ");
+//        String filterChipsList = getString(R.string.skill_chips_list);
+//        String[] filterSplit = filterChipsList.split(" ");
         mcontext = getActivity();
         String[] filterList = mcontext.getResources().getStringArray(R.array.skills_list);
 
@@ -154,11 +155,19 @@ public class SearchFragment extends Fragment {
 //                }
 //            }
 //        };
-        List<Integer> ids = mfilters.getCheckedChipIds();
-        for (Integer id:ids) {
-            Chip chip = mfilters.findViewById(id);
-            selectedChipData.add(chip.getText().toString());
+
+        for(int i = 0; i<mfilters.getChildCount(); i++){
+            Chip chip = (Chip)mfilters.getChildAt(i);
+            if(chip.isChecked()){
+                    selectedChipData.add(chip.getText().toString());
+                }
         }
+
+//        List<Integer> ids = mfilters.getCheckedChipIds();
+//        for (Integer id:ids) {
+//            Chip chip = mfilters.findViewById(id);
+//            selectedChipData.add(chip.getText().toString());
+//        }
         return selectedChipData;
 
     }
