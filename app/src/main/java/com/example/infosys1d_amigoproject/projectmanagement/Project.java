@@ -28,7 +28,6 @@ public class Project {
         this.createdby = createdby;
     }
 
-
     public String getThumbnail() {
         return thumbnail;
     }

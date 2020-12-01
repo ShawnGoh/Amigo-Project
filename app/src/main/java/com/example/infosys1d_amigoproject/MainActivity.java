@@ -28,6 +28,9 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    DatabaseReference myref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // use this to switch between activity views
         //this.setTitle("Explore");
-
+        myref = FirebaseDatabase.getInstance().getReference();
+        myref.child("hello").setValue("yo whats up");
 
         signoutbutton = findViewById(R.id.signoutbutton);
 

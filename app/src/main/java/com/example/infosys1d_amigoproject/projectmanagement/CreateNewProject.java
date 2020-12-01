@@ -12,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
@@ -30,7 +33,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class CreateNewProject extends AppCompatActivity {
@@ -59,7 +61,7 @@ public class CreateNewProject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_project);
-        imageView = findViewById(R.id.imageView2);
+        imageView = findViewById(R.id.imageview2);
         textInputLayout = findViewById(R.id.textInputLayout);
         textInputLayoutdescrip = findViewById(R.id.textInputLayout_description);
         button = findViewById(R.id.button);

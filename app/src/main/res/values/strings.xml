@@ -30,5 +30,8 @@
     <string name="field_lookingfor">looking_for</string>
     <string name="field_skills">skills</string>
     <string name="field_email">email</string>
+    <string name="profile_picture">profile_picture</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
