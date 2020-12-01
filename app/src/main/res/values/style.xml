@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="collapsingToolbarLayoutTitleColor" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">18sp</item>
+    <style name="collapsingToolbarLayoutTitleColorWhite" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="collapsingToolbarLayoutTitleColorBlack" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
