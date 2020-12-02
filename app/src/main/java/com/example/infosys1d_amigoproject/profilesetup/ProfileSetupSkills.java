@@ -12,5 +12,6 @@ public class ProfileSetupSkills extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setup_skills);
+
     }
 }
