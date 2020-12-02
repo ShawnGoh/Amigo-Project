@@ -100,7 +100,7 @@ public class MyProjectsFragment extends Fragment {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != (userID)){
+                        if (FirebaseAuth.getInstance().getCurrentUser().getUid() == (userID)){
                             projectList.add(project);
                         }
                     }
