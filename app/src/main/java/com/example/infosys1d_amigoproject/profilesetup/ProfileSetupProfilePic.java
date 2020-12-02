@@ -46,7 +46,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
     ImageView profilepic;
     private static final String TAG = "ProfileSetupAboutMe";
     TextInputLayout aboutme;
-    Button nextbutton, prevbutton, skipbutton;
+    Button nextbutton, prevbutton;
     Button upload_from_gallery;
     Uri imageUri, downloadUrl;
     String randomKey;
@@ -68,7 +68,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
         aboutme = findViewById(R.id.aboutme);
         nextbutton = findViewById(R.id.nextbuttonaboutme);
         prevbutton = findViewById(R.id.prevbuttonaboutme);
-        skipbutton = findViewById(R.id.skipsetupbuttonprofilepic);
+
         firebaseMethods = new FirebaseMethods(ProfileSetupProfilePic.this);
         storageRef = FirebaseStorage.getInstance().getReference();
         firebaseReference = FirebaseDatabase.getInstance().getReference();
@@ -90,24 +90,13 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //saveProfileSettings();
-                FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
-                DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
-                myref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        mUserSettings = firebaseMethods.getUserData(snapshot);
-                        if(mUserSettings.getUsersdisplay().isCompeletedsetup()){
-                        startActivity(new Intent(ProfileSetupProfilePic.this, MainActivity.class));
-                        }
-                    }
+                saveProfileSettings();
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
+                updatesetup(true);
+                Intent intent = new Intent(ProfileSetupProfilePic.this, MainActivity.class);
+                (ProfileSetupProfilePic.this).finish();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
             }
         });
@@ -136,7 +125,6 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                         if (!mUserSettings.getUsersdisplay().getSkills().toString().toString().equals(skillstext)){
                             firebaseMethods.updateSkillChips(skillstext);
                             Toast.makeText(ProfileSetupProfilePic.this, "You have completed your setup!", Toast.LENGTH_SHORT).show();
-                            updatesetup(true);
                             if(mUserSettings.getUsersdisplay().isCompeletedsetup()) {
                                 System.out.println("ITS TRUE 92383312");
 
@@ -175,7 +163,8 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
             imageUri = data.getData();
             profilepic.setImageURI(imageUri);
             uploadpicture();
-            saveProfileSettings();
+
+
         }
         else{
             profilepic.setImageResource(R.mipmap.ic_launcher_round);
@@ -200,6 +189,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 downloadUrl = uri;
                                 System.out.println("123456789" + downloadUrl.toString());
+                                FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
 
 
                             }
@@ -221,6 +211,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+
 
         mAuth.addAuthStateListener(mAuthstatelistner);
     }
