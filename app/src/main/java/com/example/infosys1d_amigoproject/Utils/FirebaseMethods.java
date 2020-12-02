@@ -265,6 +265,7 @@ public class FirebaseMethods {
                     display.setProjectDescription(ds.child(userID).getValue(users_display.class).getProjectDescription());
                     display.setProjectTitle(ds.child(userID).getValue(users_display.class).getProjectTitle());
                     display.setStatus(ds.child(userID).getValue(users_display.class).getStatus());
+                    display.setCompeletedsetup(ds.child(userID).getValue(users_display.class).isCompeletedsetup());
                     Log.d(TAG, "onDataChange: " + display.getStatus());
                     Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
                 }catch (NullPointerException E){

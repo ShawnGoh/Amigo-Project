@@ -1,11 +1,9 @@
 package com.example.infosys1d_amigoproject.profilemanagement_tab;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infosys1d_amigoproject.MyAdapter;
+import com.example.infosys1d_amigoproject.adapter.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
@@ -35,7 +32,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,7 +45,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -268,7 +263,7 @@ public class profilefragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mFirebasedatabase = FirebaseDatabase.getInstance();
-        databaseReference = mFirebasedatabase.getReference();;
+        databaseReference = mFirebasedatabase.getReference();
 
         //check if user is sign in
         mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
