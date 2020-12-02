@@ -9,4 +9,20 @@
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="theme_expanded" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">43sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/transparent</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display4</item>
+    </style>
+    <style name="theme_collapsed" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">30sp</item>
+        <item name="paddingStart">50dp</item>
+
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display4</item>
+    </style>
 </resources>

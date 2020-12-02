@@ -131,6 +131,9 @@ public class CreateNewProject extends AppCompatActivity {
             imageView.setImageURI(imageUri);
             uploadpicture();
         }
+        else{
+            imageView.setImageResource(R.drawable.ic_android);
+        }
     }
 
     private void uploadpicture() {
