@@ -2,11 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infosys1d_amigoproject">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-feature android:name="android.hardware.type.watch" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -15,34 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
-
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
-        <activity
-            android:name=".projectmanagement_tab.EditProject"
-            android:label="@string/title_activity_edit_project">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".projectmanagement_tab.CreateNewProject" />
-        <activity android:name=".profilemanagement_tab.profileactivity" />
+        <activity android:name=".projectmanagement_tab.CreateNewProject"></activity>
+        <activity android:name=".profilemanagement_tab.profileactivity"></activity>
         <activity android:name=".chat_tab.MessageActivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
-        <activity android:name=".profilesetup.ProfileSetupAboutMe" />
+        <activity android:name=".profilesetup.ProfileSetupAboutMe"></activity>
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
         <activity android:name=".projectmanagement_tab.ExploreProjectListings" />
