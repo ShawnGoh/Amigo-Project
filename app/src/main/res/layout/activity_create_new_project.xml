@@ -68,13 +68,9 @@
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:theme="@style/SignupinTheme"
-                android:background="@drawable/roundedrectanglered"
-                android:textColor="@color/white"
-                android:paddingHorizontal="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="64dp"
                 android:text="upload thumbnail"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout4"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />

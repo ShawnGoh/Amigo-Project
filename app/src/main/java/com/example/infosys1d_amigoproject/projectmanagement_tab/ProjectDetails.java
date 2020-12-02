@@ -51,6 +51,7 @@ public class ProjectDetails extends AppCompatActivity {
         project_description = findViewById(R.id.projectDescription);
         createdby_pic = findViewById(R.id.createdby_pic);
         projecttitle = findViewById(R.id.projecttitle);
+        imageButton = findViewById(R.id.editprojectbutton);
         skillsrequired = findViewById(R.id.projectskillchipsgroup);
 
         FirebaseMethods firebaseMethods = new FirebaseMethods(getApplicationContext());
@@ -127,17 +128,6 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
-
-        imageButton = findViewById(R.id.editprojectbutton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), EditProject.class);
-                intent.putExtra("Project ID", project_id);
-                startActivity(intent);
-
-            }
-        });
 
         }
     }
