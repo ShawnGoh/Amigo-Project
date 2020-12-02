@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".projectmanagement_tab.CreateNewProject"></activity>
         <activity android:name=".profilemanagement_tab.profileactivity"></activity>
+        <activity android:name=".profilemanagement_tab.OtherProfile2"></activity>
         <activity android:name=".chat_tab.MessageActivity" />
         <activity android:name=".profilesetup.ProfileSetupSkills" />
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />

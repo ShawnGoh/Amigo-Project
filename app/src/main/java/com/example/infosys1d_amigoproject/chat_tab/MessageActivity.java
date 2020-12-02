@@ -20,6 +20,7 @@ import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.adapter.messageAdapter;
 import com.example.infosys1d_amigoproject.models.Chat;
 import com.example.infosys1d_amigoproject.models.users_display;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.OtherProfile2;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -61,6 +62,14 @@ public class MessageActivity extends AppCompatActivity {
         backbutton = findViewById(R.id.chatbackbutton);
         pastmessages = findViewById(R.id.pastchatmessages);
         profilepic = findViewById(R.id.personyoutextingprofile);
+        profilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent INT=new Intent(MessageActivity.this, OtherProfile2.class);
+                startActivity(INT);
+
+            }
+        });
 
         pastmessages.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext);
