@@ -20,9 +20,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
@@ -53,7 +55,7 @@ public class viewprofilefragment extends Fragment {
     private static final String TAG = "profilefragment";
     private TextView mName, mBio, mAboutme, mlookingfor,  muserid, memail;
     private ImageView mProfilepic;
-    private Button changeProfilePic, signoutbutton;
+    private Button backButton;
     private Context mcontext;
     private ImageButton editProfile;
     private ChipGroup mskills;
@@ -96,7 +98,7 @@ public class viewprofilefragment extends Fragment {
 //      muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
 //      backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
-//        changeProfilePic = view.findViewById(R.id.Changepicturebutton);
+        backButton = view.findViewById(R.id.backbutton);
         mskills = view.findViewById(R.id.profileskillchipsgroup);
 //        editProfile = view.findViewById(R.id.editprofilebutton);
 //        signoutbutton = view.findViewById(R.id.signoutbutton);
@@ -110,19 +112,25 @@ public class viewprofilefragment extends Fragment {
         Log.d(TAG, "onCreateView: widgets inited");
 
 
-        storageReference = FirebaseStorage.getInstance().getReference();
-        firebaseMethods = new FirebaseMethods(mcontext);
-        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
-        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(mProfilepic);
-            }
-        });
+//        storageReference = FirebaseStorage.getInstance().getReference();
+//        firebaseMethods = new FirebaseMethods(mcontext);
+//        StorageReference newRef = storageReference.child("images/" + mUser.getUsersprivate().getUser_id());
+//        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Picasso.get().load(uri).into(mProfilepic);
+//            }
+//        });
 
         setupfirebaseauth();
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                startActivity(new Intent(mcontext, MainActivity.class));
+            }
+        });
 
         //OnClickListeners
 
@@ -174,7 +182,7 @@ public class viewprofilefragment extends Fragment {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() == userID){
+                        if (mUser.getUsersprivate().getUser_id() != userID){
                             projectList.add(project);
                         }
                     }
@@ -196,13 +204,14 @@ public class viewprofilefragment extends Fragment {
         if(bundle!=null){
             final String getID = bundle.getString("Intent User");
             DatabaseReference mref = FirebaseDatabase.getInstance().getReference("users_display").child(getID);
-
+            System.out.println(mref +"92383312");
+            DatabaseReference mref2 = FirebaseDatabase.getInstance().getReference("users_private").child(getID);
+            System.out.println(mref2 + "92383312");
             mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
             user= snapshot.getValue(users_display.class);
-            user2= snapshot.getValue(users_private.class);
-            mUser = new Userdataretrieval(user, user2);
+
 
                 }
 
@@ -211,6 +220,18 @@ public class viewprofilefragment extends Fragment {
 
                     }
                 });
+            mref2.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    user2= snapshot.getValue(users_private.class);
+                    mUser = new Userdataretrieval(user, user2);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             return mUser;
         } else{
             return null;
@@ -218,37 +239,37 @@ public class viewprofilefragment extends Fragment {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-            imageUri = data.getData();
-            mProfilepic.setImageURI(imageUri);
-            uploadpicture();
-        }
-    }
-    private void uploadpicture() {
-        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
-        newRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                downloadUrl = uri;
-                                firebaseMethods.updateProfilePicture(downloadUrl.toString());
-                            }
-                        });
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData() != null){
+//            imageUri = data.getData();
+//            mProfilepic.setImageURI(imageUri);
+//            uploadpicture();
+//        }
+//    }
+//    private void uploadpicture() {
+//        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
+//        newRef.putFile(imageUri)
+//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                            @Override
+//                            public void onSuccess(Uri uri) {
+//                                downloadUrl = uri;
+//                                firebaseMethods.updateProfilePicture(downloadUrl.toString());
+//                            }
+//                        });
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
+//    }
     private void setProfileWidgets(Userdataretrieval userSettings){
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieved from firebase database");
 
@@ -261,8 +282,9 @@ public class viewprofilefragment extends Fragment {
         mlookingfor.setText(displaydata.getLooking_for());
 
 //        muserid.setText(privatedata.getUser_id());
+        System.out.println(privatedata.getEmail() + "92383312");
         memail.setText(privatedata.getEmail());
-
+        Picasso.get().load(displaydata.getProfile_picture()).into(mProfilepic);
 
 
 
