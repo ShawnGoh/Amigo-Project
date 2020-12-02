@@ -89,7 +89,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveProfileSettings();
+                //saveProfileSettings();
                 FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
                 DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
                 myref.addValueEventListener(new ValueEventListener() {
@@ -175,6 +175,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
             imageUri = data.getData();
             profilepic.setImageURI(imageUri);
             uploadpicture();
+            saveProfileSettings();
         }
         else{
             profilepic.setImageResource(R.mipmap.ic_launcher_round);
