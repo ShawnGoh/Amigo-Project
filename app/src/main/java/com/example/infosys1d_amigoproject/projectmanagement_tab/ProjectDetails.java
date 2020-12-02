@@ -3,6 +3,7 @@ package com.example.infosys1d_amigoproject.projectmanagement_tab;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,6 +18,8 @@ import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +30,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     DatabaseReference myref,userref;
@@ -35,6 +40,7 @@ public class ProjectDetails extends AppCompatActivity {
     Project project;
     Button applytoJoin, back;
     ImageButton imageButton, clicktoChat;
+    ChipGroup skillsrequired;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,7 @@ public class ProjectDetails extends AppCompatActivity {
         createdby_pic = findViewById(R.id.createdby_pic);
         projecttitle = findViewById(R.id.projecttitle);
         imageButton = findViewById(R.id.editprojectbutton);
+        skillsrequired = findViewById(R.id.projectskillchipsgroup);
 
         FirebaseMethods firebaseMethods = new FirebaseMethods(getApplicationContext());
         imageView = findViewById(R.id.project_picture);
@@ -60,6 +67,12 @@ public class ProjectDetails extends AppCompatActivity {
                 mCollapsingToolbarLayout.setTitle(project.getProjectitle());
                 project_description.setText(project.getProjectdescription());
                 projecttitle.setText(project.getProjectitle());
+                LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+
+                for(String text: project.getSkillsrequired()){
+                    Chip newchip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
+                    newchip.setText(text);
+                    skillsrequired.addView(newchip);}
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
                     System.out.println(project.getCreatedby() + "1234567");
                     System.out.println(firebaseMethods.getUserID() + "1234567");
