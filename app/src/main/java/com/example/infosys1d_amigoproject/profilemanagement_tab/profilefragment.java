@@ -103,11 +103,18 @@ public class profilefragment extends Fragment {
 
         storageReference = FirebaseStorage.getInstance().getReference();
         firebaseMethods = new FirebaseMethods(mcontext);
-        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
-        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        DatabaseReference userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getUid());
+        userref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(mProfilepic);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users_display user = snapshot.getValue(users_display.class);
+                Picasso.get().load(user.getProfile_picture()).into(mProfilepic);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 

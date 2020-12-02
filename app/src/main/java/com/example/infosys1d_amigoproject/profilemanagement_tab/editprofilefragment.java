@@ -179,7 +179,6 @@ public class editprofilefragment extends Fragment {
 
 
 
-
                 if (!mUserSettings.getUsersdisplay().getName().equals(displayName)) {
                     checkIfNameExists(displayName);
                 }

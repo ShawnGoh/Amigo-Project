@@ -130,7 +130,7 @@
         app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
 
-    <TextView
+    <Button
         android:id="@+id/skipsetupbuttonprofilepic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
