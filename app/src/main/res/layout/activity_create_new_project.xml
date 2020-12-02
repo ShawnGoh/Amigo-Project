@@ -6,8 +6,7 @@
 
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -70,11 +69,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="64dp"
-                android:text="upload thumbnail"
-                android:theme="@style/SignupinTheme"
-                android:padding="10dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/roundedrectanglered"
+                android:padding="10dp"
+                android:text="upload thumbnail"
                 android:textColor="@color/white"
+                android:theme="@style/SignupinTheme"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout4"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
@@ -114,22 +115,8 @@
                 android:text="Skills required"
                 android:textSize="25dp"
                 android:textStyle="bold"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayout_description" />
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/filterChipGroupBox"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:flexWrap="wrap"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/skillsrequired">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/filterChipGroup"
@@ -139,11 +126,13 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skillsrequired"
                     android:clipToPadding="true"
                     android:textAlignment="center">
 
                 </com.google.android.material.chip.ChipGroup>
-            </com.google.android.flexbox.FlexboxLayout>
 
             <TextView
                 android:id="@+id/setCategory"
@@ -159,7 +148,7 @@
                 android:textStyle="bold"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/filterChipGroupBox"
+                app:layout_constraintTop_toBottomOf="@id/filterChipGroup"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <com.google.android.material.chip.ChipGroup
