@@ -84,6 +84,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
             Picasso.get().load(userdisplay.getProfile_picture()).into(holder.profile_image);
         }
 
+        System.out.println(userdisplay.getStatus());
+
         if(ischat){
             if(userdisplay.getStatus().equals("online")){
                 holder.icon_on.setVisibility(View.VISIBLE);
