@@ -125,12 +125,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:inputType="textMultiLine"
-                android:gravity="start|top"/>
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
+    <Button
         android:id="@+id/skipsetupbuttonlookingfor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
