@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,12 +49,13 @@ public class EditPojects extends AppCompatActivity {
     Button button,create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
-    Uri downloadUrl;
+    Uri downloadUrl = null;
     FirebaseStorage storage;
     StorageReference storageRef;
     TextInputLayout textInputLayout,textInputLayoutdescrip;
     String randomKey;
     ArrayList<String> skills;
+
     DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
     DatabaseReference userref = FirebaseDatabase.getInstance().getReference();
 
@@ -113,7 +116,20 @@ public class EditPojects extends AppCompatActivity {
                     }
 
                 }
-                Picasso.get().load(project.getThumbnail()).into(imageView);
+
+                userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
+                userref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        users_display user = snapshot.getValue(users_display.class);
+                        Picasso.get().load(user.getProfile_picture()).into(imageView);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -123,22 +139,52 @@ public class EditPojects extends AppCompatActivity {
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedChipData.clear();
-                for(int i = 0; i<mfilters.getChildCount(); i++){
-                    Chip chip = (Chip)mfilters.getChildAt(i);
-                    if(chip.isChecked()){
-                        selectedChipData.add(chip.getText().toString());
-                    }
-                }
-                String projectKey = myref.child("Projects").push().getKey();
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
-                        textInputLayoutdescrip.getEditText().getText().toString(),
-                        selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
-                        firebaseMethods.getUserID(), projectKey);
 
-                myref.child("Projects").child(projectKey).setValue(new_proj);
-                Intent intent1 = new Intent(EditPojects.this,MainActivity.class);
-                startActivity(intent1);
+
+
+                myref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        project = snapshot.getValue(Project.class);
+                        System.out.println(project.getProjectitle() + "123456");
+                        System.out.println(textInputLayout.getEditText().getText() + "92383312");
+                        if (textInputLayout.getEditText().getText().toString().equals(project.getProjectitle())){
+                            Toast.makeText(EditPojects.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
+                        else if (textInputLayoutdescrip.getEditText().getText().toString().equals(project.getProjectdescription())) {Toast.makeText(EditPojects.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
+                        else if (downloadUrl == null){Toast.makeText(EditPojects.this, "Upload Picture!", Toast.LENGTH_SHORT).show();}
+                        else {
+                            System.out.println("CLEAR 12345678");
+                            selectedChipData.clear();
+                            for(int i = 0; i<mfilters.getChildCount(); i++){
+                                Chip chip = (Chip)mfilters.getChildAt(i);
+                                if(chip.isChecked()){
+                                    selectedChipData.add(chip.getText().toString());
+                                }
+                            }
+
+                            Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
+                                    textInputLayoutdescrip.getEditText().getText().toString(),
+                                    selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
+                                    firebaseMethods.getUserID(), project_id);
+                            System.out.println(new_proj.getProjectID() +"1234");
+                            System.out.println(new_proj.getThumbnail() +"1234");
+                            System.out.println(project_id +"1234");
+                            FirebaseDatabase.getInstance().getReference().child("Projects").child(project_id).setValue(new_proj);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+
+
             }
         });
 
@@ -186,7 +232,7 @@ public class EditPojects extends AppCompatActivity {
                                 downloadUrl = uri;
                             }
                         });
-                        Snackbar.make(findViewById(R.id.upload), "Image Uploaded", Snackbar.LENGTH_LONG).show();
+//                        Snackbar.make(findViewById(R.id.upload), "Image Uploaded", Snackbar.LENGTH_LONG).show();
                     };
                 })
                 .addOnFailureListener(new OnFailureListener() {
