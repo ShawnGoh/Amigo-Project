@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,16 +15,28 @@
         android:text="Projects"
         android:textSize="30sp"
         android:textFontWeight="350"
+        app:layout_constraintTop_toTopOf="parent"
         />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedRecycler2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-
-
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add"
 
         />
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

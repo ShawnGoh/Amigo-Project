@@ -11,13 +11,15 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:foregroundGravity="center"
         android:src="@drawable/setupgraphic2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="51dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
     </ImageView>
 
@@ -124,17 +126,17 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:inputType="textMultiLine"
-                android:gravity="start|top"/>
+                android:layout_height="match_parent"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
+    <Button
         android:id="@+id/skipsetupbuttonlookingfor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
         android:textColor="@color/colorPrimary"
         android:text="SKIP FOR NOW"

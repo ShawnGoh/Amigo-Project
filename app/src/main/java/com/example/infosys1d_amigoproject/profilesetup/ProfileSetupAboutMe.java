@@ -1,15 +1,19 @@
 package com.example.infosys1d_amigoproject.profilesetup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +27,9 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
 
     private static final String TAG = "ProfileSetupAboutMe";
     TextInputLayout aboutme;
-    Button nextbutton, prevbutton;
+    Button nextbutton, prevbutton, skipbutton;
+
+    private Userdataretrieval mUserSettings;
 
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
@@ -42,6 +48,24 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
         aboutme = findViewById(R.id.aboutme);
         nextbutton = findViewById(R.id.nextbuttonaboutme);
         prevbutton = findViewById(R.id.prevbuttonaboutme);
+        skipbutton =  findViewById(R.id.skipsetupbuttonaboutme);
+        firebaseMethods = new FirebaseMethods(ProfileSetupAboutMe.this);
+        setupfirebaseauth();
+
+        nextbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveProfileSettings();
+            }
+        });
+
+        skipbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileSetupAboutMe.this, MainActivity.class));
+            }
+        });
+
 
 
 
@@ -49,6 +73,9 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
 
     private void saveProfileSettings() {
         final String aboutmetext = aboutme.getEditText().getText().toString();
+        Intent intent = new Intent(ProfileSetupAboutMe.this, ProfileSetupLookingFor.class);
+        intent.putExtra("About Me", aboutmetext);
+        startActivity(intent);
 
     }
 
@@ -56,20 +83,19 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
     //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
 
         mAuth.addAuthStateListener(mAuthstatelistner);
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         if(mAuthstatelistner!=null){
             mAuth.removeAuthStateListener(mAuthstatelistner);
         }
     }
-
 
     //FirebaseAuth
     private void setupfirebaseauth(){
@@ -78,9 +104,7 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebasedatabase = FirebaseDatabase.getInstance();
         myRef = mFirebasedatabase.getReference();;
-
-
-
+         String userID = mAuth.getCurrentUser().getUid();
 
         //check if user is sign in
         mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
@@ -92,28 +116,6 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
                 if(user !=null){
                     //user is signed in
                     Log.d(TAG, "onAuthStateChanged: signed_in" +user.getUid());
-
-                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            //add new users_display to database
-//                            firebaseMethods.addNewUser(firstnamesignup, lastnamesignup, email);
-                            Toast.makeText(getApplicationContext(), "Account created, sending verification email", Toast.LENGTH_LONG).show();
-                            //Sign user out as need verification email
-                            mAuth.signOut();
-
-
-                            //add new users_private to database
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
                 }
                 else{
                     //user is signed out
@@ -122,6 +124,23 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
 
             }
         };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //retrieve user information from database
+                mUserSettings = firebaseMethods.getUserData(snapshot);
+                //retrieve profile pic from database
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
     }
 

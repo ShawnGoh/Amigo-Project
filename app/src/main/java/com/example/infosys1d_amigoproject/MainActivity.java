@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.chat_tab.ChatsFragment;
+import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.profilemanagement_tab.profilefragment;
+import com.example.infosys1d_amigoproject.profilesetup.ProfileSetupAboutMe;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.ExploreProjectListings;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.MyProjectsFragment;
 import com.example.infosys1d_amigoproject.signinsignup.SignIn;
@@ -29,8 +32,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity/Homescreen";
     Button profilepagebutton;
-
+    FirebaseMethods firebaseMethod = new FirebaseMethods(MainActivity.this);
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
-
+    Userdataretrieval user;
     ListView suggestedListView;
     List suggestedList = new ArrayList();
     ArrayAdapter adapter;
@@ -68,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         menu_bottom = findViewById(R.id.navigation);
 
         setupfirebaseauth();
+
+
 
         menu_bottom.setItemSelected(0, true);
 
@@ -154,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupfirebaseauth(){
         Log.d(TAG, "Setup FirebaseAuth");
         mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mFirebasedatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mFirebasedatabase.getReference();;
 
         //check if user is sign in
         mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
@@ -173,6 +183,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = firebaseMethod.getUserData(snapshot);
+                if(user.getUsersdisplay().isCompeletedsetup()==false){
+                    startActivity(new Intent(MainActivity.this, ProfileSetupAboutMe.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
