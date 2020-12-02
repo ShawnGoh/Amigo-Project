@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
         mcontext = getActivity();
         String[] filterList = mcontext.getResources().getStringArray(R.array.skills_list);
 
-        mfilters = view.findViewById(R.id.filterChipGroup);
+        mfilters = view.findViewById(R.id.editPfilterChipGroup);
 
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: filterList){
