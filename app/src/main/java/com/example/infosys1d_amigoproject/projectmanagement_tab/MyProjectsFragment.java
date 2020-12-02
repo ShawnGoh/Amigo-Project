@@ -1,23 +1,34 @@
 package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
-import com.example.infosys1d_amigoproject.adapter.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.adapter.MyAdapter;
+import com.example.infosys1d_amigoproject.chat_tab.ActiveChatsFragment;
+import com.example.infosys1d_amigoproject.chat_tab.ChatsUsersFragment;
+import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,138 +44,102 @@ import java.util.ArrayList;
 
 public class MyProjectsFragment extends Fragment {
 
-    MyAdapter myAdapter;
-    private TextView mTitleName;
-    private static final String TAG = "profilefragment";
-    //Firebase Database
-    private FirebaseDatabase mFirebasedatabase;
-    private DatabaseReference databaseReference;
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
+    private static final String TAG = "ChatActivity";
+
+
+    private Context mContext = getContext();
+
+    private FirebaseDatabase mFirebasedatabase;
+    private DatabaseReference myRef;
+    ArrayList<Userdataretrieval> mUsers = new ArrayList<>();
 
     //Firebase Auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
-    private FirebaseMethods firebaseMethods;
-    users_display user;
 
-    RecyclerView recyclerView;
-    FloatingActionButton createproject;
-    public MyProjectsFragment() {
-        // Required empty public constructor
-    }
+    FirebaseUser fuser;
 
+    FirebaseUser currentuser = FirebaseAuth.getInstance().getCurrentUser();
 
+    ImageButton btn_send;
+    EditText text_send;
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view  = inflater.inflate(R.layout.fragment_my_projects, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_my_projects, container, false);
-        mTitleName = view.findViewById(R.id.Title);
-        recyclerView = view.findViewById(R.id.suggestedRecycler2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        setupfirebaseauth();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mref2 = FirebaseDatabase.getInstance().getReference("users_display").child(FirebaseAuth.getInstance().getUid());
-        mref2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user= snapshot.getValue(users_display.class);
-                mTitleName.setText(user.getName() + "'s Projects");
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebasedatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebasedatabase.getReference("users_display").child(fuser.getUid());
 
-        DatabaseReference projref = databaseReference.child("Projects");
-        ArrayList<Project> projectList = new ArrayList<>();
-        myAdapter = new MyAdapter(projectList);
-        createproject = view.findViewById(R.id.create_project);
-        createproject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(),CreateNewProject.class));
-            }
-        });
+        tabLayout = view.findViewById(R.id.tablayout);
+        viewPager = view.findViewById(R.id.viewpagerchat);
 
-        projref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                projectList.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Project project = postSnapshot.getValue(Project.class);
-                    for (String userID: project.getUsersinProject()){
-                        System.out.println(userID+ "123456");
-                        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userID)){
-                            projectList.add(project);
-                        }
-                    }
-                }
-                myAdapter.notifyDataSetChanged();
-                System.out.println(projectList.toString());
-                recyclerView.setAdapter(myAdapter);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: ");
-            }
-        });
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        viewPagerAdapter.addFragment(new ActiveChatsFragment(), "My Projects");
+        viewPagerAdapter.addFragment(new ChatsUsersFragment(), "Applied Projects");
+        viewPager.setAdapter(viewPagerAdapter);
+
         return view;
     }
 
 
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        private ArrayList<Fragment> fragments;
+        private ArrayList<String> titles;
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+            this.fragments = new ArrayList<>();
+            this.titles = new ArrayList<>();
+        }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        mAuth.addAuthStateListener(mAuthstatelistner);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(mAuthstatelistner!=null){
-            mAuth.removeAuthStateListener(mAuthstatelistner);
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        public void addFragment(Fragment frag, String title){
+            fragments.add(frag);
+            titles.add(title);
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
         }
     }
-
-    //FirebaseAuth
-    private void setupfirebaseauth(){
-        Log.d(TAG, "Setup FirebaseAuth");
-
-        mAuth = FirebaseAuth.getInstance();
-        mFirebasedatabase = FirebaseDatabase.getInstance();
-        databaseReference = mFirebasedatabase.getReference();;
-
-        //check if user is sign in
-        mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user  = firebaseAuth.getCurrentUser();
-
-
-                if(user !=null){
-                    //user is signed in
-                    Log.d(TAG, "onAuthStateChanged: signed_in" +user.getUid());
-                }
-                else{
-                    //user is signed out
-                    Log.d(TAG, "onAuthStateChanged: signed_out");
-                }
-
-            }
-        };
-
-
-    }
 }
+
+
+
+
+
+
+
