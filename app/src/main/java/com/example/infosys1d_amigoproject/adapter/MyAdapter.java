@@ -1,4 +1,4 @@
-package com.example.infosys1d_amigoproject;
+package com.example.infosys1d_amigoproject.adapter;
 
 import android.content.Intent;
 import android.util.Log;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.ProjectDetails;
 import com.google.firebase.storage.StorageReference;
@@ -23,7 +24,7 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 
-public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implements Filterable {
         private List<Project> projectsList;
         private List<Project> projectListAll;
         private StorageReference storageReference,projectref;

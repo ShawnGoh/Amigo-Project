@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -80,6 +81,9 @@ public class ProjectDetails extends AppCompatActivity {
                     imageButton.setVisibility(View.GONE);
 
                 }
+                else {
+                    clicktoChat.setVisibility(View.GONE);
+                }
 
                 userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
                 userref.addValueEventListener(new ValueEventListener() {
@@ -111,6 +115,9 @@ public class ProjectDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // intent to chat with project creator
+                Intent intent = new Intent(v.getContext(), MessageActivity.class);
+                intent.putExtra("userid", project.getCreatedby());
+                startActivity(intent);
             }
         });
         applytoJoin = findViewById(R.id.applytoJoin);
@@ -138,5 +145,7 @@ public class ProjectDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
         }
     }

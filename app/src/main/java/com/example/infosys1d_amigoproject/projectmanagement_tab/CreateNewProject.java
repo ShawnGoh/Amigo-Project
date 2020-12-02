@@ -72,7 +72,9 @@ public class CreateNewProject extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
+
         selectedChipData = new ArrayList<>();
+
 
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
