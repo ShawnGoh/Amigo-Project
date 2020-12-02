@@ -9,13 +9,15 @@
     android:background="#fff">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:id="@+id/imageView6"
+        android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
         android:foregroundGravity="center"
         android:src="@drawable/setupgraphic1"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/skipsetupbuttonaboutme"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
     </ImageView>
@@ -29,7 +31,7 @@
         android:text="Welcome!"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="144dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <TextView
         android:id="@+id/textView"
@@ -121,22 +123,27 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:hint="Start writing here!"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/skipsetupbuttonaboutme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@color/colorPrimary"
-        android:text="SKIP FOR NOW"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/skipsetupbuttonaboutme"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:padding="10dp"-->
+<!--        android:background="@drawable/roundedrectanglewhite"-->
+<!--        android:elevation="200dp"-->
+<!--        android:text="SKIP FOR NOW"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
