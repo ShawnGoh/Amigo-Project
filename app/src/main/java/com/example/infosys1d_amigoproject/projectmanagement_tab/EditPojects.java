@@ -116,7 +116,20 @@ public class EditPojects extends AppCompatActivity {
                     }
 
                 }
-                Picasso.get().load(project.getThumbnail()).into(imageView);
+
+                userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
+                userref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        users_display user = snapshot.getValue(users_display.class);
+                        Picasso.get().load(user.getProfile_picture()).into(imageView);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
