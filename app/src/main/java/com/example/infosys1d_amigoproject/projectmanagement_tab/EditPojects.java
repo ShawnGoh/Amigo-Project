@@ -122,7 +122,7 @@ public class EditPojects extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         users_display user = snapshot.getValue(users_display.class);
-                        Picasso.get().load(user.getProfile_picture()).into(imageView);
+                        Picasso.get().load(project.getThumbnail()).into(imageView);
                     }
 
                     @Override
