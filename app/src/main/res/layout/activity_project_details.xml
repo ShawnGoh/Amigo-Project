@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".MainActivity">
-
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/back_from_project_details"
+        android:theme="@style/SignupinTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:iconSize="20dp"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:iconTint="#FFFFFF" />
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
