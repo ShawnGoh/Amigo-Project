@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -128,6 +129,14 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
-
+        imageButton = findViewById(R.id.editprojectbutton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditPojects.class);
+                intent.putExtra("Project ID", project_id);
+                startActivity(intent);
+            }
+        });
         }
     }
