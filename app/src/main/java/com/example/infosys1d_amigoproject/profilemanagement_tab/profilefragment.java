@@ -66,7 +66,8 @@ public class profilefragment extends Fragment {
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
     private DatabaseReference databaseReference;
-    StorageReference storageReference;
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
 
     //Firebase Auth
     private FirebaseAuth mAuth;
@@ -107,8 +108,8 @@ public class profilefragment extends Fragment {
 
         storageReference = FirebaseStorage.getInstance().getReference();
         firebaseMethods = new FirebaseMethods(mcontext);
-        StorageReference profileRef = storageReference.child("users/"+ FirebaseAuth.getInstance().getCurrentUser().getUid()+"/profile.jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
+        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).into(mProfilepic);
@@ -194,7 +195,6 @@ public class profilefragment extends Fragment {
         }
     }
     private void uploadpicture() {
-        storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
         newRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
