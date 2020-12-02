@@ -58,6 +58,8 @@ public class MessageActivity extends AppCompatActivity {
     messageAdapter messageAdapter;
     ArrayList<Chat> mChat;
     Userdataretrieval intentuser;
+    String imgurlright;
+    String imgurlleft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,30 +138,37 @@ public class MessageActivity extends AppCompatActivity {
 
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
-        mref = FirebaseDatabase.getInstance().getReference("users_display").child(getID);
+        mref = FirebaseDatabase.getInstance().getReference("users_display");
 
         mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                users_display user= snapshot.getValue(users_display.class);
-                personyoutalkingto.setText(user.getName());
-                if(user.getProfile_picture().equals("none")){
-                    profilepic.setImageResource(R.mipmap.ic_launcher_round);
-                }else{
-                    Glide.with(MessageActivity.this).load(user.getProfile_picture()).into(profilepic);
-                }
 
-                if(user.getStatus().equals("online")){
-                    icon_on.setVisibility(View.VISIBLE);
-                    icon_off.setVisibility(View.GONE);
-                }else{
-                    icon_off.setVisibility(View.VISIBLE);
-                    icon_on.setVisibility(View.GONE);
-                }
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if(ds.getKey().equals(getID)) {
+                        users_display user = ds.getValue(users_display.class);
+                        personyoutalkingto.setText(user.getName());
+                        if (user.getProfile_picture().equals("none")) {
+                            profilepic.setImageResource(R.mipmap.ic_launcher_round);
+                        } else {
+                            Glide.with(MessageActivity.this).load(user.getProfile_picture()).into(profilepic);
+                            imgurlleft = user.getProfile_picture();
+                        }
 
-                ReadMessages(fuser.getUid(), getID, user.getProfile_picture());
+                        if (user.getStatus().equals("online")) {
+                            icon_on.setVisibility(View.VISIBLE);
+                            icon_off.setVisibility(View.GONE);
+                        } else {
+                            icon_off.setVisibility(View.VISIBLE);
+                            icon_on.setVisibility(View.GONE);
+                        }
+                    }
+                    else if(ds.getKey().equals(fuser.getUid())){
+                        imgurlright = ds.getValue(users_display.class).getProfile_picture();
+                    }
+                }
+                ReadMessages(fuser.getUid(), getID, imgurlleft, imgurlright);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -186,10 +195,12 @@ public class MessageActivity extends AppCompatActivity {
     }
 
 
-    private void ReadMessages(final String myid, final String userid, final String imgurl){
+    private void ReadMessages(final String myid, final String userid, final String imgurl, final String imgurlright){
         mChat = new ArrayList<>();
 
         mref = FirebaseDatabase.getInstance().getReference("Chats");
+        FirebaseUser curruser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference cref = FirebaseDatabase.getInstance().getReference("users_display");
 
         mref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -201,7 +212,7 @@ public class MessageActivity extends AppCompatActivity {
                         mChat.add(chat);
                     }
                 }
-                messageAdapter = new messageAdapter(mcontext, mChat, imgurl);
+                messageAdapter = new messageAdapter(mcontext, mChat, imgurl, imgurlright);
                 pastmessages.setAdapter(messageAdapter);
                 pastmessages.scrollToPosition(messageAdapter.getItemCount()-1);
 
