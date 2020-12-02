@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chat_tab.ChatsUsersFragment"
     android:background="@color/white">
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/roundedrectanglewhite"
+            android:hint="Search Users..."
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:elevation="10dp"
+            android:id="@+id/searchusersinuserfragment"/>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/searchusersinuserfragment"
             android:id="@+id/userrecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-</FrameLayout>
+</RelativeLayout>

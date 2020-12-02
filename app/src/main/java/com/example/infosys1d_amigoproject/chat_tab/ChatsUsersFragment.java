@@ -2,9 +2,12 @@ package com.example.infosys1d_amigoproject.chat_tab;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class ChatsUsersFragment extends Fragment {
 
     private UserAdapter userAdapter;
     private ArrayList<Userdataretrieval> mUsers;
+    EditText searchbar;
 
     private Context mcontext = getContext();
 
@@ -50,24 +55,83 @@ public class ChatsUsersFragment extends Fragment {
 
 
 
-        System.out.println(currentuser);
-
         recyclerView = view.findViewById(R.id.userrecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(mcontext));
-
         mUsers = new ArrayList<>();
-
-
         readUsers(currentuser);
 
 
+        searchbar = view.findViewById(R.id.searchusersinuserfragment);
 
+        searchbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                System.out.println("I'm changedddddddd");
+                searchusers(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         return view;
+    }
+
+    private void searchusers(String s) {
+        final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseMethods firebaseMethods = new FirebaseMethods(mcontext);
+        Query query = FirebaseDatabase.getInstance().getReference("users_display").orderByChild("name")
+                .startAt(s).endAt(s+"\uf8ff");
+
+        DatabaseReference mref = FirebaseDatabase.getInstance().getReference();
+        mref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userAdapter=new UserAdapter(getContext(), mUsers, getActivity(), false);
+                recyclerView.setAdapter(userAdapter);
+                mUsers.clear();
+
+                    ArrayList<Userdataretrieval> list = firebaseMethods.getuserlist(snapshot);
+                    System.out.println(list);
+                    for(Userdataretrieval userdataretrieval : list){
+                        users_private userprivatedata = userdataretrieval.getUsersprivate();
+                        users_display userdisplaydata = userdataretrieval.getUsersdisplay();
+                        System.out.println(userprivatedata.getUser_id().toString()+" 123456789");
+                        System.out.println(fuser.getUid()+" 12345678910");
+
+
+                        assert userdataretrieval!=null;
+                        assert fuser!=null;
+
+                        System.out.println(userprivatedata.getUser_id().equals(fuser.getUid()));
+
+                        if(!userprivatedata.getUser_id().equals(fuser.getUid())){
+                            mUsers.add(userdataretrieval);
+
+                        }
+
+                }
+                userAdapter.notifyDataSetChanged();
+                userAdapter.setmUsersAll(mUsers);
+                userAdapter.getFilter().filter(s);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void readUsers(final String currentuser){
@@ -80,6 +144,8 @@ public class ChatsUsersFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println(searchbar.getText().toString().equals(""));
+                if(searchbar.getText().toString().equals("")){
                 mUsers.clear();
                     ArrayList<Userdataretrieval> list = firebaseMethods.getuserlist(snapshot);
 
@@ -93,7 +159,7 @@ public class ChatsUsersFragment extends Fragment {
                     userAdapter = new UserAdapter(getContext(),mUsers, getActivity(), false);
                     recyclerView.setAdapter(userAdapter);
 
-                }
+                }}
 
 
             @Override

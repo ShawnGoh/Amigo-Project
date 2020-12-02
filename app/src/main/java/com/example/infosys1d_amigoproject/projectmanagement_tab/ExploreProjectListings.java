@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infosys1d_amigoproject.MyAdapter;
+import com.example.infosys1d_amigoproject.adapter.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

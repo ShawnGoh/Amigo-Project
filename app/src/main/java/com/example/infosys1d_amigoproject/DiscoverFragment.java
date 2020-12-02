@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.adapter.MyAdapter;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.ExploreProjectListings;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.google.firebase.database.DataSnapshot;

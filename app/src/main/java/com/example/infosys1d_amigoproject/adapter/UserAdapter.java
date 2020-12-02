@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,11 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> implements Filterable {
 
     private Context mcontext;
     private ArrayList<Userdataretrieval> mUsers;
+    private ArrayList<Userdataretrieval> mUsersAll;
     Activity activity;
     DatabaseReference myref;
     private boolean ischat;
@@ -56,6 +60,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
             icon_off = itemView.findViewById(R.id.statusindicatoruseritemoffline);
             icon_on = itemView.findViewById(R.id.statusindicatoruseritemonline);
         }
+    }
+
+    public void setmUsersAll(ArrayList<Userdataretrieval> mUsersAll) {
+        this.mUsersAll = mUsersAll;
     }
 
     @NonNull
@@ -117,4 +125,54 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     public int getItemCount() {
         return mUsers.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return usersFilter;
+    }
+    private Filter usersFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Userdataretrieval> filteredUsers = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredUsers.addAll(mUsersAll);
+            }
+            else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+//                System.out.println("HELLOOOOOO!");
+//
+//                System.out.println(projectsList);
+//                System.out.println(projectListAll);
+//                System.out.println(filterPattern);
+//                System.out.println(filteredProjects);
+
+                for (Userdataretrieval user : mUsersAll) {
+                    System.out.println("omG!");
+                    if (user.getUsersdisplay().getName().toLowerCase().contains(filterPattern))
+                    {
+                        filteredUsers.add(user);
+                        System.out.println("This works!");
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredUsers;
+//            if (filteredUsers.isEmpty()) {
+//                isEmpty = true;
+//                System.out.println("I'm Empty!");
+//
+//            }
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mUsers.clear();
+            mUsers.addAll((ArrayList) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
