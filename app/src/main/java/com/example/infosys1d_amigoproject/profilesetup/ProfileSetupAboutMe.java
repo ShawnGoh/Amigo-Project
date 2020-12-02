@@ -48,7 +48,7 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
         aboutme = findViewById(R.id.aboutme);
         nextbutton = findViewById(R.id.nextbuttonaboutme);
         prevbutton = findViewById(R.id.prevbuttonaboutme);
-        skipbutton =  findViewById(R.id.skipsetupbuttonaboutme);
+//        skipbutton =  findViewById(R.id.skipsetupbuttonaboutme);
         firebaseMethods = new FirebaseMethods(ProfileSetupAboutMe.this);
         setupfirebaseauth();
 
@@ -59,12 +59,12 @@ public class ProfileSetupAboutMe extends AppCompatActivity {
             }
         });
 
-        skipbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileSetupAboutMe.this, MainActivity.class));
-            }
-        });
+//        skipbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(ProfileSetupAboutMe.this, MainActivity.class));
+//            }
+//        });
 
 
 
