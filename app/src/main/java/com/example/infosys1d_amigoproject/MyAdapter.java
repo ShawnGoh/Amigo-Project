@@ -28,11 +28,19 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
         private List<Project> projectListAll;
         private StorageReference storageReference,projectref;
 
+        public boolean isEmpty;
+
         public MyAdapter(List<Project> projectsList) {
             this.projectsList = projectsList;
             projectListAll = new ArrayList<>(projectsList);
         }
+        public void setProjectsList(List<Project> projectsList) {
+            this.projectsList = projectsList;
+        }
 
+        public void setProjectListAll(List<Project> projectListAll) {
+            this.projectListAll = projectListAll;
+        }
         @NonNull
         @Override
         public myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,7 +75,11 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
         public Filter getFilter() {
             return projectsFilter;
         }
-
+        public boolean checkIsEmpty() {
+            if (isEmpty == true) {
+                System.out.println("HELLO I AM EMPTY LA");
+            }
+            return isEmpty;}
         private Filter projectsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -99,8 +111,13 @@ public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigop
 
             FilterResults results = new FilterResults();
             results.values = filteredProjects;
+            if (filteredProjects.isEmpty()) {
+                isEmpty = true;
+                System.out.println("I'm Empty!");
 
+            }
             return results;
+
         }
 
         @Override
