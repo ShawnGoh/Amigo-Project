@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileSetupLookingFor extends AppCompatActivity {
     private static final String TAG = "ProfileSetupAboutMe";
     TextInputLayout aboutme;
-    Button nextbutton, prevbutton, skipbutton;
+    Button nextbutton, prevbutton;
 
     private Userdataretrieval mUserSettings;
 
@@ -46,7 +46,7 @@ public class ProfileSetupLookingFor extends AppCompatActivity {
         aboutme = findViewById(R.id.aboutme);
         nextbutton = findViewById(R.id.nextbuttonaboutme);
         prevbutton = findViewById(R.id.prevbuttonaboutme);
-        skipbutton =  findViewById(R.id.skipsetupbuttonlookingfor);
+
         firebaseMethods = new FirebaseMethods(ProfileSetupLookingFor.this);
         setupfirebaseauth();
 
@@ -57,12 +57,7 @@ public class ProfileSetupLookingFor extends AppCompatActivity {
             }
         });
 
-        skipbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileSetupLookingFor.this, MainActivity.class));
-            }
-        });
+
 
 
 

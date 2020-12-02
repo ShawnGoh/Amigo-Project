@@ -54,6 +54,7 @@ public class EditPojects extends AppCompatActivity {
     StorageReference storageRef;
     TextInputLayout textInputLayout,textInputLayoutdescrip;
     String randomKey;
+    ArrayList<String> category;
     ArrayList<String> skills;
 
     DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
@@ -66,6 +67,7 @@ public class EditPojects extends AppCompatActivity {
 
     private Context mcontext;
     private ChipGroup mfilters;
+    private ChipGroup categoryChipGroup;
     private ArrayList<String> selectedChipData;
 
     @Override
@@ -96,6 +98,16 @@ public class EditPojects extends AppCompatActivity {
             newChip.setText(text);
             mfilters.addView(newChip);}
 
+        String[] projectCategories = mcontext.getResources().getStringArray(R.array.category_list);
+
+        categoryChipGroup = findViewById(R.id.categoryChipGroup);
+        LayoutInflater inflater_1 = LayoutInflater.from(mcontext);
+        for(String text: projectCategories){
+            Chip newChip = (Chip) inflater_1.inflate(R.layout.chip_filter,null,false);
+            System.out.println("category asdf" + text);
+            newChip.setText(text);
+            mfilters.addView(newChip);}
+
 
         Intent intent = getIntent();
         String project_id = intent.getStringExtra("Project ID");
@@ -115,6 +127,14 @@ public class EditPojects extends AppCompatActivity {
                         chip.setChecked(true);
                     }
 
+                }
+
+                categoryChipGroup.getCheckedChipIds();
+                for(int i = 0; i<categoryChipGroup.getChildCount(); i++){
+                    Chip chip = (Chip) categoryChipGroup.getChildAt(i);
+                    if ( project.getCategory().contains(chip.getText().toString())){
+                        chip.setChecked(true);
+                    }
                 }
 
                 userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
@@ -162,9 +182,17 @@ public class EditPojects extends AppCompatActivity {
                                 }
                             }
 
+                            categoryChipGroup.getCheckedChipIds();
+                            for(int i = 0; i<categoryChipGroup.getChildCount(); i++){
+                                Chip chip = (Chip)categoryChipGroup.getChildAt(i);
+                                if(chip.isChecked()){
+                                    category.add(chip.getText().toString());
+                                }
+                            }
+
                             Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
                                     textInputLayoutdescrip.getEditText().getText().toString(),
-                                    selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
+                                    selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), category,
                                     firebaseMethods.getUserID(), project_id);
                             System.out.println(new_proj.getProjectID() +"1234");
                             System.out.println(new_proj.getThumbnail() +"1234");

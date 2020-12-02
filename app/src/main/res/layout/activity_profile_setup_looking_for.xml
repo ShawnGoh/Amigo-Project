@@ -132,16 +132,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/skipsetupbuttonlookingfor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@color/colorPrimary"
-        android:text="SKIP FOR NOW"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 
