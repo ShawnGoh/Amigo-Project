@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#009688"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".projectmanagement_tab.MyProjectsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:textColor="#fff"
-        android:text="My Projects" />
+        android:layout_margin="8dp"
+        android:id="@+id/Title"
+        android:text="Projects"
+        android:textSize="30sp"
+        android:textFontWeight="350"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/suggestedRecycler2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
 
-</RelativeLayout>
+        android:padding="8dp"
+
+        />
+
+
+</LinearLayout>

@@ -12,6 +12,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="search_hint">"Search Projects by Name.."</string>
     <string name="skill_chips_list">"Java Python C++ JSim BSim HTML/CSS JavaScript UI/UX ML CV NLP"</string>
+    <string name="Belongs_to">"%1$d's Projects"</string>
     <string-array name="skills_list">
         <item>"Java"</item>
         <item>"Python"</item>
