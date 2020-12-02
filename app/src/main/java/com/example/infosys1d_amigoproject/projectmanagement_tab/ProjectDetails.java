@@ -1,5 +1,6 @@
 package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,16 +14,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.adapter.ApplicantAdapter;
 import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
+import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,21 +39,26 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     DatabaseReference myref,userref;
     ImageView imageView, createdby_pic;
-    TextView createdby_text,project_description,projecttitle;
+    TextView createdby_text,project_description,projecttitle, applicantstitle;
     Project project;
     Button applytoJoin, back;
     ImageButton imageButton, clicktoChat;
     ChipGroup skillsrequired;
+    RecyclerView applicantrecycler;
+    Context mcontext = ProjectDetails.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details);
+
+
         mCollapsingToolbarLayout = findViewById(R.id.collapse);
         createdby_text = findViewById(R.id.projectCreator);
         project_description = findViewById(R.id.projectDescription);
@@ -55,6 +66,11 @@ public class ProjectDetails extends AppCompatActivity {
         projecttitle = findViewById(R.id.projecttitle);
         imageButton = findViewById(R.id.editprojectbutton);
         skillsrequired = findViewById(R.id.projectskillchipsgroup);
+        applicantrecycler = findViewById(R.id.ApplicantRecycler);
+        applicantstitle = findViewById(R.id.applicants_title);
+
+
+
 
         FirebaseMethods firebaseMethods = new FirebaseMethods(getApplicationContext());
         imageView = findViewById(R.id.project_picture);
@@ -76,14 +92,41 @@ public class ProjectDetails extends AppCompatActivity {
                     newchip.setText(text);
                     skillsrequired.addView(newchip);}
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
-                    System.out.println(project.getCreatedby() + "1234567");
-                    System.out.println(firebaseMethods.getUserID() + "1234567");
                     imageButton.setVisibility(View.GONE);
+                    applicantstitle.setVisibility(View.GONE);
 
                 }
                 else {
                     clicktoChat.setVisibility(View.GONE);
                 }
+                ArrayList<users_display> mUserlist = new ArrayList<>();
+
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("users_display");
+
+                mref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        for(DataSnapshot ds: snapshot.getChildren()){
+
+                            users_display currentiter = ds.getValue(users_display.class);
+                            if(project.getApplicantsinProject().contains(ds.getKey())){
+                                if(!mUserlist.contains(currentiter)){
+                                    mUserlist.add(currentiter);}
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+                FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
 
                 userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
                 userref.addValueEventListener(new ValueEventListener() {
@@ -92,6 +135,18 @@ public class ProjectDetails extends AppCompatActivity {
                         users_display user = snapshot.getValue(users_display.class);
                         Picasso.get().load(user.getProfile_picture()).into(createdby_pic);
                         createdby_text.setText(user.getName());
+
+
+
+                        if(muser.getUid().equals(project.getCreatedby())){
+                            applytoJoin.setVisibility(View.GONE);
+                            applicantrecycler.setVisibility(View.VISIBLE);
+                            ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist);
+                            applicantrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
+                            applicantrecycler.setAdapter(newadapter);
+
+
+                        }
                     }
 
                     @Override
