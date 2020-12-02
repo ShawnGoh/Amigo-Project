@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,6 +77,11 @@ public class CreateNewProject extends AppCompatActivity {
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (textInputLayout.getEditText().getText().toString().equals("")){
+                    Toast.makeText(CreateNewProject.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
+                else if (textInputLayoutdescrip.getEditText().getText().toString().equals("")) {Toast.makeText(CreateNewProject.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
+                else if (downloadUrl == null){Toast.makeText(CreateNewProject.this, "Upload Picture!", Toast.LENGTH_SHORT).show();}
+                else {
                 selectedChipData.clear();
                 for(int i = 0; i<mfilters.getChildCount(); i++){
                     Chip chip = (Chip)mfilters.getChildAt(i);
@@ -92,7 +98,7 @@ public class CreateNewProject extends AppCompatActivity {
                 myref.child("Projects").child(projectKey).setValue(new_proj);
                 Intent intent1 = new Intent(CreateNewProject.this,MainActivity.class);
                 startActivity(intent1);
-            }
+            }}
         });
 
         button.setOnClickListener(new View.OnClickListener() {
