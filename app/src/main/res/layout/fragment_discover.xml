@@ -47,7 +47,7 @@
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="125dp"
+            android:layout_height="wrap_content"
             android:scrollbars="none">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,6 +65,16 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/learnicon" />
 
+                <TextView
+                    android:id="@+id/learntext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Learn"
+                    app:layout_constraintEnd_toEndOf="@+id/projecticon1"
+                    app:layout_constraintStart_toStartOf="@+id/projecticon1"
+                    app:layout_constraintTop_toBottomOf="@+id/projecticon1" />
+
                 <ImageButton
                     android:id="@+id/projecticon2"
                     android:layout_width="wrap_content"
@@ -74,6 +84,16 @@
                     app:layout_constraintStart_toEndOf="@id/projecticon1"
                     app:layout_constraintTop_toTopOf="@id/projecticon1"
                     app:srcCompat="@drawable/hardwareicon" />
+
+                <TextView
+                    android:id="@+id/hardwaretext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Hardware"
+                    app:layout_constraintEnd_toEndOf="@+id/projecticon2"
+                    app:layout_constraintStart_toStartOf="@+id/projecticon2"
+                    app:layout_constraintTop_toBottomOf="@+id/projecticon2" />
 
                 <ImageButton
                     android:id="@+id/projecticon3"
@@ -85,6 +105,16 @@
                     app:layout_constraintTop_toTopOf="@id/projecticon2"
                     app:srcCompat="@drawable/softwareicon" />
 
+                <TextView
+                    android:id="@+id/softwaretext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Software"
+                    app:layout_constraintEnd_toEndOf="@+id/projecticon3"
+                    app:layout_constraintStart_toStartOf="@+id/projecticon3"
+                    app:layout_constraintTop_toBottomOf="@+id/projecticon3" />
+
                 <ImageButton
                     android:id="@+id/projecticon4"
                     android:layout_width="wrap_content"
@@ -95,8 +125,71 @@
                     app:layout_constraintTop_toTopOf="@id/projecticon3"
                     app:srcCompat="@drawable/startupicon" />
 
+                <TextView
+                    android:id="@+id/startuptext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Start Up"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/projecticon4"
+                    app:layout_constraintTop_toBottomOf="@+id/projecticon4" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </HorizontalScrollView>
+
+<!--        <HorizontalScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="125dp"-->
+<!--            android:scrollbars="none">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginTop="20dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/learntext"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    android:text="Learn" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/learntext"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    android:text="Learn" />-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/projecticon3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/projecticon2"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/projecticon2"-->
+<!--                    app:srcCompat="@drawable/softwareicon" />-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/projecticon4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/projecticon3"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/projecticon3"-->
+<!--                    app:srcCompat="@drawable/startupicon" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </HorizontalScrollView>-->
 
         <Button
             android:id="@+id/seeAllButton1"
