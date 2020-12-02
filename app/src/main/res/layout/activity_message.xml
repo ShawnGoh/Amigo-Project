@@ -55,14 +55,40 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/personyoutextingprofile"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toBottomOf="@+id/Personyoutexting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/statusonlinemessage"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignEnd="@+id/Chat_Profile_Image"
+        android:layout_alignBottom="@+id/Chat_Profile_Image"
+        android:src="@mipmap/ic_launcher_round"
+        android:visibility="gone"
+        app:civ_border_color="#05df29"
+        app:civ_border_width="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/personyoutextingprofile"
+        app:layout_constraintEnd_toEndOf="@+id/personyoutextingprofile" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/statusofflinemessage"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignEnd="@+id/Chat_Profile_Image"
+        android:layout_alignBottom="@+id/Chat_Profile_Image"
+        android:src="@mipmap/ic_launcher_round"
+        android:visibility="invisible"
+        app:civ_border_color="#bfbfbf"
+        app:civ_border_width="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/personyoutextingprofile"
+        app:layout_constraintEnd_toEndOf="@+id/personyoutextingprofile" />
 
     <ImageButton
             android:id="@+id/buttonsend"
