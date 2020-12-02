@@ -118,15 +118,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/cretedbytext"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/chatnow"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/projecttitle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/white"
+                android:src="@drawable/chat"
                 app:layout_constraintBottom_toTopOf="@id/projectDescription"
-                android:src="@drawable/chat"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/projecttitle" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/createdby_pic"
@@ -165,12 +165,11 @@
         android:layout_marginBottom="25dp"
         android:text="Apply"
         android:textAlignment="center"
-        android:textColor="#F44336"
+        android:textColor="#ffffff"
         android:textSize="18dp"
-        app:backgroundTint="#ffffff"
+        app:backgroundTint="#F44336"
         app:icon="@drawable/ic_baseline_assignment_ind_24"
-        app:iconTint="#F44336"
-        app:iconGravity="textStart"
-        app:shapeAppearance=""/>
+        app:iconTint="#ffffff"
+        app:iconGravity="textStart"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

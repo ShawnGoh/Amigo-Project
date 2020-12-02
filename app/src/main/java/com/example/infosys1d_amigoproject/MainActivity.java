@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(textView);
     }
 
-
     private void setupfirebaseauth(){
         Log.d(TAG, "Setup FirebaseAuth");
         mAuth = FirebaseAuth.getInstance();
