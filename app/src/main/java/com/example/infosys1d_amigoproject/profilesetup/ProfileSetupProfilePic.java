@@ -84,7 +84,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                                 downloadUrl = uri;
                             }
                         });
-                        Snackbar.make(findViewById(R.id.upload), "Image Uploaded", Snackbar.LENGTH_LONG).show();
+
                     };
                 })
                 .addOnFailureListener(new OnFailureListener() {
