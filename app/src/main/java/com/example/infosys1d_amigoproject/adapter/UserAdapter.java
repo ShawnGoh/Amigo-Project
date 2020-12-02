@@ -77,10 +77,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
         holder.username.setText(userdisplay.getName());
         if(userdisplay.getProfile_picture().equals("none")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-            System.out.println("something to search"+userdisplay.getName()+ userdisplay.getProfile_picture());
         }
         else{
-            System.out.println("something to search"+userdisplay.getName()+ userdisplay.getProfile_picture());
             Picasso.get().load(userdisplay.getProfile_picture()).into(holder.profile_image);
         }
 

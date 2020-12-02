@@ -265,7 +265,7 @@ public class FirebaseMethods {
                     display.setProjectDescription(ds.child(userID).getValue(users_display.class).getProjectDescription());
                     display.setProjectTitle(ds.child(userID).getValue(users_display.class).getProjectTitle());
                     display.setStatus(ds.child(userID).getValue(users_display.class).getStatus());
-
+                    Log.d(TAG, "onDataChange: " + display.getStatus());
                     Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
                 }catch (NullPointerException E){
                     Log.d(TAG, "getUserData: null field encountered ");
@@ -312,6 +312,7 @@ public class FirebaseMethods {
                         display.setSkills(snap.getValue(users_display.class).getSkills());
                         display.setChats(snap.getValue(users_display.class).getChats());
                         display.setProfile_picture(snap.getValue(users_display.class).getProfile_picture());
+                        display.setStatus(snap.getValue(users_display.class).getStatus());
 
                         Log.d(TAG, "getUserData: retrieved user display data "+display.toString());
                     }catch (NullPointerException E){
