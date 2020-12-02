@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -68,12 +69,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); // use this to switch between activity views
         //this.setTitle("Explore");
         myref = FirebaseDatabase.getInstance().getReference();
-        myref.child("hello").setValue("yo whats up");
+
 
 
         menu_bottom = findViewById(R.id.navigation);
 
         setupfirebaseauth();
+
+
+
 
 
 
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     @Override
     protected void onStart() {
@@ -188,9 +193,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = firebaseMethod.getUserData(snapshot);
-                if(user.getUsersdisplay().isCompeletedsetup()==false){
-                    startActivity(new Intent(MainActivity.this, ProfileSetupAboutMe.class));
-                }
+
             }
 
             @Override

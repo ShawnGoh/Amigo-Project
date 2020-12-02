@@ -208,28 +208,9 @@ public class FirebaseMethods {
 
         users_display display = new users_display(firstname+" "+lastname);
 
-        ArrayList<String> projectTitle = new ArrayList<>();
-        projectTitle.add("Project 1");
-        projectTitle.add("Project 2");
-        projectTitle.add("Project 3");
-        projectTitle.add("Project 4");
-        projectTitle.add("Project 5");
-        ArrayList<String> projectDescription = new ArrayList<>();
-        projectDescription.add("THIS IS A DESCRIPTION OF THE PROJECT");
-        projectDescription.add("THIS IS A DESCRIPTION OF THE PROJECT");
-        projectDescription.add("THIS IS A DESCRIPTION OF THE PROJECT");
-        projectDescription.add("THIS IS A DESCRIPTION OF THE PROJECT");
-        projectDescription.add("THIS IS A DESCRIPTION OF THE PROJECT");
-        ArrayList<String> skilllist = new ArrayList<>();
-        skilllist.add("Python");
-        skilllist.add("Java");
-        skilllist.add("CSS/HTML/JS");
-        skilllist.add("C");
 
-        //debugging chips
-        display.setSkills(skilllist);
-        display.setProjectTitle(projectTitle);
-        display.setProjectDescription(projectDescription);
+
+
 
         myRef.child(mContext.getString(R.string.db_usersdisplay)).child(userID).setValue(display);
 
