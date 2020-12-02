@@ -110,15 +110,7 @@ public class viewprofilefragment extends Fragment {
         Log.d(TAG, "onCreateView: widgets inited");
 
 
-        storageReference = FirebaseStorage.getInstance().getReference();
-        firebaseMethods = new FirebaseMethods(mcontext);
-        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
-        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(mProfilepic);
-            }
-        });
+
 
         setupfirebaseauth();
 
@@ -174,7 +166,9 @@ public class viewprofilefragment extends Fragment {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() == userID){
+                        System.out.println(userID+"123456789");
+                        System.out.println(mUser.getUsersprivate().getUser_id()+"123456789");
+                        if (mUser.getUsersprivate().getUser_id().equals(userID)){
                             projectList.add(project);
                         }
                     }
@@ -195,12 +189,14 @@ public class viewprofilefragment extends Fragment {
 
         if(bundle!=null){
             final String getID = bundle.getString("Intent User");
-            DatabaseReference mref = FirebaseDatabase.getInstance().getReference("users_display").child(getID);
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference();
 
             mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for( DataSnapshot)
             user= snapshot.getValue(users_display.class);
+            Picasso.get().load(user.getProfile_picture()).into(mProfilepic);
             user2= snapshot.getValue(users_private.class);
             mUser = new Userdataretrieval(user, user2);
 
@@ -218,37 +214,7 @@ public class viewprofilefragment extends Fragment {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-            imageUri = data.getData();
-            mProfilepic.setImageURI(imageUri);
-            uploadpicture();
-        }
-    }
-    private void uploadpicture() {
-        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
-        newRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                downloadUrl = uri;
-                                firebaseMethods.updateProfilePicture(downloadUrl.toString());
-                            }
-                        });
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
 
-                    }
-                });
-    }
     private void setProfileWidgets(Userdataretrieval userSettings){
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieved from firebase database");
 
