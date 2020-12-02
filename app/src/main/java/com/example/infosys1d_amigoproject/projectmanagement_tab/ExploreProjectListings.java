@@ -36,11 +36,14 @@ public class ExploreProjectListings extends AppCompatActivity {
     MyAdapter myAdapter;
     TextView projectCategory;
     ImageButton closebutton;
+    TextView errorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_project_listings);
+
+        errorMessage = findViewById(R.id.errorMessage);
 
         closebutton = findViewById(R.id.allprojectsclosebutton);
         closebutton.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +164,14 @@ public class ExploreProjectListings extends AppCompatActivity {
                 System.out.println(projectsList);
                 myAdapter.setProjectListAll(textFilteredProjects);
                 myAdapter.getFilter().filter(text_filter);
+
+                System.out.println("Printing Item Count!");
+                System.out.println(myAdapter.getItemCount());
+
+//                while (myAdapter.getItemCount() != 0) {
+//                    int i = myAdapter.getItemCount();
+//                    errorMessage.setVisibility(View.VISIBLE);
+//                }
 
             }
         }

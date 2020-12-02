@@ -1,5 +1,6 @@
 package com.example.infosys1d_amigoproject.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,11 +30,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
         private List<Project> projectsList;
         private List<Project> projectListAll;
         private StorageReference storageReference,projectref;
+//        private Context mContext;
 
         public boolean isEmpty;
 
         public MyAdapter(List<Project> projectsList) {
             this.projectsList = projectsList;
+//            this.mContext = mContext;
             projectListAll = new ArrayList<>(projectsList);
         }
         public void setProjectsList(List<Project> projectsList) {
@@ -116,7 +120,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
             if (filteredProjects.isEmpty()) {
                 isEmpty = true;
                 System.out.println("I'm Empty!");
-
+//                Toast.makeText(mContext, "Sorry, no such project yet! Why not create your own?", Toast.LENGTH_LONG).show();
             }
             return results;
 
