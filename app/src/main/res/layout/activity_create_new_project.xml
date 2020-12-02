@@ -118,6 +118,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayout_description" />
             <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/filterChipGroupBox"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="20dp"
@@ -143,6 +144,40 @@
 
                 </com.google.android.material.chip.ChipGroup>
             </com.google.android.flexbox.FlexboxLayout>
+
+            <TextView
+                android:id="@+id/setCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/colorPrimary"
+                android:text="Which category does your project fall under?"
+                android:textSize="20dp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/filterChipGroupBox"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/categoryChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                android:clipToPadding="true"
+                android:textAlignment="center"
+                app:singleSelection="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/setCategory">
+
+            </com.google.android.material.chip.ChipGroup>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

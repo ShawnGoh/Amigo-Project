@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,12 @@ public class DiscoverFragment extends Fragment {
     DatabaseReference databaseReference;
     DatabaseReference dbProjects;
     public List<Project> projectsList;
+
+    private ImageButton learnButton;
+    private ImageButton softwareButton;
+    private ImageButton hardwareButton;
+    private ImageButton startupButton;
+
     public DiscoverFragment() {
         // Required empty public constructor
     }
@@ -103,13 +110,51 @@ public class DiscoverFragment extends Fragment {
 
             }
         });
+
+        learnButton = view.findViewById(R.id.projecticon1);
+        learnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExploreProjectListings.class);
+                intent.putExtra("category", "Learn");
+                startActivity(intent);
+            }
+        });
+        hardwareButton = view.findViewById(R.id.projecticon2);
+        hardwareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExploreProjectListings.class);
+                intent.putExtra("category", "Hardware");
+                startActivity(intent);
+            }
+        });
+        softwareButton = view.findViewById(R.id.projecticon3);
+        softwareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExploreProjectListings.class);
+                intent.putExtra("category", "Software");
+                startActivity(intent);
+            }
+        });
+        startupButton = view.findViewById(R.id.projecticon4);
+        startupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExploreProjectListings.class);
+                intent.putExtra("category", "Start-Up");
+                startActivity(intent);
+            }
+        });
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projref = databaseReference.child("Projects");
         projectsList = new ArrayList<>();
         myAdapter = new MyAdapter(projectsList);
         recyclerView.setAdapter(myAdapter);
 
-     //   Project new_proj = new Project("random url", "test Title", "test description ","userid");
+        //   Project new_proj = new Project("random url", "test Title", "test description ","userid");
 
         firebaseMethods = new FirebaseMethods(container.getContext());
 //        Project new_proj = new Project("random url", "test Title", "test description ",
