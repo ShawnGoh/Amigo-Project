@@ -44,7 +44,9 @@ public class MessageActivity extends AppCompatActivity {
     EditText chatMessage;
     ImageButton sendbutton, backbutton;
     RecyclerView pastmessages;
-    ImageView profilepic;
+    ImageView profilepic, icon_on, icon_off;
+
+
 
     FirebaseUser fuser;
     DatabaseReference mref;
@@ -68,6 +70,9 @@ public class MessageActivity extends AppCompatActivity {
         backbutton = findViewById(R.id.chatbackbutton);
         pastmessages = findViewById(R.id.pastchatmessages);
         profilepic = findViewById(R.id.personyoutextingprofile);
+        icon_on = findViewById(R.id.statusonlinemessage);
+        icon_off = findViewById(R.id.statusofflinemessage);
+
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +148,15 @@ public class MessageActivity extends AppCompatActivity {
                 }else{
                     Glide.with(MessageActivity.this).load(user.getProfile_picture()).into(profilepic);
                 }
+
+                if(user.getStatus().equals("online")){
+                    icon_on.setVisibility(View.VISIBLE);
+                    icon_off.setVisibility(View.GONE);
+                }else{
+                    icon_off.setVisibility(View.VISIBLE);
+                    icon_on.setVisibility(View.GONE);
+                }
+
                 ReadMessages(fuser.getUid(), getID, user.getProfile_picture());
             }
 
