@@ -39,7 +39,9 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -52,6 +54,7 @@ public class ProjectDetails extends AppCompatActivity {
     ChipGroup skillsrequired;
     RecyclerView applicantrecycler;
     Context mcontext = ProjectDetails.this;
+    FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +129,7 @@ public class ProjectDetails extends AppCompatActivity {
 
 
 
-                FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
+
 
                 userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
                 userref.addValueEventListener(new ValueEventListener() {
@@ -179,7 +182,14 @@ public class ProjectDetails extends AppCompatActivity {
         applytoJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // intent to project application fragment OR fillable dialogue
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
+                List<String> applicantlst = project.getApplicantsinProject();
+                applicantlst.add(muser.getUid());
+                HashMap<String, Object> hashmap = new HashMap<>();
+                hashmap.put("applicantsinProject", applicantlst);
+
+                mref.updateChildren(hashmap);
+
             }
         });
 
