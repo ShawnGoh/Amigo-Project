@@ -132,7 +132,7 @@ public class SearchFragment extends Fragment {
                 selectedChipData = submitFilters();
                 Intent resultIntent = new Intent(getActivity(), ExploreProjectListings.class);
                 resultIntent.setAction(Intent.ACTION_SEARCH);
-                resultIntent.putExtra("skills_filter", selectedChipData.toString());
+                resultIntent.putExtra("skills_filter", selectedChipData);
                 resultIntent.putExtra("text_filter", filterString);
                 startActivity(resultIntent);
             }

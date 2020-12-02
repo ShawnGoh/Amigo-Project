@@ -94,5 +94,8 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                     }
                 });
 
+        System.out.println(getIntent().getStringExtra("About Me")+ "92383312");
+        System.out.println(getIntent().getStringExtra("Looking For")+ "92383312");
+        System.out.println(getIntent().getStringExtra("Skills")+ "92383312");
     }
 }

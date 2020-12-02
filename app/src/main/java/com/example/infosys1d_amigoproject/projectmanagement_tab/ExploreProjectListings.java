@@ -124,30 +124,44 @@ public class ExploreProjectListings extends AppCompatActivity {
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
                 ArrayList<String> skills_filter = intent.getStringArrayListExtra("skills_filter");
                 String text_filter = intent.getStringExtra("text_filter");
-                if (text_filter != null){
-                    projectCategory.setText('"'+text_filter+'"');
-                }
-                System.out.println("This sends data!");
-                System.out.println(skills_filter);
+                List<Project> textFilteredProjects = new ArrayList<>();
 
-                System.out.println(projectsList);
-                myAdapter.getFilter().filter(text_filter);
+                // ORDER IS IMPORTANT SINCE ITS ASYNC
 
                 if (skills_filter != null && skills_filter.size() != 0) {
-                    List<Project> textFilteredProjects = new ArrayList<>();
+                    if (text_filter == null) {
+                        projectCategory.setText("Search results");
+                    }
+                    System.out.println(skills_filter);
                     System.out.println("hello");
+                    System.out.println(projectsList);
                     for (Project project : projectsList) {
                         for (String skill : skills_filter) {
                             System.out.println("Iterating through skills");
+                            System.out.println(skill);
                             if (project.getSkillsrequired().contains(skill)){
                                 textFilteredProjects.add(project);
                                 System.out.println("Adding project with skill");
                             }
                         }
+                        myAdapter.setProjectsList(textFilteredProjects);
                     }
-                    myAdapter.setProjectListAll(textFilteredProjects);
-                    myAdapter.notifyDataSetChanged();
+                    System.out.println(textFilteredProjects);;
                 }
+
+                System.out.println(text_filter);
+                if (text_filter != null){
+                    if (text_filter.trim().length() != 0) {
+                        projectCategory.setText('"'+text_filter+'"');
+                    }
+                }
+                System.out.println("This sends data!");
+                System.out.println(skills_filter);
+
+                System.out.println(projectsList);
+                myAdapter.setProjectListAll(textFilteredProjects);
+                myAdapter.getFilter().filter(text_filter);
+
             }
         }
 
