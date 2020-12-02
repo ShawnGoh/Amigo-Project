@@ -1,5 +1,7 @@
 package com.example.infosys1d_amigoproject;
 
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,7 +71,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); // use this to switch between activity views
         //this.setTitle("Explore");
         myref = FirebaseDatabase.getInstance().getReference();
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = firebaseMethod.getUserData(snapshot);
+                if(!user.getUsersdisplay().isCompeletedsetup()){
+                    System.out.println(user.getUsersdisplay().isCompeletedsetup()+"92383312");
+                    startActivity(new Intent(MainActivity.this, ProfileSetupAboutMe.class));
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         menu_bottom = findViewById(R.id.navigation);
@@ -189,18 +205,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user = firebaseMethod.getUserData(snapshot);
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 

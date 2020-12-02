@@ -58,6 +58,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/colorPrimary"
+        android:background="@color/white"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +67,7 @@
     <ImageButton
         android:id="@+id/allprojectsclosebutton"
         android:layout_width="wrap_content"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:src="@drawable/ic_close"

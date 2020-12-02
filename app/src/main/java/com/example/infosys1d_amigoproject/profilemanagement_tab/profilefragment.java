@@ -239,6 +239,7 @@ public class profilefragment extends Fragment {
         ArrayList<String> chipslist = displaydata.getSkills();
         LayoutInflater inflater = LayoutInflater.from(mcontext);
 
+        mskills.removeAllViews();
         for(String text: chipslist){
             Chip newchip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
             newchip.setText(text);

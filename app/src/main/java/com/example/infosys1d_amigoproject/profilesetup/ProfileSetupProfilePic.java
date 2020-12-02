@@ -1,5 +1,7 @@
 package com.example.infosys1d_amigoproject.profilesetup;
 
+
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -90,23 +92,14 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //saveProfileSettings();
-                FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
-                DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
-                myref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        mUserSettings = firebaseMethods.getUserData(snapshot);
-                        if(mUserSettings.getUsersdisplay().isCompeletedsetup()){
-                        startActivity(new Intent(ProfileSetupProfilePic.this, MainActivity.class));
-                        }
-                    }
+                saveProfileSettings();
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-
+                updatesetup(true);
+                Intent intent = new Intent(ProfileSetupProfilePic.this, MainActivity.class);
+                (ProfileSetupProfilePic.this).finish();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
 
             }
@@ -136,7 +129,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                         if (!mUserSettings.getUsersdisplay().getSkills().toString().toString().equals(skillstext)){
                             firebaseMethods.updateSkillChips(skillstext);
                             Toast.makeText(ProfileSetupProfilePic.this, "You have completed your setup!", Toast.LENGTH_SHORT).show();
-                            updatesetup(true);
+
                             if(mUserSettings.getUsersdisplay().isCompeletedsetup()) {
                                 System.out.println("ITS TRUE 92383312");
 
@@ -144,7 +137,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                             }
 
                         }
-                }
+                    }
 
 
                 }
@@ -175,7 +168,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
             imageUri = data.getData();
             profilepic.setImageURI(imageUri);
             uploadpicture();
-            saveProfileSettings();
+
         }
         else{
             profilepic.setImageResource(R.mipmap.ic_launcher_round);
@@ -200,7 +193,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 downloadUrl = uri;
                                 System.out.println("123456789" + downloadUrl.toString());
-
+                                FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
 
                             }
                         });
