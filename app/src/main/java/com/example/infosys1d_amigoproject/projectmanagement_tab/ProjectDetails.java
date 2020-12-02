@@ -80,6 +80,9 @@ public class ProjectDetails extends AppCompatActivity {
                     imageButton.setVisibility(View.GONE);
 
                 }
+                else {
+                    clicktoChat.setVisibility(View.GONE);
+                }
 
                 userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
                 userref.addValueEventListener(new ValueEventListener() {
@@ -111,6 +114,9 @@ public class ProjectDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // intent to chat with project creator
+                Intent intent = new Intent(v.getContext(), EditPojects.class);
+                intent.putExtra("Project ID", project_id);
+                startActivity(intent);
             }
         });
         applytoJoin = findViewById(R.id.applytoJoin);
@@ -138,5 +144,7 @@ public class ProjectDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
         }
     }
