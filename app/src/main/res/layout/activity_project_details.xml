@@ -145,7 +145,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Project Description"
                 android:textFontWeight="300"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/projectCreator"/>
 
@@ -165,12 +165,12 @@
         android:layout_marginBottom="25dp"
         android:text="Apply"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#F44336"
         android:textSize="18dp"
-        android:background="@drawable/roundedrectanglewhite"
-        app:backgroundTint="#F44336"
+        app:backgroundTint="#ffffff"
         app:icon="@drawable/ic_baseline_assignment_ind_24"
-        app:iconTint="#FFFFFF" />
-
+        app:iconTint="#F44336"
+        app:iconGravity="textStart"
+        app:shapeAppearance=""/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
