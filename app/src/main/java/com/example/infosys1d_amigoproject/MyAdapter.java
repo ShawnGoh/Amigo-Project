@@ -13,38 +13,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infosys1d_amigoproject.projectmanagement.ExploreProjectListings;
-import com.example.infosys1d_amigoproject.projectmanagement.Project;
-import com.example.infosys1d_amigoproject.projectmanagement.ProjectDetails;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.ProjectDetails;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
-    public List<Project> projectsList;
-    public List<Project> projectListAll;
-    public boolean isEmpty;
+import static android.content.ContentValues.TAG;
 
 
-    public void setProjectsList(List<Project> projectsList) {
-        this.projectsList = projectsList;
-    }
-
-    public void setProjectListAll(List<Project> projectListAll) {
-        this.projectListAll = projectListAll;
-    }
-
-    @NonNull
-    @Override
-    public myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.row,parent,false);
-        return new myholder(view);
-    }
+public class MyAdapter extends RecyclerView.Adapter<com.example.infosys1d_amigoproject.MyAdapter.myholder> implements Filterable {
+        private List<Project> projectsList;
+        private List<Project> projectListAll;
+        private StorageReference storageReference,projectref;
 
         public MyAdapter(List<Project> projectsList) {
             this.projectsList = projectsList;
@@ -86,14 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
             return projectsFilter;
         }
 
-        public boolean checkIsEmpty() {
-            if (isEmpty == true) {
-                System.out.println("HELLO I AM EMPTY LA");
-            }
-            return isEmpty;
-        }
-
-    private Filter projectsFilter = new Filter() {
+        private Filter projectsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Project> filteredProjects = new ArrayList<>();
@@ -125,15 +100,6 @@ public class MyAdapter extends RecyclerView.Adapter <com.example.infosys1d_amigo
             FilterResults results = new FilterResults();
             results.values = filteredProjects;
 
-            System.out.println(filteredProjects);
-
-            //Async task, can't get errorMessage to show up
-
-            if (filteredProjects.isEmpty()) {
-                isEmpty = true;
-                System.out.println("I'm Empty!");
-
-            }
             return results;
         }
 
