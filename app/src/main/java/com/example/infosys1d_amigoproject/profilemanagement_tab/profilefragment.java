@@ -74,7 +74,7 @@ public class profilefragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
     private FirebaseMethods firebaseMethods;
 
-    RecyclerView recyclerView;
+//    RecyclerView recyclerView;
 
 
     private Uri imageUri, downloadUrl;
@@ -92,8 +92,8 @@ public class profilefragment extends Fragment {
         mAboutme = view.findViewById(R.id.profileaboutmetextview);
         mlookingfor = view.findViewById(R.id.profilelookingfortextview);
         mProfilepic = view.findViewById(R.id.profilepic);
-        recyclerView = view.findViewById(R.id.suggestedRecycler2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+//        recyclerView = view.findViewById(R.id.suggestedRecycler2);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mcontext = getActivity();
 //      muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
@@ -155,33 +155,33 @@ public class profilefragment extends Fragment {
         });
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference projref = databaseReference.child("Projects");
-        ArrayList<Project> projectList = new ArrayList<>();
-        myAdapter = new MyAdapter(projectList);
-        recyclerView.setAdapter(myAdapter);
-
-
-        projref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                projectList.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Project project = postSnapshot.getValue(Project.class);
-                    for (String userID: project.getUsersinProject()){
-                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() != userID){
-                            projectList.add(project);
-                        }
-                    }
-                }
-                myAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: ");
-            }
-        });
+//        databaseReference = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference projref = databaseReference.child("Projects");
+//        ArrayList<Project> projectList = new ArrayList<>();
+//        myAdapter = new MyAdapter(projectList);
+//        recyclerView.setAdapter(myAdapter);
+//
+//
+//        projref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                projectList.clear();
+//                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+//                    Project project = postSnapshot.getValue(Project.class);
+//                    for (String userID: project.getUsersinProject()){
+//                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() != userID){
+//                            projectList.add(project);
+//                        }
+//                    }
+//                }
+//                myAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                System.out.println("The read failed: ");
+//            }
+//        });
         return view;
     }
 
