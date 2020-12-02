@@ -101,6 +101,7 @@ public class MessageActivity extends AppCompatActivity {
         pastmessages.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext);
         linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setStackFromEnd(true);
         pastmessages.setLayoutManager(linearLayoutManager);
 
         intent =getIntent();
@@ -189,6 +190,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
                 messageAdapter = new messageAdapter(mcontext, mChat, imgurl);
                 pastmessages.setAdapter(messageAdapter);
+                pastmessages.scrollToPosition(messageAdapter.getItemCount()-1);
 
 
             }
