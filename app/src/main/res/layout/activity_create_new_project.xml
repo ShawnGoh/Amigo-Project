@@ -168,6 +168,16 @@
 
             </com.google.android.material.chip.ChipGroup>
 
+            <ImageButton
+                android:id="@+id/createprojectclosebutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="@+id/category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textView" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
