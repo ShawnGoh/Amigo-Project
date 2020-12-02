@@ -34,22 +34,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     private ArrayList<Userdataretrieval> mUsers;
     Activity activity;
     DatabaseReference myref;
+    private boolean ischat;
 
-    public UserAdapter(Context mcontext, ArrayList<Userdataretrieval> mUsers, Activity activity){
+    public UserAdapter(Context mcontext, ArrayList<Userdataretrieval> mUsers, Activity activity, boolean ischat){
         this.mUsers = mUsers;
         this.mcontext = mcontext;
         this.activity = activity;
+        this.ischat = ischat;
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView profile_image;
+        private ImageView icon_on, icon_off;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
             username = itemView.findViewById(R.id.Chat_username);
             profile_image = itemView.findViewById(R.id.Chat_Profile_Image);
+            icon_off = itemView.findViewById(R.id.statusindicatoruseritemoffline);
+            icon_on = itemView.findViewById(R.id.statusindicatoruseritemonline);
         }
     }
 
@@ -77,6 +82,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
         else{
             System.out.println("something to search"+userdisplay.getName()+ userdisplay.getProfile_picture());
             Picasso.get().load(userdisplay.getProfile_picture()).into(holder.profile_image);
+        }
+
+        if(ischat){
+            if(userdisplay.getStatus().equals("online")){
+                holder.icon_on.setVisibility(View.VISIBLE);
+                holder.icon_off.setVisibility(View.GONE);
+            }else{
+                holder.icon_off.setVisibility(View.VISIBLE);
+                holder.icon_on.setVisibility(View.GONE);
+            }
+        }else{
+            holder.icon_on.setVisibility(View.GONE);
+            holder.icon_off.setVisibility(View.GONE);
         }
 
 
