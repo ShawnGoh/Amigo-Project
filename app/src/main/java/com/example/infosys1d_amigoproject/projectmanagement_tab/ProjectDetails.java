@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
+import com.example.infosys1d_amigoproject.models.users_display;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,9 +31,10 @@ public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     DatabaseReference myref,userref;
     ImageView imageView, createdby_pic;
-    TextView createdby_text,project_description;
+    TextView createdby_text,project_description,projecttitle;
     Project project;
     Button clicktoChat, applytoJoin, back;
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class ProjectDetails extends AppCompatActivity {
         createdby_text = findViewById(R.id.projectCreator);
         project_description = findViewById(R.id.projectDescription);
         createdby_pic = findViewById(R.id.createdby_pic);
+        projecttitle = findViewById(R.id.projecttitle);
+        imageButton = findViewById(R.id.editprojectbutton);
+
         FirebaseMethods firebaseMethods = new FirebaseMethods(getApplicationContext());
         imageView = findViewById(R.id.project_picture);
         Intent intent = getIntent();
@@ -50,26 +56,31 @@ public class ProjectDetails extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 project = snapshot.getValue(Project.class);
-                System.out.println(project.getThumbnail()+"   123456");
                 Picasso.get().load(project.getThumbnail()).into(imageView);
                 mCollapsingToolbarLayout.setTitle(project.getProjectitle());
+                project_description.setText(project.getProjectdescription());
+                projecttitle.setText(project.getProjectitle());
+                if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
+                    System.out.println(project.getCreatedby() + "1234567");
+                    System.out.println(firebaseMethods.getUserID() + "1234567");
+                    imageButton.setVisibility(View.GONE);
 
+                }
 
-
-                userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project_id);
+                userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
                 userref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        project = snapshot.getValue(user.class);
-                        System.out.println(project.getThumbnail()+"   123456");
-                        Picasso.get().load(project.getThumbnail()).into(imageView);
+                        users_display user = snapshot.getValue(users_display.class);
+                        Picasso.get().load(user.getProfile_picture()).into(createdby_pic);
+                        createdby_text.setText(user.getName());
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                })
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
