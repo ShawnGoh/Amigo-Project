@@ -33,8 +33,8 @@ public class ProjectDetails extends AppCompatActivity {
     ImageView imageView, createdby_pic;
     TextView createdby_text,project_description,projecttitle;
     Project project;
-    Button clicktoChat, applytoJoin, back;
-    ImageButton imageButton;
+    Button applytoJoin, back;
+    ImageButton imageButton, clicktoChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class ProjectDetails extends AppCompatActivity {
 
 
 
-        clicktoChat = findViewById(R.id.clicktoChat);
+        clicktoChat = findViewById(R.id.chatnow);
         clicktoChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
