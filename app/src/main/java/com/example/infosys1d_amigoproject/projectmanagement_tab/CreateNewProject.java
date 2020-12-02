@@ -91,6 +91,7 @@ public class CreateNewProject extends AppCompatActivity {
                         selectedChipData.add(chip.getText().toString());
                     }
                 }
+                myref.child("Projects").push();
                 String projectKey = myref.child("Projects").push().getKey();
                 Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
                         textInputLayoutdescrip.getEditText().getText().toString(),
