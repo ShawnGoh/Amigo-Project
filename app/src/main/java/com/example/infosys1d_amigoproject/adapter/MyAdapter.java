@@ -37,6 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
         }
         public void setProjectsList(List<Project> projectsList) {
             this.projectsList = projectsList;
+            notifyDataSetChanged();
         }
 
         public void setProjectListAll(List<Project> projectListAll) {
