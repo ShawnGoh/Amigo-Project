@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-
-
-
-
-
-
-
-
     <color name="grey">#bfbfbf</color>
     <color name="white">#fff</color>
     <color name="black">#000000</color>
@@ -41,10 +32,5 @@
     <color name="purple_700">#BF0000</color>
     <color name="teal_200">#BF0000</color>
     <color name="teal_700">#BF0000</color>
-
-
-
-
-
 
 </resources>

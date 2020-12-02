@@ -28,8 +28,7 @@ public class ProjectDetails extends AppCompatActivity {
     StorageReference storageReference,projectref;
     DatabaseReference myref;
     ImageView imageView;
-    Button clicktoChat;
-    Button applytoJoin;
+    Button clicktoChat, applytoJoin, back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +46,12 @@ public class ProjectDetails extends AppCompatActivity {
                 Project project = snapshot.getValue(Project.class);
                 System.out.println(project.getThumbnail()+"   123456");
                 Picasso.get().load(project.getThumbnail()).into(imageView);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 //        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
 //        mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
 
@@ -65,12 +70,14 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
-            }
+        back = findViewById(R.id.back_from_project_details);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("errror");
+            public void onClick(View v) {
+                finish();
             }
         });
 
+
+        }
     }
-}

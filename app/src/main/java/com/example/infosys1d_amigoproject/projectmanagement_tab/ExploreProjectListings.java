@@ -3,6 +3,7 @@ package com.example.infosys1d_amigoproject.projectmanagement_tab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,11 +35,24 @@ public class ExploreProjectListings extends AppCompatActivity {
     private Intent intent;
     MyAdapter myAdapter;
     TextView projectCategory;
+    ImageButton closebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_project_listings);
+
+        closebutton = findViewById(R.id.allprojectsclosebutton);
+        closebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.nothing, android.R.anim.fade_out);
+            }
+        });
+
+
         projectsList = new ArrayList<>();
         projectCategory = findViewById(R.id.category);
         firebaseMethods = new FirebaseMethods(getApplicationContext());
