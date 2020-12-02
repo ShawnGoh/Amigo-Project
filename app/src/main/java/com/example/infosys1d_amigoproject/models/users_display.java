@@ -19,6 +19,7 @@ public class users_display {
     private ArrayList<String> projectDescription = new ArrayList<>();
     private ArrayList<String> skills = new ArrayList<>();
     private boolean compeletedsetup = false;
+    private String status = "offline";
 
 
 
@@ -38,6 +39,14 @@ public class users_display {
     }
 
     public users_display() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public boolean isCompeletedsetup() {

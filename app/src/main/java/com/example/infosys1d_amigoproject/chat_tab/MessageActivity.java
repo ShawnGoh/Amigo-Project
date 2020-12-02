@@ -101,7 +101,6 @@ public class MessageActivity extends AppCompatActivity {
         pastmessages.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext);
         linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setStackFromEnd(true);
         pastmessages.setLayoutManager(linearLayoutManager);
 
         intent =getIntent();

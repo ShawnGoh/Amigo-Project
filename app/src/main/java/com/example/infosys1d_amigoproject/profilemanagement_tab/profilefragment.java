@@ -125,7 +125,7 @@ public class profilefragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
-                startActivity(new Intent(mcontext, SignIn.class));
+                startActivity(new Intent(mcontext, SignIn.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });

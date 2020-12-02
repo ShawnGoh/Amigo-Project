@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
         menu_bottom = findViewById(R.id.navigation);
 
         setupfirebaseauth();
-
-
-
 
         menu_bottom.setItemSelected(0, true);
 
@@ -179,4 +177,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void status(String status){
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mref = FirebaseDatabase.getInstance().getReference("users_display").child(fuser.getUid());
+        HashMap<String, Object> hashmap = new HashMap<>();
+        hashmap.put("status", status);
+
+        mref.updateChildren(hashmap);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+    }
 }

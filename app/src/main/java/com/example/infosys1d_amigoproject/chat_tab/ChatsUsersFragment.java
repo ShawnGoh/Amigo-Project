@@ -90,7 +90,7 @@ public class ChatsUsersFragment extends Fragment {
                         if(!userprivate.getUser_id().equals(fuser.getUid())){
                             mUsers.add(data);}
                     }
-                    userAdapter = new UserAdapter(getContext(),mUsers, getActivity());
+                    userAdapter = new UserAdapter(getContext(),mUsers, getActivity(), false);
                     recyclerView.setAdapter(userAdapter);
 
                 }

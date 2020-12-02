@@ -19,7 +19,6 @@
         <activity android:name=".profilesetup.ProfileSetupProfilePic" />
         <activity android:name=".profilesetup.ProfileSetupLookingFor" />
         <activity android:name=".profilesetup.ProfileSetupAboutMe"></activity>
-        <activity android:name=".profilesetup.ProfileSetupBio" />
         <activity android:name=".signinsignup.SignIn" />
         <activity android:name=".signinsignup.SignUp" />
         <activity android:name=".projectmanagement_tab.ExploreProjectListings" />

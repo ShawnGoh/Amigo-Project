@@ -109,7 +109,7 @@ public class ActiveChatsFragment extends Fragment {
                         }
                     }
                 }
-                userAdapter = new UserAdapter(getContext(),mUsers, getActivity());
+                userAdapter = new UserAdapter(getContext(),mUsers, getActivity(), true);
                 activechats.setAdapter(userAdapter);
                 }
 
