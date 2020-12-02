@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,7 +44,7 @@ public class CreateNewProject extends AppCompatActivity {
     Button button,create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
-    Uri downloadUrl;
+    Uri downloadUrl = null;
     FirebaseStorage storage;
     StorageReference storageRef;
     TextInputLayout textInputLayout,textInputLayoutdescrip;
@@ -63,6 +65,8 @@ public class CreateNewProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageview2);
+        TextInputEditText inputtitle = findViewById(R.id.inputtitle);
+        TextInputEditText inputdescription = findViewById(R.id.inputdescription);
         textInputLayout = findViewById(R.id.textInputLayout);
         textInputLayoutdescrip = findViewById(R.id.textInputLayout_description);
         button = findViewById(R.id.button);
@@ -76,23 +80,28 @@ public class CreateNewProject extends AppCompatActivity {
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedChipData.clear();
-                for(int i = 0; i<mfilters.getChildCount(); i++){
-                    Chip chip = (Chip)mfilters.getChildAt(i);
-                    if(chip.isChecked()){
-                        selectedChipData.add(chip.getText().toString());
+                if (inputtitle.getText().toString().equals("")){
+                    Toast.makeText(CreateNewProject.this, "FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
+                else if (inputdescription.getText().toString().equals("")) {Toast.makeText(CreateNewProject.this, "FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
+                else if (downloadUrl == null){Toast.makeText(CreateNewProject.this, "Upload Picture!", Toast.LENGTH_SHORT).show();}
+                else {
+                    selectedChipData.clear();
+                    for (int i = 0; i < mfilters.getChildCount(); i++) {
+                        Chip chip = (Chip) mfilters.getChildAt(i);
+                        if (chip.isChecked()) {
+                            selectedChipData.add(chip.getText().toString());
+                        }
                     }
-                }
-                String projectKey = myref.child("Projects").push().getKey();
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
-                        textInputLayoutdescrip.getEditText().getText().toString(),
-                        selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
-                        firebaseMethods.getUserID(), projectKey);
+                    String projectKey = myref.child("Projects").push().getKey();
+                    Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
+                            textInputLayoutdescrip.getEditText().getText().toString(),
+                            selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
+                            firebaseMethods.getUserID(), projectKey);
 
-                myref.child("Projects").child(projectKey).setValue(new_proj);
-                Intent intent1 = new Intent(CreateNewProject.this,MainActivity.class);
-                startActivity(intent1);
-            }
+                    myref.child("Projects").child(projectKey).setValue(new_proj);
+                    Intent intent1 = new Intent(CreateNewProject.this, MainActivity.class);
+                    startActivity(intent1);
+                } }
         });
 
         button.setOnClickListener(new View.OnClickListener() {
