@@ -19,6 +19,12 @@
         <item>"C++"</item>
         <item>"Machine Learning"</item>
     </string-array>
+    <string-array name="category_list">
+        <item>"Learn"</item>
+        <item>"Hardware"</item>
+        <item>"Software"</item>
+        <item>"Start-Up"</item>
+    </string-array>
     <string name="db_usersdisplay">"users_display"</string>
     <string name="db_usersprivate">"users_private"</string>
     <string name="field_name">name</string>

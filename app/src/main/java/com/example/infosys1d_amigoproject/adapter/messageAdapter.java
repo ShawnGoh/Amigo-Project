@@ -25,13 +25,15 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.Viewhold
 
     private Context mcontext;
     private ArrayList<Chat> mChat;
-    private String imageurl;
+    private String imageurlleft;
+    private String imageurlright;
     FirebaseUser fuser;
 
-    public messageAdapter(Context mcontext, ArrayList<Chat> mChat, String imageurl) {
+    public messageAdapter(Context mcontext, ArrayList<Chat> mChat, String imageurlleft, String imageurlright) {
         this.mcontext = mcontext;
         this.mChat = mChat;
-        this.imageurl = imageurl;
+        this.imageurlleft = imageurlleft;
+        this.imageurlright = imageurlright;
     }
 
 
@@ -67,10 +69,19 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.Viewhold
         Chat chat = mChat.get(position);
         holder.show_message.setText(chat.getMessage());
 
-        if(imageurl.equals(null)){
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher_round);
+
+        if(holder.getItemViewType() == MSG_TYPE_RIGHT) {
+            if (imageurlright.equals(null)) {
+                holder.profile_image.setImageResource(R.mipmap.ic_launcher_round);
+            } else {
+                Glide.with(mcontext).load(imageurlright).into(holder.profile_image);
+            }
         }else{
-            Glide.with(mcontext).load(imageurl).into(holder.profile_image);
+            if (imageurlleft.equals(null)) {
+                holder.profile_image.setImageResource(R.mipmap.ic_launcher_round);
+            } else {
+                Glide.with(mcontext).load(imageurlleft).into(holder.profile_image);
+            }
         }
 
 

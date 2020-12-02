@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import java.util.UUID;
 public class CreateNewProject extends AppCompatActivity {
 
     ImageView imageView;
+    ImageButton closeCreateProject;
     Button button,create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
@@ -57,6 +59,8 @@ public class CreateNewProject extends AppCompatActivity {
 
     private Context mcontext;
     private ChipGroup mfilters;
+    private ChipGroup categoryChipGroup;
+    private ArrayList<String> category;
     private ArrayList<String> selectedChipData;
 
     @Override
@@ -64,6 +68,7 @@ public class CreateNewProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageview2);
+        closeCreateProject = findViewById(R.id.createprojectclosebutton);
         textInputLayout = findViewById(R.id.textInputLayout);
         textInputLayoutdescrip = findViewById(R.id.textInputLayout_description);
         button = findViewById(R.id.button);
@@ -71,9 +76,8 @@ public class CreateNewProject extends AppCompatActivity {
         firebaseMethods = new FirebaseMethods(getApplicationContext());
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-
-
         selectedChipData = new ArrayList<>();
+        category = new ArrayList<>();
 
 
         create_project.setOnClickListener(new View.OnClickListener() {
@@ -84,24 +88,30 @@ public class CreateNewProject extends AppCompatActivity {
                 else if (textInputLayoutdescrip.getEditText().getText().toString().equals("")) {Toast.makeText(CreateNewProject.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
                 else if (downloadUrl == null){Toast.makeText(CreateNewProject.this, "Upload Picture!", Toast.LENGTH_SHORT).show();}
                 else {
-                selectedChipData.clear();
-                for(int i = 0; i<mfilters.getChildCount(); i++){
-                    Chip chip = (Chip)mfilters.getChildAt(i);
-                    if(chip.isChecked()){
-                        selectedChipData.add(chip.getText().toString());
+                    selectedChipData.clear();
+                    for(int i = 0; i<mfilters.getChildCount(); i++){
+                        Chip chip = (Chip)mfilters.getChildAt(i);
+                        if(chip.isChecked()){
+                            selectedChipData.add(chip.getText().toString());
+                        }
                     }
-                }
-                myref.child("Projects").push();
-                String projectKey = myref.child("Projects").push().getKey();
-                Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
-                        textInputLayoutdescrip.getEditText().getText().toString(),
-                        selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())),
-                        firebaseMethods.getUserID(), projectKey);
+                    category.clear();
+                    for(int i = 0; i<categoryChipGroup.getChildCount(); i++){
+                        Chip chip = (Chip)categoryChipGroup.getChildAt(i);
+                        if(chip.isChecked()){
+                            category.add(chip.getText().toString());
+                        }
+                    }
+                    String projectKey = myref.child("Projects").push().getKey();
+                    Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
+                            textInputLayoutdescrip.getEditText().getText().toString(),
+                            selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), category,
+                            firebaseMethods.getUserID(), projectKey);
 
-                myref.child("Projects").child(projectKey).setValue(new_proj);
-                Intent intent1 = new Intent(CreateNewProject.this,MainActivity.class);
-                startActivity(intent1);
-            }}
+                    myref.child("Projects").child(projectKey).setValue(new_proj);
+                    Intent intent1 = new Intent(CreateNewProject.this,MainActivity.class);
+                    startActivity(intent1);
+                }}
         });
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +121,13 @@ public class CreateNewProject extends AppCompatActivity {
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(gallery,1);
+            }
+        });
+
+        closeCreateProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -128,8 +145,15 @@ public class CreateNewProject extends AppCompatActivity {
             newChip.setText(text);
             mfilters.addView(newChip);}
 
+        String[] projectCategories = mcontext.getResources().getStringArray(R.array.category_list);
 
-
+        categoryChipGroup = findViewById(R.id.categoryChipGroup);
+        LayoutInflater inflater_1 = LayoutInflater.from(mcontext);
+        for(String text: projectCategories){
+            Chip newChip = (Chip) inflater_1.inflate(R.layout.chip_filter,null,false);
+            System.out.println("category asdf" + text);
+            newChip.setText(text);
+            categoryChipGroup.addView(newChip);}
     }
 
     @Override

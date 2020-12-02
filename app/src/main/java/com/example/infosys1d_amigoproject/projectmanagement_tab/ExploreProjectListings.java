@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ExploreProjectListings extends AppCompatActivity {
     private Intent intent;
     MyAdapter myAdapter;
     TextView projectCategory;
+    String category_filter;
     ImageButton closebutton;
     TextView errorMessage;
 
@@ -62,11 +64,22 @@ public class ExploreProjectListings extends AppCompatActivity {
 //        Project new_proj = new Project("random url", "test Title", "test description ",
 //                new ArrayList<String>(Arrays.asList("hello","java","C++")),
 //                new ArrayList<String>(Arrays.asList("3Qyanm1Rl6WgR0eB4v8oUFULth72",firebaseMethods.getUserID())),
-//                firebaseMethods.getUserID());
+//                firebaseMethods.getUserID());2
 
+        // Get the intent, verify the action and get the query
+        intent = getIntent();
+        category_filter = intent.getStringExtra("category");
+//        if (category_filter != null) {
+//            System.out.println(category_filter);
+//            Query query = FirebaseDatabase.getInstance().getReference("Projects").orderByChild("category").equalTo(category_filter);
+//            query.addListenerForSingleValueEvent(valueEventListener);
+//
+//        }
+//        else {
         //code for database query of projects
         dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
         dbProjects.addListenerForSingleValueEvent(valueEventListener);
+//        }
         System.out.println("helloooooooooooo"+projectsList.toString());
 
         //this block of code is for the recycler view
@@ -79,11 +92,10 @@ public class ExploreProjectListings extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),CreateNewProject.class));
+                startActivityForResult(new Intent(view.getContext(),CreateNewProject.class), 101);
             }
         });
-        // Get the intent, verify the action and get the query
-        intent = getIntent();
+
 //        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 //            String skills_filter = intent.getStringExtra("skills_filter");
 //            String text_filter = intent.getStringExtra("text_filter");
@@ -120,8 +132,10 @@ public class ExploreProjectListings extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Project project = snapshot.getValue(Project.class);
                     projectsList.add(project);
+                    System.out.println(project);
                 }
                 myAdapter.notifyDataSetChanged();
+                System.out.println("added all items from server query");
             }
             myAdapter.setProjectListAll(projectsList);
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -173,6 +187,20 @@ public class ExploreProjectListings extends AppCompatActivity {
 //                    errorMessage.setVisibility(View.VISIBLE);
 //                }
 
+
+            }
+
+            else if (category_filter != null) {
+                System.out.println(category_filter);
+                projectCategory.setText(category_filter);
+                List<Project> filteredProjects = new ArrayList<>();
+                for (Project project : projectsList) {
+                    if (project.getCategory().contains(category_filter)){
+                        filteredProjects.add(project);
+                        System.out.println("Adding project of category");
+                    }
+                }
+                myAdapter.setProjectsList(filteredProjects);
             }
         }
 
