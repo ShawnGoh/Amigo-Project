@@ -1,6 +1,9 @@
 package com.example.infosys1d_amigoproject.models;
 
-public class Userdataretrieval {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Userdataretrieval implements Parcelable {
 
     private users_display usersdisplay;
     private users_private usersprivate;
@@ -13,6 +16,30 @@ public class Userdataretrieval {
 
     public Userdataretrieval() {
     }
+
+    protected Userdataretrieval(Parcel in) {
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Userdataretrieval> CREATOR = new Creator<Userdataretrieval>() {
+        @Override
+        public Userdataretrieval createFromParcel(Parcel in) {
+            return new Userdataretrieval(in);
+        }
+
+        @Override
+        public Userdataretrieval[] newArray(int size) {
+            return new Userdataretrieval[size];
+        }
+    };
 
     @Override
     public String toString() {

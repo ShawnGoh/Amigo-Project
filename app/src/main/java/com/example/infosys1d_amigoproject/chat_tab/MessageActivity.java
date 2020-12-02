@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,8 +20,12 @@ import com.bumptech.glide.Glide;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.adapter.messageAdapter;
 import com.example.infosys1d_amigoproject.models.Chat;
+import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
-import com.example.infosys1d_amigoproject.profilemanagement_tab.OtherProfile2;
+import com.example.infosys1d_amigoproject.models.users_private;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.editprofilefragment;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.profileactivity;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.profilefragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +55,7 @@ public class MessageActivity extends AppCompatActivity {
 
     messageAdapter messageAdapter;
     ArrayList<Chat> mChat;
+    Userdataretrieval intentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,28 @@ public class MessageActivity extends AppCompatActivity {
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent INT=new Intent(MessageActivity.this, OtherProfile2.class);
+                Intent INT = new Intent(MessageActivity.this, profileactivity.class);
+                INT.putExtra("Calling Activity" , "Message Activity");
+                final String getID = intent.getStringExtra("userid");
+                INT.putExtra("Intent User" , getID);
+//                mref = FirebaseDatabase.getInstance().getReference("users_display").child(getID);
+//
+//                mref.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        users_display user= snapshot.getValue(users_display.class);
+//                        System.out.println("123456" + user.getName());
+//                        users_private user2= snapshot.getValue(users_private.class);
+//                        intentuser = new Userdataretrieval(user, user2);
+//                        INT.putExtra("Intent User", intentuser);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+
                 startActivity(INT);
 
             }
