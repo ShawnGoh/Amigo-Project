@@ -22,16 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="0dp"
-            android:background="@color/cardview_dark_background">
 
-
-        </RelativeLayout>
 
         <SearchView
             android:id="@+id/searchBarHome"
@@ -113,6 +104,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:layout_marginBottom="10dp"
+            android:elevation="10dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/roundedrectanglewhite"
             android:text="See all projects" />
 
         <TextView
@@ -129,11 +123,7 @@
         android:id="@+id/suggestedRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
