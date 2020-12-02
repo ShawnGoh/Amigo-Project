@@ -1,9 +1,5 @@
 <resources>
 
-
-
-
-
     <string name="app_name">InfoSys1D_AmigoProject</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

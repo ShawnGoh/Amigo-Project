@@ -98,6 +98,7 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(container.getContext(), ExploreProjectListings.class));
+                getActivity().overridePendingTransition(android.R.anim.fade_in, R.anim.nothing);
 
             }
         });

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     // for testing purposes, Main Activity file should be compiled after every view has been completed.
 
     private static final String TAG = "MainActivity/Homescreen";
-    Button signoutbutton, profilepagebutton;
+    Button profilepagebutton;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
