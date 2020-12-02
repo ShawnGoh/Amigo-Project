@@ -1,5 +1,6 @@
 package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.example.infosys1d_amigoproject.adapter.MyAdapter;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.users_display;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +49,7 @@ public class MyProjectsFragment extends Fragment {
     users_display user;
 
     RecyclerView recyclerView;
+    FloatingActionButton createproject;
     public MyProjectsFragment() {
         // Required empty public constructor
     }
@@ -72,9 +75,6 @@ public class MyProjectsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user= snapshot.getValue(users_display.class);
                 mTitleName.setText(user.getName() + "'s Projects");
-
-
-
             }
 
             @Override
@@ -86,9 +86,13 @@ public class MyProjectsFragment extends Fragment {
         DatabaseReference projref = databaseReference.child("Projects");
         ArrayList<Project> projectList = new ArrayList<>();
         myAdapter = new MyAdapter(projectList);
-        recyclerView.setAdapter(myAdapter);
-
-
+        createproject = view.findViewById(R.id.create_project);
+        createproject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(),CreateNewProject.class));
+            }
+        });
 
         projref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -97,12 +101,15 @@ public class MyProjectsFragment extends Fragment {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        if (FirebaseAuth.getInstance().getCurrentUser().getUid() == (userID)){
+                        System.out.println(userID+ "123456");
+                        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userID)){
                             projectList.add(project);
                         }
                     }
                 }
                 myAdapter.notifyDataSetChanged();
+                System.out.println(projectList.toString());
+                recyclerView.setAdapter(myAdapter);
             }
 
             @Override
