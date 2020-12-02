@@ -90,13 +90,7 @@ public class myprojectstabFragment extends Fragment {
         DatabaseReference projref = databaseReference.child("Projects");
         ArrayList<Project> projectList = new ArrayList<>();
         myAdapter = new MyAdapter(projectList);
-        createproject = view.findViewById(R.id.create_project);
-        createproject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(),CreateNewProject.class));
-            }
-        });
+
 
         projref.addValueEventListener(new ValueEventListener() {
             @Override
