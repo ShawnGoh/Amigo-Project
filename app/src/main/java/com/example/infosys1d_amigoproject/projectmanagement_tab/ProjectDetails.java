@@ -51,13 +51,12 @@ public class ProjectDetails extends AppCompatActivity {
     ImageView imageView, createdby_pic;
     TextView createdby_text,project_description,projecttitle, applicantstitle;
     Project project;
-    Button applytoJoin, back;
+    Button applytoJoin, back,delete;
     ImageButton imageButton, clicktoChat;
     ChipGroup skillsrequired;
     RecyclerView applicantrecycler;
     Context mcontext = ProjectDetails.this;
     FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
-    FloatingActionButton delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class ProjectDetails extends AppCompatActivity {
         skillsrequired = findViewById(R.id.projectskillchipsgroup);
         applicantrecycler = findViewById(R.id.ApplicantRecycler);
         applicantstitle = findViewById(R.id.applicants_title);
-   //     delete = findViewById(R.id.delete);
+        delete = findViewById(R.id.delete);
 
 
 
@@ -100,8 +99,7 @@ public class ProjectDetails extends AppCompatActivity {
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
                     imageButton.setVisibility(View.GONE);
                     applicantstitle.setVisibility(View.GONE);
-            //        delete.setVisibility(View.GONE);
-
+                    delete.setVisibility(View.GONE);
                 }
                 else {
                     clicktoChat.setVisibility(View.GONE);
@@ -217,6 +215,14 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
+                mref.removeValue();
+                finish();
+            }
+        });
 
         }
     }

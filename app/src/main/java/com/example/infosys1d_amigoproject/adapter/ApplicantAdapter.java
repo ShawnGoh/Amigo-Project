@@ -83,15 +83,17 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                 List<String> memberlist = project.getUsersinProject();
                 List<String> applicantlst = project.getApplicantsinProject();
                 System.out.println(memberlist.toString());
+                if (applicantlst.contains(user_id)) {
+                    applicantlst.remove(user_id);
+                    HashMap<String, Object> hashmap2 = new HashMap<>();
+                    hashmap2.put("applicantsinProject", applicantlst);
+                    myref.updateChildren(hashmap2);
+                }
                 if (!memberlist.contains(user_id)){
                     memberlist.add(user_id);
                     HashMap<String, Object> hashmap = new HashMap<>();
                     hashmap.put("usersinProject", memberlist);
                     myref.updateChildren(hashmap);
-                    applicantlst.remove(user_id);
-                    HashMap<String, Object> hashmap2 = new HashMap<>();
-                    hashmap2.put("applicantsinProject", applicantlst);
-                    myref.updateChildren(hashmap2);
                 }
             }
         });
