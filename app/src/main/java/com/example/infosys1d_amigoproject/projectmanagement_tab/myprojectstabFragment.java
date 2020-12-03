@@ -84,7 +84,6 @@ public class myprojectstabFragment extends Fragment {
                 System.out.println(user.getName()+"654123");
                 mTitleName.setText(user.getName() + "'s Projects");
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
