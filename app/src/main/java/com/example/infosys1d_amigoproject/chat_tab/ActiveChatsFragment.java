@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,7 @@ public class ActiveChatsFragment extends Fragment {
     private ArrayList<String> userslist;
 
     private Context mcontext = getContext();
+    private TextView noChatsError;
 
 
 
@@ -60,6 +62,8 @@ public class ActiveChatsFragment extends Fragment {
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         userslist = new ArrayList<>();
+
+        noChatsError = view.findViewById(R.id.noChats);
 
         reference = FirebaseDatabase.getInstance().getReference("Chats");
         reference.addValueEventListener(new ValueEventListener() {
@@ -106,6 +110,9 @@ public class ActiveChatsFragment extends Fragment {
                     for(String id: userslist){
                         if(userprivate.getUser_id().equals(id)){
                             mUsers.add(data);
+                        }
+                        if (mUsers.isEmpty()) {
+                            noChatsError.setVisibility(View.VISIBLE);
                         }
                     }
                 }

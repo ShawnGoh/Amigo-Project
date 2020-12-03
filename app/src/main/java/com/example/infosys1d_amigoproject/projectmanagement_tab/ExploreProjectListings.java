@@ -165,6 +165,9 @@ public class ExploreProjectListings extends AppCompatActivity {
                     }
                     System.out.println(textFilteredProjects);;
                 }
+                else {
+                    textFilteredProjects = projectsList;
+                }
 
                 System.out.println(text_filter);
                 if (text_filter != null){

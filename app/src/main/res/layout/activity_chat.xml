@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat_tab.ChatsFragment"
     android:background="@color/white"
-    android:theme="@style/SignupinTheme">
+    android:theme="@style/SignupinTheme"
+    tools:context=".chat_tab.ChatsFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
@@ -30,6 +30,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tablayout" />
 
+    <TextView
+        android:id="@+id/noChats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have no active chats :("
+        android:textColor="#F44336"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpagerchat"
         android:layout_width="0dp"
@@ -38,14 +52,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
-
-
-
-
-
-
+    </androidx.viewpager.widget.ViewPager>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
