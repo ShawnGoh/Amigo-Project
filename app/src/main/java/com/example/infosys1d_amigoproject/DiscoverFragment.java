@@ -216,6 +216,7 @@ public class DiscoverFragment extends Fragment {
 //                System.out.println(skills_filter);
                 System.out.println("hello");
                 System.out.println(projectsList);
+                textFilteredProjects.clear();
                 for (Project project : projectsList) {
                     for (String skill : mUserSettings.getUsersdisplay().getSkills()) {
                         System.out.println("Iterating through skills");

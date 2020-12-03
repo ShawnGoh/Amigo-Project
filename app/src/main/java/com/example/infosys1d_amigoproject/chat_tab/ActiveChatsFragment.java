@@ -111,9 +111,6 @@ public class ActiveChatsFragment extends Fragment {
                         if(userprivate.getUser_id().equals(id)){
                             mUsers.add(data);
                         }
-                        if (mUsers.isEmpty()) {
-                            noChatsError.setVisibility(View.VISIBLE);
-                        }
                     }
                 }
 
