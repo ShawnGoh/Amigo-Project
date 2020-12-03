@@ -85,31 +85,55 @@
 
 
             <!-- website section -->
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/relLayout2"
-                android:background="@drawable/grey_border_bottom"
                 android:id="@+id/relLayout3"
                 android:layout_marginTop="15dp">
 
                 <ImageView
                     android:layout_width="35dp"
+                    android:id="@+id/skillsicon"
                     android:layout_height="35dp"
                     android:src="@drawable/ic_web"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_centerVertical="true"/>
 
-                <EditText
+                <TextView
+                    android:id="@+id/skillsLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/collectionofskillchips"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
+                    android:layout_marginTop="5dp"
                     android:background="@null"
-                    android:inputType="textNoSuggestions"
-                    android:hint="Skills"/>
+                    android:text="Skills"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@id/skillsicon"
+                    app:layout_constraintStart_toStartOf="@id/skillsicon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </RelativeLayout>
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/collectionofskillchips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skillsLabel"
+                    android:clipToPadding="true"
+                    android:textAlignment="center">
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <!-- description section -->

@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.adapter.MyAdapter;
+import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.ExploreProjectListings;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +54,9 @@ public class DiscoverFragment extends Fragment {
     DatabaseReference databaseReference;
     DatabaseReference dbProjects;
     public List<Project> projectsList;
+    private Userdataretrieval mUserSettings;
+    private FirebaseAuth mAuth;
+    private String userID;
 
     private ImageButton learnButton;
     private ImageButton softwareButton;
@@ -98,6 +103,7 @@ public class DiscoverFragment extends Fragment {
         View view = inflater2.inflate(R.layout.fragment_discover, container, false);
         dbProjects = FirebaseDatabase.getInstance().getReference("Projects");
         dbProjects.addListenerForSingleValueEvent(valueEventListener);
+
         recyclerView = view.findViewById(R.id.suggestedRecycler);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -149,10 +155,10 @@ public class DiscoverFragment extends Fragment {
         });
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference projref = databaseReference.child("Projects");
+        databaseReference.addListenerForSingleValueEvent(valueEventListener);
+//        DatabaseReference projref = databaseReference.child("Projects");
+
         projectsList = new ArrayList<>();
-        myAdapter = new MyAdapter(projectsList);
-        recyclerView.setAdapter(myAdapter);
 
         //   Project new_proj = new Project("random url", "test Title", "test description ","userid");
 
@@ -186,15 +192,43 @@ public class DiscoverFragment extends Fragment {
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            mUserSettings = firebaseMethods.getUserData(dataSnapshot);
+            myAdapter = new MyAdapter(projectsList);
+            recyclerView.setAdapter(myAdapter);
             projectsList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Project project = snapshot.getValue(Project.class);
-                    projectsList.add(project);
+                    if (snapshot.getKey().equals("Projects")){
+                        for (DataSnapshot snapsnapshot : snapshot.getChildren()) {
+                            Project project = snapsnapshot.getValue(Project.class);
+                            projectsList.add(project);
+                            System.out.println("Adding PROJECT!!!!!");
+                        }
+                    }
                 }
                 myAdapter.notifyDataSetChanged();
             }
+            List<Project> textFilteredProjects = new ArrayList<>();
 
+            if (!mUserSettings.getUsersdisplay().getSkills().isEmpty()) {
+//                System.out.println(skills_filter);
+                System.out.println("hello");
+                System.out.println(projectsList);
+                for (Project project : projectsList) {
+                    for (String skill : mUserSettings.getUsersdisplay().getSkills()) {
+                        System.out.println("Iterating through skills");
+                        System.out.println(skill);
+                        if (project.getSkillsrequired().contains(skill)) {
+                            textFilteredProjects.add(project);
+                            System.out.println("Adding project with skill");
+                        }
+                    }
+                    myAdapter.setProjectsList(textFilteredProjects);
+                }
+                System.out.println(textFilteredProjects);
+
+
+            }
         }
 
         @Override

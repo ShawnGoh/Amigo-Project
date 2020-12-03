@@ -17,7 +17,13 @@
         <item>"Java"</item>
         <item>"Python"</item>
         <item>"C++"</item>
-        <item>"Machine Learning"</item>
+        <item>"JavaScript"</item>
+        <item>"Machine-Learning"</item>
+        <item>"UI/UX"</item>
+        <item>"SQL"</item>
+        <item>"Firebase"</item>
+        <item>"3D-Printing"</item>
+        <item>"Alchitry"</item>
     </string-array>
     <string-array name="category_list">
         <item>"Learn"</item>

@@ -34,6 +34,7 @@ public class FirebaseMethods {
     private String userID;
     private FirebaseDatabase mfirebasedatabase;
     private DatabaseReference myRef;
+    private String[] cleanstring;
 
 
     private Context mContext;
@@ -89,9 +90,13 @@ public class FirebaseMethods {
 
     public void updateSkillChips(String skillChipsString){
         Log.d(TAG, "updateName: updating name to: " + skillChipsString);
-        String str[] = skillChipsString.split(" ");
+        String[] str = skillChipsString.split(" ");
+        cleanstring = new String[str.length];
+        for (int i = 0; i<str.length; i++) {
+            cleanstring[i] = str[i].trim();
+        }
         List<String> al = new ArrayList<String>();
-        al = Arrays.asList(str);
+        al = Arrays.asList(cleanstring);
 
         myRef.child(mContext.getString(R.string.db_usersdisplay))
                 .child(userID)

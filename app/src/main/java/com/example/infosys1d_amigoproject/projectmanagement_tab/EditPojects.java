@@ -106,7 +106,7 @@ public class EditPojects extends AppCompatActivity {
             Chip newChip = (Chip) inflater_1.inflate(R.layout.chip_filter,null,false);
             System.out.println("category asdf" + text);
             newChip.setText(text);
-            mfilters.addView(newChip);}
+            categoryChipGroup.addView(newChip);}
 
 
         Intent intent = getIntent();

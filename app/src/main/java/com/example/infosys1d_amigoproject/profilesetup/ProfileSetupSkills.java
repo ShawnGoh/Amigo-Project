@@ -1,8 +1,10 @@
 package com.example.infosys1d_amigoproject.profilesetup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,6 +15,8 @@ import com.example.infosys1d_amigoproject.MainActivity;
 import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ProfileSetupSkills extends AppCompatActivity {
 
@@ -33,11 +39,14 @@ public class ProfileSetupSkills extends AppCompatActivity {
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
     private DatabaseReference myRef;
+    private Context mcontext;
+    private ChipGroup mskills;
 
     //Firebase Auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
     private FirebaseMethods firebaseMethods;
+    private String selectedChipData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class ProfileSetupSkills extends AppCompatActivity {
         aboutme = findViewById(R.id.aboutme);
         nextbutton = findViewById(R.id.nextbuttonaboutme);
         prevbutton = findViewById(R.id.prevbuttonaboutme);
+        selectedChipData = "";
 
         firebaseMethods = new FirebaseMethods(ProfileSetupSkills.this);
         setupfirebaseauth();
@@ -58,13 +68,31 @@ public class ProfileSetupSkills extends AppCompatActivity {
             }
         });
 
+        String[] skillsList = mcontext.getResources().getStringArray(R.array.skills_list);
 
+        mskills = findViewById(R.id.filterChipGroup);
+
+        LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
+        for(String text: skillsList){
+            Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
+            System.out.println("skills asdf" + text);
+            newChip.setText(text);
+            mskills.addView(newChip);}
 
 
     }
 
     private void saveProfileSettings() {
-        final String skillstext = aboutme.getEditText().getText().toString();
+
+        selectedChipData = "";
+        for(int i = 0; i<mskills.getChildCount(); i++){
+            Chip chip = (Chip)mskills.getChildAt(i);
+            if(chip.isChecked()){
+                selectedChipData += (chip.getText().toString() + " ");
+            }
+        }
+
+        final String skillstext = selectedChipData;
 
         final String aboutmetext = getIntent().getStringExtra("About Me");
         final String lookingfortext = getIntent().getStringExtra("Looking For");

@@ -1,6 +1,7 @@
 package com.example.infosys1d_amigoproject.profilemanagement_tab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,9 @@ import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +58,8 @@ public class editprofilefragment extends Fragment {
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
     private DatabaseReference myRef;
+    private ChipGroup mskills;
+    private String selectedChipData;
 
     //Firebase Auth
     private FirebaseAuth mAuth;
@@ -112,7 +119,8 @@ public class editprofilefragment extends Fragment {
         mBio = view.findViewById(R.id.bio);
         mAboutme = view.findViewById(R.id.aboutme);
         mlookingfor = view.findViewById(R.id.lookingfor);
-        mSkills = view.findViewById(R.id.collectionofskillchips);
+//        mSkills = view.findViewById(R.id.collectionofskillchips);
+//        moreSkills = view.findViewById(R.id.moreSkills);
 
 
         mEmail = view.findViewById(R.id.email);
@@ -140,6 +148,17 @@ public class editprofilefragment extends Fragment {
             }
         });
 
+        String[] skillsList = mcontext.getResources().getStringArray(R.array.skills_list);
+
+        mskills = view.findViewById(R.id.collectionofskillchips);
+
+        LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
+        for(String text: skillsList){
+            Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
+            System.out.println("skills asdf" + text);
+            newChip.setText(text);
+            mskills.addView(newChip);}
+
 
         return view;
     }
@@ -156,7 +175,13 @@ public class editprofilefragment extends Fragment {
         mBio.setText(displaydata.getBio());
         mAboutme.setText(displaydata.getAbout_me());
         mlookingfor.setText(displaydata.getLooking_for());
-        mSkills.setText(displaydata.getSkills().toString().toString().replaceAll("\\[", "").replaceAll("\\]","").replaceAll("\\,", ""));
+        for(int i = 0; i<mskills.getChildCount(); i++){
+            Chip chip = (Chip) mskills.getChildAt(i);
+            if ( displaydata.getSkills().contains(chip.getText().toString())){
+                chip.setChecked(true);
+            }
+        }
+//        mSkills.setText(displaydata.getSkills().toString().toString().replaceAll("\\[", "").replaceAll("\\]","").replaceAll("\\,", ""));
         mEmail.setText(privatedata.getEmail().toString());
 
 
@@ -169,7 +194,18 @@ public class editprofilefragment extends Fragment {
         final String Bio = mBio.getText().toString();
         final String aboutMe = mAboutme.getText().toString();
         final String lookingFor = mlookingfor.getText().toString();
-        final String skillChipsString = mSkills.getText().toString();
+//        final String skillChipsString = mSkills.getText().toString();
+
+        selectedChipData = "";
+        for(int i = 0; i<mskills.getChildCount(); i++){
+            Chip chip = (Chip)mskills.getChildAt(i);
+            if(chip.isChecked()){
+                selectedChipData += (chip.getText().toString() + " ");
+            }
+        }
+        System.out.println("PRINTING SELECTED CHIPS");
+        System.out.println(selectedChipData);
+        final String skillChipsString = selectedChipData.trim();
         final String Email = mEmail.getText().toString();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -195,7 +231,7 @@ public class editprofilefragment extends Fragment {
 
                 }
 
-                if (!mUserSettings.getUsersdisplay().getSkills().toString().toString().equals(skillChipsString)){
+                if (!mUserSettings.getUsersdisplay().getSkills().toString().equals(skillChipsString)){
                     firebaseMethods.updateSkillChips(skillChipsString);
 
 
