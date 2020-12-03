@@ -112,7 +112,9 @@ public class myprojectstabFragment extends Fragment {
                     for (String userID: project.getUsersinProject()){
                         System.out.println(userID+ "123456");
                         if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userID)){
-                            projectList.add(project);
+                            if(!projectList.contains(project)){
+                                projectList.add(project);
+                            }
                         }
                     }
                 }
