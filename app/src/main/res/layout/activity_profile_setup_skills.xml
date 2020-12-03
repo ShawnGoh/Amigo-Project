@@ -130,7 +130,7 @@
 <!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/setSkillChips"
+        android:id="@+id/setSkillChipsgroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"

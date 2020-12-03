@@ -68,11 +68,11 @@ public class ProfileSetupSkills extends AppCompatActivity {
             }
         });
 
-        String[] skillsList = mcontext.getResources().getStringArray(R.array.skills_list);
+        String[] skillsList = getApplicationContext().getResources().getStringArray(R.array.skills_list);
 
-        mskills = findViewById(R.id.filterChipGroup);
+        mskills = findViewById(R.id.setSkillChipsgroup);
 
-        LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
+        LayoutInflater inflater_0 = LayoutInflater.from(getApplicationContext());
         for(String text: skillsList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
             System.out.println("skills asdf" + text);
