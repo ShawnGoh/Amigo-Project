@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -61,6 +62,7 @@ public class myprojectstabFragment extends Fragment {
     private users_display user;
     private RecyclerView recyclerView;
     private FloatingActionButton createproject;
+    private Context mcontext = getContext();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,15 +74,16 @@ public class myprojectstabFragment extends Fragment {
         recyclerView = view.findViewById(R.id.suggestedRecycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         setupfirebaseauth();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mref2 = FirebaseDatabase.getInstance().getReference("users_display").child(FirebaseAuth.getInstance().getUid());
         mref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user= snapshot.getValue(users_display.class);
+                System.out.println(user.getName()+"654123");
                 mTitleName.setText(user.getName() + "'s Projects");
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -90,6 +93,14 @@ public class myprojectstabFragment extends Fragment {
         DatabaseReference projref = databaseReference.child("Projects");
         ArrayList<Project> projectList = new ArrayList<>();
         myAdapter = new MyAdapter(projectList);
+        createproject = view.findViewById(R.id.create_projectmyprojectstab);
+
+        createproject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), CreateNewProject.class));
+            }
+        });
 
 
         projref.addValueEventListener(new ValueEventListener() {
@@ -101,7 +112,9 @@ public class myprojectstabFragment extends Fragment {
                     for (String userID: project.getUsersinProject()){
                         System.out.println(userID+ "123456");
                         if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userID)){
-                            projectList.add(project);
+                            if(!projectList.contains(project)){
+                                projectList.add(project);
+                            }
                         }
                     }
                 }

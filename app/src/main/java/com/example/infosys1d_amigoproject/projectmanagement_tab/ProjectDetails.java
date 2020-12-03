@@ -23,10 +23,12 @@ import com.example.infosys1d_amigoproject.adapter.ApplicantAdapter;
 import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
+import com.example.infosys1d_amigoproject.models.users_private;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,11 +47,11 @@ import java.util.List;
 
 public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    DatabaseReference myref,userref;
+    DatabaseReference myref,userref_display;
     ImageView imageView, createdby_pic;
     TextView createdby_text,project_description,projecttitle, applicantstitle;
     Project project;
-    Button applytoJoin, back;
+    Button applytoJoin, back,delete;
     ImageButton imageButton, clicktoChat;
     ChipGroup skillsrequired;
     RecyclerView applicantrecycler;
@@ -71,7 +73,7 @@ public class ProjectDetails extends AppCompatActivity {
         skillsrequired = findViewById(R.id.projectskillchipsgroup);
         applicantrecycler = findViewById(R.id.ApplicantRecycler);
         applicantstitle = findViewById(R.id.applicants_title);
-
+        delete = findViewById(R.id.delete);
 
 
 
@@ -89,7 +91,7 @@ public class ProjectDetails extends AppCompatActivity {
                 project_description.setText(project.getProjectdescription());
                 projecttitle.setText(project.getProjectitle());
                 LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-
+                skillsrequired.removeAllViews();
                 for(String text: project.getSkillsrequired()){
                     Chip newchip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
                     newchip.setText(text);
@@ -97,12 +99,13 @@ public class ProjectDetails extends AppCompatActivity {
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
                     imageButton.setVisibility(View.GONE);
                     applicantstitle.setVisibility(View.GONE);
-
+                    delete.setVisibility(View.GONE);
                 }
                 else {
                     clicktoChat.setVisibility(View.GONE);
                 }
                 ArrayList<users_display> mUserlist = new ArrayList<>();
+                ArrayList<String> mUserIDs = new ArrayList<>();
 
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("users_display");
 
@@ -116,6 +119,7 @@ public class ProjectDetails extends AppCompatActivity {
                             if(project.getApplicantsinProject().contains(ds.getKey())){
                                 if(!mUserlist.contains(currentiter)){
                                     mUserlist.add(currentiter);}
+                                    mUserIDs.add(ds.getKey());
                             }
                         }
                     }
@@ -131,8 +135,8 @@ public class ProjectDetails extends AppCompatActivity {
 
 
 
-                userref = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
-                userref.addValueEventListener(new ValueEventListener() {
+                userref_display = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
+                userref_display.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         users_display user = snapshot.getValue(users_display.class);
@@ -144,7 +148,7 @@ public class ProjectDetails extends AppCompatActivity {
                         if(muser.getUid().equals(project.getCreatedby())){
                             applytoJoin.setVisibility(View.GONE);
                             applicantrecycler.setVisibility(View.VISIBLE);
-                            ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist);
+                            ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist,mUserIDs,project);
                             applicantrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
                             applicantrecycler.setAdapter(newadapter);
 
@@ -211,6 +215,14 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
+                mref.removeValue();
+                finish();
+            }
+        });
 
         }
     }

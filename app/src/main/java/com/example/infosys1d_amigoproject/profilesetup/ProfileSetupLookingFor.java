@@ -61,7 +61,6 @@ public class ProfileSetupLookingFor extends AppCompatActivity {
 
 
 
-
     }
 
     private void saveProfileSettings() {
