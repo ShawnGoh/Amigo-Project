@@ -97,7 +97,7 @@ public class myprojectstabFragment extends Fragment {
         createproject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mcontext, CreateNewProject.class));
+                startActivity(new Intent(view.getContext(), CreateNewProject.class));
             }
         });
 
