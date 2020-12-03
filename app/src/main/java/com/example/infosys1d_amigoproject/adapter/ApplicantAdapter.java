@@ -20,21 +20,29 @@ import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.Viewholder> {
 
     private Context mcontext;
-    private ArrayList<users_display> mUsers;
+    private ArrayList<users_display> mUsers_display;
+    private ArrayList<String> mUsers_ids;
     DatabaseReference myref;
+    Project project;
 
 
-    public ApplicantAdapter(Context mcontext, ArrayList<users_display> mUsers){
-        this.mUsers = mUsers;
+    public ApplicantAdapter(Context mcontext, ArrayList<users_display> mUsers_display, ArrayList<String> mUsers_ids, Project project){
+        this.mUsers_display = mUsers_display;
+        this.mUsers_ids = mUsers_ids;
         this.mcontext = mcontext;
+        this.project = project;
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
@@ -64,22 +72,42 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
 
-        users_display user = mUsers.get(position);
-
-
+        String user_id = mUsers_ids.get(position);
+        System.out.println(user_id+ "123456");
+        users_display user = mUsers_display.get(position);
         holder.username.setText(user.getName());
-
+        myref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                List<String> memberlist = project.getUsersinProject();
+                List<String> applicantlst = project.getApplicantsinProject();
+                System.out.println(memberlist.toString());
+                if (!memberlist.contains(user_id)){
+                    memberlist.add(user_id);
+                    HashMap<String, Object> hashmap = new HashMap<>();
+                    hashmap.put("usersinProject", memberlist);
+                    myref.updateChildren(hashmap);
+                    applicantlst.remove(user_id);
+                    HashMap<String, Object> hashmap2 = new HashMap<>();
+                    hashmap2.put("applicantsinProject", applicantlst);
+                    myref.updateChildren(hashmap2);
+                }
             }
         });
 
         holder.reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                List<String> memberlist = project.getUsersinProject();
+                List<String> applicantlst = project.getApplicantsinProject();
+                System.out.println(memberlist.toString());
+                if (applicantlst.contains(user_id)){
+                    applicantlst.remove(user_id);
+                    HashMap<String, Object> hashmap2 = new HashMap<>();
+                    hashmap2.put("applicantsinProject", applicantlst);
+                    myref.updateChildren(hashmap2);
+                }
             }
         });
 
@@ -98,7 +126,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
 
     @Override
     public int getItemCount() {
-        return mUsers.size();
+        return mUsers_display.size();
     }
 
 

@@ -92,7 +92,7 @@ public class ExploreProjectListings extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),CreateNewProject.class));
+                startActivityForResult(new Intent(view.getContext(),CreateNewProject.class), 101);
             }
         });
 

@@ -1,5 +1,7 @@
 package com.example.infosys1d_amigoproject.profilesetup;
 
+
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -132,7 +134,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                             }
 
                         }
-                }
+                    }
 
 
                 }
@@ -164,7 +166,6 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
             profilepic.setImageURI(imageUri);
             uploadpicture();
 
-
         }
         else{
             profilepic.setImageResource(R.mipmap.ic_launcher_round);
@@ -190,7 +191,6 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                                 downloadUrl = uri;
                                 System.out.println("123456789" + downloadUrl.toString());
                                 FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
-
 
                             }
                         });

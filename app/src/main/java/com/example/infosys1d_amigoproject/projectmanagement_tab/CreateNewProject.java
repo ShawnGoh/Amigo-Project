@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import java.util.UUID;
 public class CreateNewProject extends AppCompatActivity {
 
     ImageView imageView;
+    ImageButton closeCreateProject;
     Button button,create_project;
     private static final int PICK_IMAGE = 1;
     public Uri imageUri;
@@ -66,6 +68,7 @@ public class CreateNewProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_project);
         imageView = findViewById(R.id.imageview2);
+        closeCreateProject = findViewById(R.id.createprojectclosebutton);
         textInputLayout = findViewById(R.id.textInputLayout);
         textInputLayoutdescrip = findViewById(R.id.textInputLayout_description);
         button = findViewById(R.id.button);
@@ -118,6 +121,13 @@ public class CreateNewProject extends AppCompatActivity {
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(gallery,1);
+            }
+        });
+
+        closeCreateProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
