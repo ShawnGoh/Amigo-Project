@@ -74,12 +74,14 @@ public class myprojectstabFragment extends Fragment {
         recyclerView = view.findViewById(R.id.suggestedRecycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         setupfirebaseauth();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mref2 = FirebaseDatabase.getInstance().getReference("users_display").child(FirebaseAuth.getInstance().getUid());
         mref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user= snapshot.getValue(users_display.class);
+                System.out.println(user.getName()+"654123");
                 mTitleName.setText(user.getName() + "'s Projects");
             }
 

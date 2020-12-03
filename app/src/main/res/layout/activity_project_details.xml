@@ -193,6 +193,25 @@
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/delete"
+
+        android:theme="@style/SignupinTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="85dp"
+        android:text="delete"
+        android:textAlignment="center"
+        android:textColor="#F44336"
+        android:textSize="18dp"
+        android:elevation="20dp"
+        app:backgroundTint="#ffffff"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:iconTint="#F44336"
+        app:iconGravity="textStart"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/applytoJoin"
 
         android:theme="@style/SignupinTheme"

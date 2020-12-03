@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -56,6 +57,7 @@ public class ProjectDetails extends AppCompatActivity {
     RecyclerView applicantrecycler;
     Context mcontext = ProjectDetails.this;
     FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
+    FloatingActionButton delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class ProjectDetails extends AppCompatActivity {
         skillsrequired = findViewById(R.id.projectskillchipsgroup);
         applicantrecycler = findViewById(R.id.ApplicantRecycler);
         applicantstitle = findViewById(R.id.applicants_title);
-
+        delete = findViewById(R.id.delete);
 
 
 
@@ -98,6 +100,7 @@ public class ProjectDetails extends AppCompatActivity {
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
                     imageButton.setVisibility(View.GONE);
                     applicantstitle.setVisibility(View.GONE);
+                    delete.setVisibility(View.GONE);
 
                 }
                 else {
