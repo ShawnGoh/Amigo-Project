@@ -80,9 +80,9 @@ public class myprojectstabFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user= snapshot.getValue(users_display.class);
+                System.out.println(user.getName()+"654123");
                 mTitleName.setText(user.getName() + "'s Projects");
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

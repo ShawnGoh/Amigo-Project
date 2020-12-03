@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:id="@+id/Title"
+        android:id="@+id/Title2"
         android:text="Projects"
         android:textSize="30sp"
         android:textFontWeight="350"
@@ -19,12 +19,12 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/suggestedRecycler2"
+        android:id="@+id/suggestedRecycler23"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        app:layout_constraintTop_toBottomOf="@+id/Title2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
