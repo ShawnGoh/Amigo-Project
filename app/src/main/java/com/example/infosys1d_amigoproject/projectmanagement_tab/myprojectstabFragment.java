@@ -74,6 +74,7 @@ public class myprojectstabFragment extends Fragment {
         recyclerView = view.findViewById(R.id.suggestedRecycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         setupfirebaseauth();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mref2 = FirebaseDatabase.getInstance().getReference("users_display").child(FirebaseAuth.getInstance().getUid());
         mref2.addValueEventListener(new ValueEventListener() {
@@ -111,7 +112,9 @@ public class myprojectstabFragment extends Fragment {
                     for (String userID: project.getUsersinProject()){
                         System.out.println(userID+ "123456");
                         if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userID)){
-                            projectList.add(project);
+                            if(!projectList.contains(project)){
+                                projectList.add(project);
+                            }
                         }
                     }
                 }
