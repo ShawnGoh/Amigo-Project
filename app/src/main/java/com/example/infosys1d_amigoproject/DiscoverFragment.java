@@ -201,7 +201,8 @@ public class DiscoverFragment extends Fragment {
                     if (snapshot.getKey().equals("Projects")){
                         for (DataSnapshot snapsnapshot : snapshot.getChildren()) {
                             Project project = snapsnapshot.getValue(Project.class);
-                            projectsList.add(project);
+                            if(!projectsList.contains(project)){
+                            projectsList.add(project);}
                             System.out.println("Adding PROJECT!!!!!");
                         }
                     }
