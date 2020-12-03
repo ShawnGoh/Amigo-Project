@@ -210,6 +210,7 @@ public class DiscoverFragment extends Fragment {
                 myAdapter.notifyDataSetChanged();
             }
             List<Project> textFilteredProjects = new ArrayList<>();
+            ArrayList<String> populatedlist = new ArrayList<>();
 
             if (!mUserSettings.getUsersdisplay().getSkills().isEmpty()) {
 //                System.out.println(skills_filter);
@@ -220,8 +221,11 @@ public class DiscoverFragment extends Fragment {
                         System.out.println("Iterating through skills");
                         System.out.println(skill);
                         if (project.getSkillsrequired().contains(skill)) {
-                            textFilteredProjects.add(project);
-                            System.out.println("Adding project with skill");
+                            if(!populatedlist.contains(project.getProjectitle())) {
+                                populatedlist.add(project.getProjectitle());
+                                textFilteredProjects.add(project);
+                                System.out.println("Adding project with skill");
+                            }
                         }
                     }
                     myAdapter.setProjectsList(textFilteredProjects);
