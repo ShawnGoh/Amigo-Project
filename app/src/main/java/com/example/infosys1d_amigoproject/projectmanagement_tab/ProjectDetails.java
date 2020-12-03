@@ -74,7 +74,7 @@ public class ProjectDetails extends AppCompatActivity {
         skillsrequired = findViewById(R.id.projectskillchipsgroup);
         applicantrecycler = findViewById(R.id.ApplicantRecycler);
         applicantstitle = findViewById(R.id.applicants_title);
-        delete = findViewById(R.id.delete);
+   //     delete = findViewById(R.id.delete);
 
 
 
@@ -100,7 +100,7 @@ public class ProjectDetails extends AppCompatActivity {
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
                     imageButton.setVisibility(View.GONE);
                     applicantstitle.setVisibility(View.GONE);
-                    delete.setVisibility(View.GONE);
+            //        delete.setVisibility(View.GONE);
 
                 }
                 else {
