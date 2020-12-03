@@ -99,7 +99,15 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
         holder.reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                List<String> memberlist = project.getUsersinProject();
+                List<String> applicantlst = project.getApplicantsinProject();
+                System.out.println(memberlist.toString());
+                if (applicantlst.contains(user_id)){
+                    applicantlst.remove(user_id);
+                    HashMap<String, Object> hashmap2 = new HashMap<>();
+                    hashmap2.put("applicantsinProject", applicantlst);
+                    myref.updateChildren(hashmap2);
+                }
             }
         });
 
