@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -61,6 +62,7 @@ public class myprojectstabFragment extends Fragment {
     private users_display user;
     private RecyclerView recyclerView;
     private FloatingActionButton createproject;
+    private Context mcontext = getContext();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +92,14 @@ public class myprojectstabFragment extends Fragment {
         DatabaseReference projref = databaseReference.child("Projects");
         ArrayList<Project> projectList = new ArrayList<>();
         myAdapter = new MyAdapter(projectList);
+        createproject = view.findViewById(R.id.create_projectmyprojectstab);
+
+        createproject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mcontext, CreateNewProject.class));
+            }
+        });
 
 
         projref.addValueEventListener(new ValueEventListener() {
