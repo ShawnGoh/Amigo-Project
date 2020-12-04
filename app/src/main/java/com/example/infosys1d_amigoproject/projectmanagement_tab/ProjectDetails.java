@@ -24,6 +24,8 @@ import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.profileactivity;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.viewprofilefragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
@@ -57,6 +59,7 @@ public class ProjectDetails extends AppCompatActivity {
     RecyclerView applicantrecycler;
     Context mcontext = ProjectDetails.this;
     FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
+    String user_id_creator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,13 +143,15 @@ public class ProjectDetails extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         users_display user = snapshot.getValue(users_display.class);
+                        user_id_creator = snapshot.getKey();
 
                         if(user.getProfile_picture().equals("")){
                             createdby_pic.setImageResource(R.mipmap.ic_launcher_round);
+
+
                         }else{
                         Picasso.get().load(user.getProfile_picture()).into(createdby_pic);}
                         createdby_text.setText(user.getName());
-
 
 
                         if(muser.getUid().equals(project.getCreatedby())){
@@ -228,5 +233,14 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        createdby_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent INT = new Intent(ProjectDetails.this, profileactivity.class);
+                INT.putExtra("Calling Activity" , "Message Activity");
+                INT.putExtra("Intent User" , user_id_creator);
+                startActivity(INT);
+            }
+        });
         }
     }
