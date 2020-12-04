@@ -184,7 +184,6 @@ public class viewprofilefragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: ");
             }
         });
         return view;
@@ -196,9 +195,7 @@ public class viewprofilefragment extends Fragment {
         if(bundle!=null){
             final String getID = bundle.getString("Intent User");
             DatabaseReference mref = FirebaseDatabase.getInstance().getReference("users_display").child(getID);
-            System.out.println(mref +"92383312");
             DatabaseReference mref2 = FirebaseDatabase.getInstance().getReference("users_private").child(getID);
-            System.out.println(mref2 + "92383312");
             mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -269,17 +266,11 @@ public class viewprofilefragment extends Fragment {
         users_private privatedata = userSettings.getUsersprivate();
 
         mName.setText(displaydata.getName());
-//        mBio.setText(displaydata.getBio());
         mAboutme.setText(displaydata.getAbout_me());
         mlookingfor.setText(displaydata.getLooking_for());
-
-//        muserid.setText(privatedata.getUser_id());
-        System.out.println(privatedata.getEmail() + "92383312");
         memail.setText(privatedata.getEmail());
+
         Picasso.get().load(displaydata.getProfile_picture()).into(mProfilepic);
-
-
-
 
         ArrayList<String> chipslist = displaydata.getSkills();
         LayoutInflater inflater = LayoutInflater.from(mcontext);
@@ -288,8 +279,6 @@ public class viewprofilefragment extends Fragment {
             Chip newchip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
             newchip.setText(text);
             mskills.addView(newchip);}
-
-
     }
 
     //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------
@@ -339,11 +328,7 @@ public class viewprofilefragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //retrieve user information from database
-//                setProfileWidgets(firebaseMethods.getUserData(snapshot));
                 setProfileWidgets(mUser);
-                //retrieve profile pic from database
-
             }
 
             @Override

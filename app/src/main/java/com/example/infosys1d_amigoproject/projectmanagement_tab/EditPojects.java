@@ -94,7 +94,6 @@ public class EditPojects extends AppCompatActivity {
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: filterList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
-            System.out.println("skills asdf" + text);
             newChip.setText(text);
             mfilters.addView(newChip);}
 
@@ -104,7 +103,6 @@ public class EditPojects extends AppCompatActivity {
         LayoutInflater inflater_1 = LayoutInflater.from(mcontext);
         for(String text: projectCategories){
             Chip newChip = (Chip) inflater_1.inflate(R.layout.chip_filter,null,false);
-            System.out.println("category asdf" + text);
             newChip.setText(text);
             categoryChipGroup.addView(newChip);}
 
@@ -166,14 +164,11 @@ public class EditPojects extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         project = snapshot.getValue(Project.class);
-                        System.out.println(project.getProjectitle() + "123456");
-                        System.out.println(textInputLayout.getEditText().getText() + "92383312");
                         if (textInputLayout.getEditText().getText().toString().equals(project.getProjectitle())){
                             Toast.makeText(EditPojects.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
                         else if (textInputLayoutdescrip.getEditText().getText().toString().equals(project.getProjectdescription())) {Toast.makeText(EditPojects.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
                         else if (downloadUrl == null){Toast.makeText(EditPojects.this, "Upload Picture!", Toast.LENGTH_SHORT).show();}
                         else {
-                            System.out.println("CLEAR 12345678");
                             selectedChipData.clear();
                             for(int i = 0; i<mfilters.getChildCount(); i++){
                                 Chip chip = (Chip)mfilters.getChildAt(i);
@@ -194,9 +189,6 @@ public class EditPojects extends AppCompatActivity {
                                     textInputLayoutdescrip.getEditText().getText().toString(),
                                     selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), category,
                                     firebaseMethods.getUserID(), project_id);
-                            System.out.println(new_proj.getProjectID() +"1234");
-                            System.out.println(new_proj.getThumbnail() +"1234");
-                            System.out.println(project_id +"1234");
                             FirebaseDatabase.getInstance().getReference().child("Projects").child(project_id).setValue(new_proj);
                             finish();
                         }

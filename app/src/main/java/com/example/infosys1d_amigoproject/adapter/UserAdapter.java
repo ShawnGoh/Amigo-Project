@@ -140,30 +140,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> im
             }
             else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-//                System.out.println("HELLOOOOOO!");
-//
-//                System.out.println(projectsList);
-//                System.out.println(projectListAll);
-//                System.out.println(filterPattern);
-//                System.out.println(filteredProjects);
 
                 for (Userdataretrieval user : mUsersAll) {
-                    System.out.println("omG!");
                     if (user.getUsersdisplay().getName().toLowerCase().contains(filterPattern))
-                    {
-                        filteredUsers.add(user);
-                        System.out.println("This works!");
+                    {filteredUsers.add(user);
                     }
                 }
             }
 
             FilterResults results = new FilterResults();
             results.values = filteredUsers;
-//            if (filteredUsers.isEmpty()) {
-//                isEmpty = true;
-//                System.out.println("I'm Empty!");
-//
-//            }
+
             return results;
 
         }

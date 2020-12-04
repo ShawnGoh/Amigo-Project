@@ -311,7 +311,6 @@ public class FirebaseMethods {
             }}
         for(DataSnapshot ds: dataSnapshot.getChildren()){
             if(ds.getKey().equals("users_private")){
-                System.out.println(1);
 
                 for(DataSnapshot prsnap: ds.getChildren()){
 

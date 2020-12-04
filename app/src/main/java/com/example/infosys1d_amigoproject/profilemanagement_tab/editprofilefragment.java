@@ -155,7 +155,6 @@ public class editprofilefragment extends Fragment {
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: skillsList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
-            System.out.println("skills asdf" + text);
             newChip.setText(text);
             mskills.addView(newChip);}
 
@@ -181,7 +180,6 @@ public class editprofilefragment extends Fragment {
                 chip.setChecked(true);
             }
         }
-//        mSkills.setText(displaydata.getSkills().toString().toString().replaceAll("\\[", "").replaceAll("\\]","").replaceAll("\\,", ""));
         mEmail.setText(privatedata.getEmail().toString());
 
 
@@ -203,8 +201,6 @@ public class editprofilefragment extends Fragment {
                 selectedChipData += (chip.getText().toString() + " ");
             }
         }
-        System.out.println("PRINTING SELECTED CHIPS");
-        System.out.println(selectedChipData);
         final String skillChipsString = selectedChipData.trim();
         final String Email = mEmail.getText().toString();
 

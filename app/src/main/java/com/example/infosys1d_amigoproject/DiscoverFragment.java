@@ -203,7 +203,6 @@ public class DiscoverFragment extends Fragment {
                             Project project = snapsnapshot.getValue(Project.class);
                             if(!projectsList.contains(project)){
                             projectsList.add(project);}
-                            System.out.println("Adding PROJECT!!!!!");
                         }
                     }
                 }
@@ -213,27 +212,18 @@ public class DiscoverFragment extends Fragment {
             ArrayList<String> populatedlist = new ArrayList<>();
 
             if (!mUserSettings.getUsersdisplay().getSkills().isEmpty()) {
-//                System.out.println(skills_filter);
-                System.out.println("hello");
-                System.out.println(projectsList);
                 textFilteredProjects.clear();
                 for (Project project : projectsList) {
                     for (String skill : mUserSettings.getUsersdisplay().getSkills()) {
-                        System.out.println("Iterating through skills");
-                        System.out.println(skill);
                         if (project.getSkillsrequired().contains(skill)) {
                             if(!populatedlist.contains(project.getProjectitle())) {
                                 populatedlist.add(project.getProjectitle());
                                 textFilteredProjects.add(project);
-                                System.out.println("Adding project with skill");
                             }
                         }
                     }
                     myAdapter.setProjectsList(textFilteredProjects);
                 }
-                System.out.println(textFilteredProjects);
-
-
             }
         }
 

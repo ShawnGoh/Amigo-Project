@@ -75,7 +75,6 @@ public class ProfileSetupSkills extends AppCompatActivity {
         LayoutInflater inflater_0 = LayoutInflater.from(getApplicationContext());
         for(String text: skillsList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
-            System.out.println("skills asdf" + text);
             newChip.setText(text);
             mskills.addView(newChip);}
 

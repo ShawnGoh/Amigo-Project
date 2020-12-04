@@ -73,7 +73,6 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
 
         String user_id = mUsers_ids.get(position);
-        System.out.println(user_id+ "123456");
         users_display user = mUsers_display.get(position);
         holder.username.setText(user.getName());
         myref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
@@ -82,7 +81,6 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             public void onClick(View view) {
                 List<String> memberlist = project.getUsersinProject();
                 List<String> applicantlst = project.getApplicantsinProject();
-                System.out.println(memberlist.toString());
                 if (applicantlst.contains(user_id)) {
                     applicantlst.remove(user_id);
                     HashMap<String, Object> hashmap2 = new HashMap<>();
@@ -103,7 +101,6 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
             public void onClick(View view) {
                 List<String> memberlist = project.getUsersinProject();
                 List<String> applicantlst = project.getApplicantsinProject();
-                System.out.println(memberlist.toString());
                 if (applicantlst.contains(user_id)){
                     applicantlst.remove(user_id);
                     HashMap<String, Object> hashmap2 = new HashMap<>();

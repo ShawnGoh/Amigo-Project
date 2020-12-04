@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,24 +83,6 @@ public class MessageActivity extends AppCompatActivity {
                 INT.putExtra("Calling Activity" , "Message Activity");
                 final String getID = intent.getStringExtra("userid");
                 INT.putExtra("Intent User" , getID);
-//                mref = FirebaseDatabase.getInstance().getReference("users_display").child(getID);
-//
-//                mref.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        users_display user= snapshot.getValue(users_display.class);
-//                        System.out.println("123456" + user.getName());
-//                        users_private user2= snapshot.getValue(users_private.class);
-//                        intentuser = new Userdataretrieval(user, user2);
-//                        INT.putExtra("Intent User", intentuser);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-
                 startActivity(INT);
 
             }
@@ -112,7 +95,6 @@ public class MessageActivity extends AppCompatActivity {
 
         intent =getIntent();
         final String getID = intent.getStringExtra("userid");
-        System.out.println(getID);
 
 
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -148,10 +130,10 @@ public class MessageActivity extends AppCompatActivity {
                     if(ds.getKey().equals(getID)) {
                         users_display user = ds.getValue(users_display.class);
                         personyoutalkingto.setText(user.getName());
-                        if (user.getProfile_picture().equals("none")) {
+                        if (user.getProfile_picture().equals("")) {
                             profilepic.setImageResource(R.mipmap.ic_launcher_round);
                         } else {
-                            Glide.with(MessageActivity.this).load(user.getProfile_picture()).into(profilepic);
+                            Picasso.get().load(user.getProfile_picture()).into(profilepic);
                             imgurlleft = user.getProfile_picture();
                         }
 
@@ -174,11 +156,6 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
 
     }
 

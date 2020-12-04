@@ -122,7 +122,6 @@ public class profilefragment extends Fragment {
 
 
         //OnClickListeners
-
         signoutbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,35 +154,6 @@ public class profilefragment extends Fragment {
 
             }
         });
-
-
-//        databaseReference = FirebaseDatabase.getInstance().getReference();
-//        DatabaseReference projref = databaseReference.child("Projects");
-//        ArrayList<Project> projectList = new ArrayList<>();
-//        myAdapter = new MyAdapter(projectList);
-//        recyclerView.setAdapter(myAdapter);
-//
-//
-//        projref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                projectList.clear();
-//                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-//                    Project project = postSnapshot.getValue(Project.class);
-//                    for (String userID: project.getUsersinProject()){
-//                        if (firebaseMethods.getUserData(snapshot).getUsersprivate().getUser_id() != userID){
-//                            projectList.add(project);
-//                        }
-//                    }
-//                }
-//                myAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: ");
-//            }
-//        });
         return view;
     }
 

@@ -112,14 +112,6 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-
-
-
-
-
-
                 if (!mUserSettings.getUsersdisplay().getAbout_me().equals(aboutme)){
                     firebaseMethods.updateAboutMe(aboutme);
                     if (!mUserSettings.getUsersdisplay().getLooking_for().equals(lookingFor)){
@@ -127,28 +119,9 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                         if (!mUserSettings.getUsersdisplay().getSkills().toString().toString().equals(skillstext)){
                             firebaseMethods.updateSkillChips(skillstext);
                             Toast.makeText(ProfileSetupProfilePic.this, "You have completed your setup!", Toast.LENGTH_SHORT).show();
-                            if(mUserSettings.getUsersdisplay().isCompeletedsetup()) {
-                                System.out.println("ITS TRUE 92383312");
-
-
-                            }
-
                         }
                     }
-
-
                 }
-
-
-
-//                if (!mUserSettings.getUsersprivate().getEmail().equals(Email)){
-//                    if(firebaseMethods.checkifemailexists(Email, dataSnapshot)== true){
-//                    firebaseMethods.updateEmail(Email);} else{Toast.makeText(getActivity(), "Email already exists!", Toast.LENGTH_SHORT).show();}
-//                }
-
-
-
-
             }
 
             @Override
@@ -189,9 +162,7 @@ public class ProfileSetupProfilePic extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 downloadUrl = uri;
-                                System.out.println("123456789" + downloadUrl.toString());
                                 FirebaseDatabase.getInstance().getReference().child("users_display").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_picture").setValue(downloadUrl.toString());
-
                             }
                         });
 

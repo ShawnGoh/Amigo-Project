@@ -141,7 +141,6 @@ public class CreateNewProject extends AppCompatActivity {
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: filterList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
-            System.out.println("skills asdf" + text);
             newChip.setText(text);
             mfilters.addView(newChip);}
 
@@ -151,7 +150,6 @@ public class CreateNewProject extends AppCompatActivity {
         LayoutInflater inflater_1 = LayoutInflater.from(mcontext);
         for(String text: projectCategories){
             Chip newChip = (Chip) inflater_1.inflate(R.layout.chip_filter,null,false);
-            System.out.println("category asdf" + text);
             newChip.setText(text);
             categoryChipGroup.addView(newChip);}
     }

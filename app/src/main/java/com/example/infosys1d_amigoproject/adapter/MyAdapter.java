@@ -96,21 +96,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
             }
             else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                System.out.println("HELLOOOOOO!");
-
-                System.out.println(projectsList);
-                System.out.println(projectListAll);
-                System.out.println(filterPattern);
-                System.out.println(filteredProjects);
 
                 for (Project project : projectListAll) {
-                    System.out.println("omG!");
                     if (project.getProjectitle().toLowerCase().contains(filterPattern)
                             || project.getProjectdescription().toLowerCase().contains(filterPattern)
                             || project.getCreatedby().toLowerCase().contains(filterPattern))
                     {
                         filteredProjects.add(project);
-                        System.out.println("This works!");
                     }
                 }
             }
@@ -119,7 +111,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
             results.values = filteredProjects;
             if (filteredProjects.isEmpty()) {
                 isEmpty = true;
-                System.out.println("I'm Empty!");
 //                Toast.makeText(mContext, "Sorry, no such project yet! Why not create your own?", Toast.LENGTH_LONG).show();
             }
             return results;

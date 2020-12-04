@@ -81,7 +81,6 @@ public class myprojectstabFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user= snapshot.getValue(users_display.class);
-                System.out.println(user.getName()+"654123");
                 mTitleName.setText(user.getName() + "'s Projects");
             }
             @Override
@@ -110,7 +109,6 @@ public class myprojectstabFragment extends Fragment {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        System.out.println(userID+ "123456");
                         if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(userID)){
                             if(!projectList.contains(project)){
                                 projectList.add(project);
@@ -119,7 +117,6 @@ public class myprojectstabFragment extends Fragment {
                     }
                 }
                 myAdapter.notifyDataSetChanged();
-                System.out.println(projectList.toString());
                 recyclerView.setAdapter(myAdapter);
             }
 

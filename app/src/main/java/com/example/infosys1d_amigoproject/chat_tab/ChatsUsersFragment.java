@@ -72,7 +72,6 @@ public class ChatsUsersFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                System.out.println("I'm changedddddddd");
                 searchusers(charSequence.toString());
             }
 
@@ -101,19 +100,12 @@ public class ChatsUsersFragment extends Fragment {
                 mUsers.clear();
 
                     ArrayList<Userdataretrieval> list = firebaseMethods.getuserlist(snapshot);
-                    System.out.println(list);
                     for(Userdataretrieval userdataretrieval : list){
                         users_private userprivatedata = userdataretrieval.getUsersprivate();
                         users_display userdisplaydata = userdataretrieval.getUsersdisplay();
-                        System.out.println(userprivatedata.getUser_id().toString()+" 123456789");
-                        System.out.println(fuser.getUid()+" 12345678910");
-
 
                         assert userdataretrieval!=null;
                         assert fuser!=null;
-
-                        System.out.println(userprivatedata.getUser_id().equals(fuser.getUid()));
-
                         if(!userprivatedata.getUser_id().equals(fuser.getUid())){
                             mUsers.add(userdataretrieval);
 
@@ -136,15 +128,12 @@ public class ChatsUsersFragment extends Fragment {
 
     public void readUsers(final String currentuser){
 
-        System.out.println("init read users");
-
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                System.out.println(searchbar.getText().toString().equals(""));
                 if(searchbar.getText().toString().equals("")){
                 mUsers.clear();
                     ArrayList<Userdataretrieval> list = firebaseMethods.getuserlist(snapshot);
