@@ -140,7 +140,11 @@ public class ProjectDetails extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         users_display user = snapshot.getValue(users_display.class);
-                        Picasso.get().load(user.getProfile_picture()).into(createdby_pic);
+
+                        if(user.getProfile_picture().equals("")){
+                            createdby_pic.setImageResource(R.mipmap.ic_launcher_round);
+                        }else{
+                        Picasso.get().load(user.getProfile_picture()).into(createdby_pic);}
                         createdby_text.setText(user.getName());
 
 

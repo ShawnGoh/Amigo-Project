@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".profilemanagement_tab.profileactivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -142,7 +142,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:elevation="10dp"
+                android:elevation="8dp"
                 android:padding="8dp"
                 android:text="Change Photo"
                 android:textStyle="bold"
@@ -162,25 +162,18 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/roundedrectanglered"
-                android:elevation="10dp"
+                android:elevation="8dp"
                 android:padding="8dp"
                 android:text="Sign Out"
-                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Changepicturebutton" />
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/suggestedRecycler2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:padding="8dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/signoutbutton" />-->
 
             <TextView
                 android:id="@+id/textView5"
