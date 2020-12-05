@@ -174,8 +174,14 @@ public class viewprofilefragment extends Fragment {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     for (String userID: project.getUsersinProject()){
-                        if (mUser.getUsersprivate().getUser_id() != userID){
-                            projectList.add(project);
+                        if (mUser.getUsersprivate().getUser_id().equals(userID)){
+                            if (projectList.contains(project)){
+
+                            }
+                            else{
+                                projectList.add(project);
+                            }
+
                         }
                     }
                 }
