@@ -20,6 +20,7 @@ import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
+import com.example.infosys1d_amigoproject.profilemanagement_tab.profileactivity;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -109,7 +110,15 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                 }
             }
         });
-
+        holder.profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent INT = new Intent(v.getContext(), profileactivity.class);
+                INT.putExtra("Calling Activity" , "Message Activity");
+                INT.putExtra("Intent User" , mUsers_ids.get(position));
+                v.getContext().startActivity(INT);
+            }
+        });
 
         if(user.getProfile_picture().equals("none")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);

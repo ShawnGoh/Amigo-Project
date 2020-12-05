@@ -126,6 +126,7 @@ public class ProjectDetails extends AppCompatActivity {
                 ArrayList<users_display> mUserlist = new ArrayList<>();
                 ArrayList<users_display> mMemberslist = new ArrayList<>();
                 ArrayList<String> mUserIDs = new ArrayList<>();
+                ArrayList<String> mUserIDs_members = new ArrayList<>();
                 FirebaseUser currenuser = FirebaseAuth.getInstance().getCurrentUser();
                 if (project.getApplicantsinProject().contains(currenuser.getUid())){
                     applytoJoin.setVisibility(View.GONE);
@@ -155,6 +156,7 @@ public class ProjectDetails extends AppCompatActivity {
                             if(project.getUsersinProject().contains(ds.getKey())){
                                 if(!mMemberslist.contains(currentiter)){
                                     mMemberslist.add(currentiter);
+                                    mUserIDs_members.add(ds.getKey());
                                 }
                             }
 
@@ -162,7 +164,7 @@ public class ProjectDetails extends AppCompatActivity {
                         }
                         System.out.println(mMemberslist);
                         membersrecycler.setVisibility(View.VISIBLE);
-                        MemberAdapter memberAdapter = new MemberAdapter(mcontext, mMemberslist, project);
+                        MemberAdapter memberAdapter = new MemberAdapter(mcontext, mMemberslist, project, mUserIDs_members);
                         membersrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
                         membersrecycler.setAdapter(memberAdapter);
                     }
