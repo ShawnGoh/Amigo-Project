@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/projdetails">
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/back_from_project_details"
         android:theme="@style/SignupinTheme"
@@ -229,5 +230,22 @@
         app:icon="@drawable/ic_baseline_assignment_ind_24"
         app:iconTint="#ffffff"
         app:iconGravity="textStart"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/cancelapply"
 
+        android:theme="@style/SignupinTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="25dp"
+        android:text="Cancel Application"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="18dp"
+        android:elevation="20dp"
+        app:backgroundTint="#F44336"
+        app:icon="@drawable/ic_baseline_assignment_ind_24"
+        app:iconTint="#ffffff"
+        app:iconGravity="textStart"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

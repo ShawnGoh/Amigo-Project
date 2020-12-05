@@ -1,9 +1,13 @@
 package com.example.infosys1d_amigoproject.projectmanagement_tab;
 
+import android.app.FragmentManager;
+
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infosys1d_amigoproject.R;
+import com.example.infosys1d_amigoproject.SearchFragment;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.adapter.ApplicantAdapter;
 import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
@@ -31,6 +37,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +60,7 @@ public class ProjectDetails extends AppCompatActivity {
     ImageView imageView, createdby_pic;
     TextView createdby_text,project_description,projecttitle, applicantstitle;
     Project project;
-    Button applytoJoin, back,delete;
+    Button applytoJoin, back,delete, cancelapply;
     ImageButton imageButton, clicktoChat;
     ChipGroup skillsrequired;
     RecyclerView applicantrecycler;
@@ -109,7 +116,12 @@ public class ProjectDetails extends AppCompatActivity {
                 }
                 ArrayList<users_display> mUserlist = new ArrayList<>();
                 ArrayList<String> mUserIDs = new ArrayList<>();
-
+                if (project.getApplicantsinProject().contains(muser.getUid())){
+                    applytoJoin.setVisibility(View.GONE);
+                }
+                else {
+                    cancelapply.setVisibility(View.GONE);
+                }
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("users_display");
 
                 mref.addValueEventListener(new ValueEventListener() {
@@ -191,18 +203,44 @@ public class ProjectDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        cancelapply = findViewById(R.id.cancelapply);
+        cancelapply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
+                List<String> applicantlst = project.getApplicantsinProject();
+                if (applicantlst.contains(muser.getUid())){
+                    applicantlst.remove(muser.getUid());
+                    HashMap<String, Object> hashmap = new HashMap<>();
+                    hashmap.put("applicantsinProject", applicantlst);
+                    mref.updateChildren(hashmap);
+                    Snackbar.make(findViewById(R.id.projdetails), "Application Cancelled!", Snackbar.LENGTH_LONG).show();
+                    applytoJoin.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"You did not apply for this project",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         applytoJoin = findViewById(R.id.applytoJoin);
         applytoJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
                 List<String> applicantlst = project.getApplicantsinProject();
-                applicantlst.add(muser.getUid());
-                HashMap<String, Object> hashmap = new HashMap<>();
-                hashmap.put("applicantsinProject", applicantlst);
-
-                mref.updateChildren(hashmap);
-
+                if (!applicantlst.contains(muser.getUid())){
+                    applicantlst.add(muser.getUid());
+                    HashMap<String, Object> hashmap = new HashMap<>();
+                    hashmap.put("applicantsinProject", applicantlst);
+                    mref.updateChildren(hashmap);
+                    Snackbar.make(findViewById(R.id.projdetails), "Project applied!", Snackbar.LENGTH_LONG).show();
+                    cancelapply.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Toast T = Toast.makeText(getApplicationContext(),"Project has been applied!",Toast.LENGTH_SHORT);
+                    T.setGravity(Gravity.CENTER_VERTICAL,0,-60);
+                    T.show();
+                }
             }
         });
 
