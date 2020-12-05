@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     tools:context=".MainActivity"
     android:id="@+id/projdetails">
@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         app:backgroundTint="@color/colorPrimary"
-        app:iconSize="20dp"
+        app:iconSize="15dp"
         app:icon="@drawable/ic_baseline_arrow_back_24"
         app:iconTint="#FFFFFF" />
     <com.google.android.material.appbar.AppBarLayout
@@ -62,10 +62,11 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="1500dp"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_marginBottom="60dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -166,28 +167,76 @@
 
             </com.google.android.material.chip.ChipGroup>
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/applicantconstraint"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/projectskillchipsgroup"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/applicants_title"
+                    android:text="Applicants"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/no_applicants"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="No current applicants"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/applicants_title" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ApplicantRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
+                android:id="@+id/MembersTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/applicants_title"
-                android:text="Applicants"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="Project Members"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
-                android:layout_marginLeft="15dp"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:textStyle="bold"
-
-                app:layout_constraintTop_toBottomOf="@id/projectskillchipsgroup"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ApplicantRecycler"
-                android:visibility="gone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/applicants_title" />
+                app:layout_constraintTop_toBottomOf="@+id/applicantconstraint" />
+
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/MembersRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="60dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/MembersTitle"/>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

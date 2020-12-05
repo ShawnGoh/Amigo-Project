@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,8 @@ import com.example.infosys1d_amigoproject.R;
 import com.example.infosys1d_amigoproject.SearchFragment;
 import com.example.infosys1d_amigoproject.Utils.FirebaseMethods;
 import com.example.infosys1d_amigoproject.adapter.ApplicantAdapter;
+import com.example.infosys1d_amigoproject.adapter.MemberAdapter;
+import com.example.infosys1d_amigoproject.adapter.UserAdapter;
 import com.example.infosys1d_amigoproject.chat_tab.MessageActivity;
 import com.example.infosys1d_amigoproject.models.Userdataretrieval;
 import com.example.infosys1d_amigoproject.models.users_display;
@@ -58,15 +61,16 @@ public class ProjectDetails extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     DatabaseReference myref,userref_display;
     ImageView imageView, createdby_pic;
-    TextView createdby_text,project_description,projecttitle, applicantstitle;
+    TextView createdby_text,project_description,projecttitle, applicantstitle ,nocurrentapplicants, memberstitle;
     Project project;
     Button applytoJoin, back,delete, cancelapply;
     ImageButton imageButton, clicktoChat;
     ChipGroup skillsrequired;
-    RecyclerView applicantrecycler;
+    RecyclerView applicantrecycler, membersrecycler;
     Context mcontext = ProjectDetails.this;
     FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
     String user_id_creator;
+    ConstraintLayout applicantsconstraint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,11 @@ public class ProjectDetails extends AppCompatActivity {
         applicantrecycler = findViewById(R.id.ApplicantRecycler);
         applicantstitle = findViewById(R.id.applicants_title);
         delete = findViewById(R.id.delete);
+        nocurrentapplicants = findViewById(R.id.no_applicants);
+        membersrecycler = findViewById(R.id.MembersRecycler);
+        memberstitle = findViewById(R.id.MembersTitle);
+        applicantsconstraint = findViewById(R.id.applicantconstraint);
+        applytoJoin = findViewById(R.id.applytoJoin);
 
 
 
@@ -115,12 +124,18 @@ public class ProjectDetails extends AppCompatActivity {
                     clicktoChat.setVisibility(View.GONE);
                 }
                 ArrayList<users_display> mUserlist = new ArrayList<>();
+                ArrayList<users_display> mMemberslist = new ArrayList<>();
                 ArrayList<String> mUserIDs = new ArrayList<>();
-                if (project.getApplicantsinProject().contains(muser.getUid())){
+                FirebaseUser currenuser = FirebaseAuth.getInstance().getCurrentUser();
+                if (project.getApplicantsinProject().contains(currenuser.getUid())){
                     applytoJoin.setVisibility(View.GONE);
                 }
                 else {
                     cancelapply.setVisibility(View.GONE);
+                }
+                if(project.getUsersinProject().contains(currenuser.getUid())){
+                    cancelapply.setVisibility(View.GONE);
+                    applytoJoin.setVisibility(View.GONE);
                 }
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("users_display");
 
@@ -136,7 +151,20 @@ public class ProjectDetails extends AppCompatActivity {
                                     mUserlist.add(currentiter);}
                                     mUserIDs.add(ds.getKey());
                             }
+
+                            if(project.getUsersinProject().contains(ds.getKey())){
+                                if(!mMemberslist.contains(currentiter)){
+                                    mMemberslist.add(currentiter);
+                                }
+                            }
+
+
                         }
+                        System.out.println(mMemberslist);
+                        membersrecycler.setVisibility(View.VISIBLE);
+                        MemberAdapter memberAdapter = new MemberAdapter(mcontext, mMemberslist, project);
+                        membersrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
+                        membersrecycler.setAdapter(memberAdapter);
                     }
 
                     @Override
@@ -166,12 +194,23 @@ public class ProjectDetails extends AppCompatActivity {
                         createdby_text.setText(user.getName());
 
 
+                        applicantsconstraint.setVisibility(View.GONE);
+                        applicantstitle.setVisibility(View.GONE);
+                        nocurrentapplicants.setVisibility(View.GONE);
+
+
                         if(muser.getUid().equals(project.getCreatedby())){
                             applytoJoin.setVisibility(View.GONE);
-                            applicantrecycler.setVisibility(View.VISIBLE);
-                            ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist,mUserIDs,project);
-                            applicantrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
-                            applicantrecycler.setAdapter(newadapter);
+                            applicantsconstraint.setVisibility(View.VISIBLE);
+                            applicantstitle.setVisibility(View.VISIBLE);
+                            nocurrentapplicants.setVisibility(View.VISIBLE);
+                            if(!mUserlist.isEmpty()){
+                                applicantrecycler.setVisibility(View.VISIBLE);
+                                nocurrentapplicants.setVisibility(View.GONE);
+                                ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist,mUserIDs,project);
+                                applicantrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
+                                applicantrecycler.setAdapter(newadapter);
+                            }
 
 
                         }
@@ -222,7 +261,7 @@ public class ProjectDetails extends AppCompatActivity {
                 }
             }
         });
-        applytoJoin = findViewById(R.id.applytoJoin);
+
         applytoJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
