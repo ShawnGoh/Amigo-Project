@@ -172,6 +172,9 @@ public class ProjectDetails extends AppCompatActivity {
                         MemberAdapter memberAdapter = new MemberAdapter(mcontext, mMemberslist, project, mUserIDs_members);
                         membersrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
                         membersrecycler.setAdapter(memberAdapter);
+                        ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist,mUserIDs,project);
+                        applicantrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
+                        applicantrecycler.setAdapter(newadapter);
                     }
 
                     @Override
@@ -214,9 +217,7 @@ public class ProjectDetails extends AppCompatActivity {
                             if(!mUserlist.isEmpty()){
                                 applicantrecycler.setVisibility(View.VISIBLE);
                                 nocurrentapplicants.setVisibility(View.GONE);
-                                ApplicantAdapter newadapter = new ApplicantAdapter(mcontext, mUserlist,mUserIDs,project);
-                                applicantrecycler.setLayoutManager(new LinearLayoutManager(mcontext));
-                                applicantrecycler.setAdapter(newadapter);
+
                             }
 
 
