@@ -143,8 +143,13 @@ public class ProjectDetails extends AppCompatActivity {
                 mref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        mMemberslist.clear();
+                        mUserIDs.clear();
+                        mUserlist.clear();
+                        mUserIDs_members.clear();
 
                         for(DataSnapshot ds: snapshot.getChildren()){
+
 
                             users_display currentiter = ds.getValue(users_display.class);
                             if(project.getApplicantsinProject().contains(ds.getKey())){
