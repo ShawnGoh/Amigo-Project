@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.profilemanagement_tab.profileactivity;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.ProjectDetails;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -44,19 +47,22 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Viewholder
     public class Viewholder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView profile_image;
+        public ImageButton remove;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
             username = itemView.findViewById(R.id.Chat_username);
             profile_image = itemView.findViewById(R.id.Chat_Profile_Image);
+            remove = itemView.findViewById(R.id.remove);
+
         }
     }
 
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mcontext).inflate(R.layout.useritem, parent, false);
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.useritem_member, parent, false);
         System.out.println("member view inflated");
 
         return new Viewholder(view);
@@ -84,7 +90,23 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Viewholder
                 v.getContext().startActivity(INT);
             }
         });
-
+        if (!project.getCreatedby().equals(FirebaseAuth.getInstance().getUid()) || membersIDs.get(position).equals(FirebaseAuth.getInstance().getUid())){
+            holder.remove.setVisibility(View.GONE);
+        }
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
+                List<String> members = project.getUsersinProject();
+                if (members.contains(membersIDs.get(position))) {
+                    members.remove(membersIDs.get(position));
+                    HashMap<String, Object> hashmap = new HashMap<>();
+                    hashmap.put("usersinProject", members);
+                    mref.updateChildren(hashmap);
+                    Snackbar.make(holder.itemView.getRootView(), user.getName() + "removed!", Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 
