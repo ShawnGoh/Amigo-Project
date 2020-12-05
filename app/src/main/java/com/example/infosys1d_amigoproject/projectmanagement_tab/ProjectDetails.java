@@ -63,7 +63,7 @@ public class ProjectDetails extends AppCompatActivity {
     ImageView imageView, createdby_pic;
     TextView createdby_text,project_description,projecttitle, applicantstitle ,nocurrentapplicants, memberstitle;
     Project project;
-    Button applytoJoin, back,delete, cancelapply;
+    Button applytoJoin, back,delete, cancelapply, leavebutton;
     ImageButton imageButton, clicktoChat;
     ChipGroup skillsrequired;
     RecyclerView applicantrecycler, membersrecycler;
@@ -93,6 +93,9 @@ public class ProjectDetails extends AppCompatActivity {
         memberstitle = findViewById(R.id.MembersTitle);
         applicantsconstraint = findViewById(R.id.applicantconstraint);
         applytoJoin = findViewById(R.id.applytoJoin);
+        leavebutton = findViewById(R.id.leaveproject);
+        cancelapply = findViewById(R.id.cancelapply);
+        clicktoChat = findViewById(R.id.chatnow);
 
 
 
@@ -130,13 +133,16 @@ public class ProjectDetails extends AppCompatActivity {
                 FirebaseUser currenuser = FirebaseAuth.getInstance().getCurrentUser();
                 if (project.getApplicantsinProject().contains(currenuser.getUid())){
                     applytoJoin.setVisibility(View.GONE);
+                    leavebutton.setVisibility(View.GONE);
                 }
                 else {
                     cancelapply.setVisibility(View.GONE);
+                    leavebutton.setVisibility(View.GONE);
                 }
-                if(project.getUsersinProject().contains(currenuser.getUid())){
+                if(project.getUsersinProject().contains(currenuser.getUid()) && !project.getCreatedby().equals(currenuser.getUid())){
                     cancelapply.setVisibility(View.GONE);
                     applytoJoin.setVisibility(View.GONE);
+                    leavebutton.setVisibility(View.VISIBLE);
                 }
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("users_display");
 
@@ -239,8 +245,30 @@ public class ProjectDetails extends AppCompatActivity {
         mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.theme_collapsed);
 
 
+        leavebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("Projects").child(project.getProjectID());
+                List<String> applicantlst = project.getApplicantsinProject();
+                List<String> memberlist = project.getUsersinProject();
+                if (memberlist.contains(muser.getUid())){
+                    memberlist.remove(muser.getUid());
+                    HashMap<String, Object> hashmap = new HashMap<>();
+                    hashmap.put("usersinProject", memberlist);
+                    mref.updateChildren(hashmap);
+                    Snackbar.make(findViewById(R.id.projdetails), "You have left the project", Snackbar.LENGTH_LONG).show();
+                    applytoJoin.setVisibility(View.VISIBLE);
+                    leavebutton.setVisibility(View.GONE);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"You are not in this project",Toast.LENGTH_LONG).show();
+                }
 
-        clicktoChat = findViewById(R.id.chatnow);
+            }
+        });
+
+
+
         clicktoChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,7 +278,7 @@ public class ProjectDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        cancelapply = findViewById(R.id.cancelapply);
+
         cancelapply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

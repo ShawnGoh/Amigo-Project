@@ -48,10 +48,12 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="70dp"
                 app:layout_collapseMode="pin"
                 android:paddingTop="15dp"
                 android:paddingLeft="80dp"
+
+
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -295,6 +297,26 @@
         android:elevation="20dp"
         app:backgroundTint="#F44336"
         app:icon="@drawable/ic_baseline_assignment_ind_24"
+        app:iconTint="#ffffff"
+        app:iconGravity="textStart"/>
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/leaveproject"
+        android:theme="@style/SignupinTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="25dp"
+        android:text="Leave Project"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="18dp"
+        android:elevation="20dp"
+        app:backgroundTint="#F44336"
+        app:icon="@drawable/ic_baseline_exit_to_app_24"
         app:iconTint="#ffffff"
         app:iconGravity="textStart"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
