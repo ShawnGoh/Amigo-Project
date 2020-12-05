@@ -22,6 +22,7 @@ import com.example.infosys1d_amigoproject.models.users_display;
 import com.example.infosys1d_amigoproject.models.users_private;
 import com.example.infosys1d_amigoproject.profilemanagement_tab.profileactivity;
 import com.example.infosys1d_amigoproject.projectmanagement_tab.Project;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -94,6 +95,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                     hashmap.put("usersinProject", memberlist);
                     myref.updateChildren(hashmap);
                 }
+                Snackbar.make(holder.itemView.getRootView().findViewById(R.id.projdetails), user.getName() + " added into your project", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -107,6 +109,7 @@ public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.View
                     HashMap<String, Object> hashmap2 = new HashMap<>();
                     hashmap2.put("applicantsinProject", applicantlst);
                     myref.updateChildren(hashmap2);
+                    Snackbar.make(holder.itemView.getRootView().findViewById(R.id.projdetails), user.getName() + " rejected", Snackbar.LENGTH_LONG).show();
                 }
             }
         });

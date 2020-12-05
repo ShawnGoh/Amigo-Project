@@ -81,7 +81,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Viewholder
         else{
             Picasso.get().load(user.getProfile_picture()).into(holder.profile_image);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent INT = new Intent(v.getContext(), profileactivity.class);
@@ -103,7 +103,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Viewholder
                     HashMap<String, Object> hashmap = new HashMap<>();
                     hashmap.put("usersinProject", members);
                     mref.updateChildren(hashmap);
-                    Snackbar.make(holder.itemView.getRootView(), user.getName() + "removed!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(holder.itemView.getRootView().findViewById(R.id.projdetails), user.getName() + " removed from project", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
