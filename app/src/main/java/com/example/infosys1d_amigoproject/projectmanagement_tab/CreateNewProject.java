@@ -182,7 +182,7 @@ public class CreateNewProject extends AppCompatActivity {
             imageView.setImageResource(R.drawable.ic_android);
         }
     }
-    
+
     private void uploadpicture() {
         randomKey = UUID.randomUUID().toString();
         StorageReference newRef = storageRef.child("images/" + randomKey);

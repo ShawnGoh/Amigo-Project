@@ -43,6 +43,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
+
+// the main concept of this activity is that we want to show the information that is
+// currently already set by the creator
+// hence we need to pull information from firebase first to allow the creator
+// to see the information that he needs to edit instead of writing everything over again
+// after that the editing function are simply edit text views to allow the creator to edit the relevant information
+// much of the remaining code is similar to the "Create Project" activity that we have explained in greater detail.
+
 public class EditPojects extends AppCompatActivity {
 
     ImageView imageView;
