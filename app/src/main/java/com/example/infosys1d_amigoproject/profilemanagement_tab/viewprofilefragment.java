@@ -80,20 +80,16 @@ public class viewprofilefragment extends Fragment {
         Log.d(TAG, "onCreateView: init widgets");
 
         mName = view.findViewById(R.id.profilenametextview);
-//      mBio = view.findViewById(R.id.profilebiotextview);
         mAboutme = view.findViewById(R.id.profileaboutmetextview);
         mlookingfor = view.findViewById(R.id.profilelookingfortextview);
         mProfilepic = view.findViewById(R.id.profilepic);
         recyclerView = view.findViewById(R.id.suggestedRecycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mcontext = getActivity();
-//      muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
-//      backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
         backButton = view.findViewById(R.id.backbutton);
         mskills = view.findViewById(R.id.profileskillchipsgroup);
-//        editProfile = view.findViewById(R.id.editprofilebutton);
-//        signoutbutton = view.findViewById(R.id.signoutbutton);
+
         try {
             mUser = getUserfromBundle();
         } catch(NullPointerException e){
@@ -102,17 +98,6 @@ public class viewprofilefragment extends Fragment {
 
         }
         Log.d(TAG, "onCreateView: widgets inited");
-
-
-//        storageReference = FirebaseStorage.getInstance().getReference();
-//        firebaseMethods = new FirebaseMethods(mcontext);
-//        StorageReference newRef = storageReference.child("images/" + mUser.getUsersprivate().getUser_id());
-//        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.get().load(uri).into(mProfilepic);
-//            }
-//        });
 
         setupfirebaseauth();
 
@@ -123,42 +108,6 @@ public class viewprofilefragment extends Fragment {
                 startActivity(new Intent(mcontext, MainActivity.class));
             }
         });
-
-        //OnClickListeners
-
-//        signoutbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mAuth.signOut();
-//                startActivity(new Intent(mcontext, SignIn.class));
-//                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//            }
-//        });
-
-
-//        editProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick, navigating to : edit profile fragment");
-//                editprofilefragment fragment = new editprofilefragment();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragment_container, fragment);
-//                transaction.addToBackStack("editprofilefragment");
-//                transaction.commit();
-//            }
-//        });
-//
-//        changeProfilePic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent gallery = new Intent();
-//                gallery.setType("image/*");
-//                gallery.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(gallery,1);
-//
-//            }
-//        });
-
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projref = databaseReference.child("Projects");
@@ -234,37 +183,7 @@ public class viewprofilefragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-//            imageUri = data.getData();
-//            mProfilepic.setImageURI(imageUri);
-//            uploadpicture();
-//        }
-//    }
-//    private void uploadpicture() {
-//        StorageReference newRef = storageReference.child("images/" + firebaseMethods.getUserID());
-//        newRef.putFile(imageUri)
-//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                        newRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                            @Override
-//                            public void onSuccess(Uri uri) {
-//                                downloadUrl = uri;
-//                                firebaseMethods.updateProfilePicture(downloadUrl.toString());
-//                            }
-//                        });
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//
-//                    }
-//                });
-//    }
+
     private void setProfileWidgets(Userdataretrieval userSettings){
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieved from firebase database");
 
@@ -312,7 +231,7 @@ public class viewprofilefragment extends Fragment {
         mFirebasedatabase = FirebaseDatabase.getInstance();
         databaseReference = mFirebasedatabase.getReference();
 
-        //check if user is sign in
+        //check if user is signed in
         mAuthstatelistner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
