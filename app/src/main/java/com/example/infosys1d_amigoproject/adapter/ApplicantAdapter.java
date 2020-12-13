@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+// this is the view we use to allow the creator of the project to accept and reject applicants
+// or propective members - hence you would notice the implementation of the accept and reject button.
 public class ApplicantAdapter extends RecyclerView.Adapter<ApplicantAdapter.Viewholder> {
 
     private Context mcontext;

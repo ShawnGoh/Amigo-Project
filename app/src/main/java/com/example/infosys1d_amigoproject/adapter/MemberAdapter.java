@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// this is the view we use to allow the creator of the project to view members in the group
+// we have given the creator the rights to delete members from the group
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Viewholder> {
 
     private Context mcontext;
