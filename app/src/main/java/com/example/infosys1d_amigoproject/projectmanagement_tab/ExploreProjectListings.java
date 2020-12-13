@@ -25,6 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// this is an activity that populates a recycler view to show the available projects
+// with any applicable filters if the user has arrived here with the search function.
 public class ExploreProjectListings extends AppCompatActivity {
 
 
