@@ -43,6 +43,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 
+
+// a very simple recylerview to show the projects that the user has applied for.
 public class appliedprojectsFragment extends Fragment {
 
 

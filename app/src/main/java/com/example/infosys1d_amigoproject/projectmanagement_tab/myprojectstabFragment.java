@@ -42,7 +42,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-
+// simple recyvclerview to show the projects that the user is in / has created.
 public class myprojectstabFragment extends Fragment {
 
 
