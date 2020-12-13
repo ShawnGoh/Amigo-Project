@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
+
+// activity to create a new project
 public class CreateNewProject extends AppCompatActivity {
 
     ImageView imageView;
@@ -53,7 +55,7 @@ public class CreateNewProject extends AppCompatActivity {
     ArrayList<String> skills;
     DatabaseReference myref = FirebaseDatabase.getInstance().getReference();
 
-    FirebaseMethods firebaseMethods;
+    FirebaseMethods firebaseMethods;  // utils object to wrapper helper firebase functions.
 
 
 
@@ -83,6 +85,9 @@ public class CreateNewProject extends AppCompatActivity {
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // these checks are being performed to ensure that the creator of the project has
+                // entered all necessary fields
                 if (textInputLayout.getEditText().getText().toString().equals("")){
                     Toast.makeText(CreateNewProject.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
                 else if (textInputLayoutdescrip.getEditText().getText().toString().equals("")) {Toast.makeText(CreateNewProject.this, "THIS IS THE SAME/FILL IN THE BLANKS!", Toast.LENGTH_SHORT).show();}
@@ -102,18 +107,24 @@ public class CreateNewProject extends AppCompatActivity {
                             category.add(chip.getText().toString());
                         }
                     }
+
+                    // creates a uniqued key / UUID for the project to identified and retrieved from firebase
                     String projectKey = myref.child("Projects").push().getKey();
+
+                    // instantiation of the Project class after necesary information has been input
                     Project new_proj = new Project(downloadUrl.toString(), textInputLayout.getEditText().getText().toString(),
                             textInputLayoutdescrip.getEditText().getText().toString(),
                             selectedChipData, new ArrayList<String>(Arrays.asList(firebaseMethods.getUserID())), category,
                             firebaseMethods.getUserID(), projectKey);
 
+                    // uploads the Project class into fire base
                     myref.child("Projects").child(projectKey).setValue(new_proj);
                     Intent intent1 = new Intent(CreateNewProject.this,MainActivity.class);
                     startActivity(intent1);
                 }}
         });
 
+        // button to allow user to enter the gallery to set a thumbnail
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,6 +135,8 @@ public class CreateNewProject extends AppCompatActivity {
             }
         });
 
+        // ends the activity if the creator wishes not to proceed with the creation
+        // of the proejct
         closeCreateProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +151,7 @@ public class CreateNewProject extends AppCompatActivity {
 
         mfilters = findViewById(R.id.filterChipGroup);
 
+        // allow the selectable chip groups to how up
         LayoutInflater inflater_0 = LayoutInflater.from(mcontext);
         for(String text: filterList){
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
@@ -154,6 +168,8 @@ public class CreateNewProject extends AppCompatActivity {
             categoryChipGroup.addView(newChip);}
     }
 
+
+    // setting the imageview to the image and uploading the image to firebase storage.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -166,7 +182,7 @@ public class CreateNewProject extends AppCompatActivity {
             imageView.setImageResource(R.drawable.ic_android);
         }
     }
-
+    
     private void uploadpicture() {
         randomKey = UUID.randomUUID().toString();
         StorageReference newRef = storageRef.child("images/" + randomKey);
