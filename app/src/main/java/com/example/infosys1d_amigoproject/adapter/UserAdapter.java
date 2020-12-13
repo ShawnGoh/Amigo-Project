@@ -87,7 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> im
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         }
         else{
-            Picasso.get().load(userdisplay.getProfile_picture()).into(holder.profile_image);
+            Picasso.get().load(userdisplay.getProfile_picture()).into(holder.profile_image); // external api to load an image into the project thumbnail into the imageview.
         }
 
         System.out.println(userdisplay.getStatus());

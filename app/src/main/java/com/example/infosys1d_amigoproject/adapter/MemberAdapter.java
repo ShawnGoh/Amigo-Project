@@ -79,7 +79,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Viewholder
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         }
         else{
-            Picasso.get().load(user.getProfile_picture()).into(holder.profile_image);
+            Picasso.get().load(user.getProfile_picture()).into(holder.profile_image);  // external api to load an image into the project thumbnail into the imageview.
         }
         holder.profile_image.setOnClickListener(new View.OnClickListener() {
             @Override

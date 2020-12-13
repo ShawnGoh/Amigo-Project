@@ -74,7 +74,7 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.Viewhold
             if (imageurlright.equals(null)) {
                 holder.profile_image.setImageResource(R.mipmap.ic_launcher_round);
             } else {
-                Glide.with(mcontext).load(imageurlright).into(holder.profile_image);
+                Glide.with(mcontext).load(imageurlright).into(holder.profile_image);// external api to load an image into the project thumbnail into the imageview.
             }
         }else{
             if (imageurlleft.equals(null)) {

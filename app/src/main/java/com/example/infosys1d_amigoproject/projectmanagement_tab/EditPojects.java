@@ -114,7 +114,7 @@ public class EditPojects extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 project = snapshot.getValue(Project.class);
-                Picasso.get().load(project.getThumbnail()).into(imageView);
+                Picasso.get().load(project.getThumbnail()).into(imageView); // external api to load an image into the project thumbnail into the imageview.
                 textInputLayout.getEditText().setText(project.getProjectitle());
                 textInputLayoutdescrip.getEditText().setText(project.getProjectdescription());
                 LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
@@ -140,7 +140,7 @@ public class EditPojects extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         users_display user = snapshot.getValue(users_display.class);
-                        Picasso.get().load(project.getThumbnail()).into(imageView);
+                        Picasso.get().load(project.getThumbnail()).into(imageView); // external api to load an image into the project thumbnail into the imageview.
                     }
 
                     @Override

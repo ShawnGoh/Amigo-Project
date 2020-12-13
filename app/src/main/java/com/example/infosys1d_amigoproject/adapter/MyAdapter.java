@@ -68,7 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
                     v.getContext().startActivity(intent);
                 }
             });
-            Picasso.get().load(projectsList.get(position).getThumbnail()).into(holder.thumbnail);
+            Picasso.get().load(projectsList.get(position).getThumbnail()).into(holder.thumbnail); // external api to load an image into the project thumbnail into the imageview.
         }
 
         @Override

@@ -103,21 +103,29 @@ public class ProjectDetails extends AppCompatActivity {
         imageView = findViewById(R.id.project_picture);
         Intent intent = getIntent();
         String project_id = intent.getStringExtra("ProjectID");
+
+        // needs to listen for information like Project description, creator, thumbnail, applicants, members.
+        // basically everything we want to pull everything that exists on the firebase database to be displayed in this view
         myref = FirebaseDatabase.getInstance().getReference().child("Projects").child(project_id);
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                project = snapshot.getValue(Project.class);
-                Picasso.get().load(project.getThumbnail()).into(imageView);
+                project = snapshot.getValue(Project.class);  // pulls the information from firebase and instantiates a "Project" class that we have defined
+                Picasso.get().load(project.getThumbnail()).into(imageView); // external api to load an image into the project thumbnail into the imageview.  // external api to load an image into the project thumbnail into the imageview.
+                // setting the textviews
                 mCollapsingToolbarLayout.setTitle(project.getProjectitle());
                 project_description.setText(project.getProjectdescription());
                 projecttitle.setText(project.getProjectitle());
                 LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
                 skillsrequired.removeAllViews();
+                // populating the skills chip 'chipgroup' view to show the skills chips required for the project
                 for(String text: project.getSkillsrequired()){
                     Chip newchip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
                     newchip.setText(text);
                     skillsrequired.addView(newchip);}
+
+                // implementation of some logic to vary information that get shown depending on whether the user is
+                // the creator or a member - allowing them different access rights
                 if (!project.getCreatedby().equals(firebaseMethods.getUserID())){
                     imageButton.setVisibility(View.GONE);
                     applicantstitle.setVisibility(View.GONE);
@@ -126,6 +134,9 @@ public class ProjectDetails extends AppCompatActivity {
                 else {
                     clicktoChat.setVisibility(View.GONE);
                 }
+
+                // setting up the information for the recycler view to show the members and applicants
+                // the project.
                 ArrayList<users_display> mUserlist = new ArrayList<>();
                 ArrayList<users_display> mMemberslist = new ArrayList<>();
                 ArrayList<String> mUserIDs = new ArrayList<>();
@@ -145,6 +156,7 @@ public class ProjectDetails extends AppCompatActivity {
                     leavebutton.setVisibility(View.VISIBLE);
                 }
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("users_display");
+
 
                 mref.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -193,7 +205,8 @@ public class ProjectDetails extends AppCompatActivity {
 
 
 
-
+                // this pulls information of the creator of the project
+                // allowing us to display the user's image and name
                 userref_display = FirebaseDatabase.getInstance().getReference().child("users_display").child(project.getCreatedby());
                 userref_display.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -241,10 +254,13 @@ public class ProjectDetails extends AppCompatActivity {
 
             }
         });
+
+        // stylistic changes to the collapsing toolbar layout we have used.
         mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.theme_expanded);
         mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.theme_collapsed);
 
-
+        // allow users to leave the project if they are no longer interested
+        // or able to commit.
         leavebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -268,7 +284,7 @@ public class ProjectDetails extends AppCompatActivity {
         });
 
 
-
+        // implementation of a 'tap to chat' feature
         clicktoChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +295,8 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+
+        // allow users with pending application to cancel their application.
         cancelapply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,6 +316,7 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        // allow interested users to apply for the project
         applytoJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -319,6 +338,7 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        // the often neglected but nevertheless necessary back button
         back = findViewById(R.id.back_from_project_details);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,6 +347,8 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        //  to allow the creator of the project to edit the details of the project
+        // brings the creator into another activity to do the editing
         imageButton = findViewById(R.id.editprojectbutton);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -337,6 +359,9 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+
+        // allows the creator to delete the project
+        // firebase will be cleaned when the project is deleted.
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -346,6 +371,7 @@ public class ProjectDetails extends AppCompatActivity {
             }
         });
 
+        // to allow other users to view the creator's profile when they click of the creator's thumbnail.
         createdby_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
