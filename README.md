@@ -1,15 +1,19 @@
 
 
 ISTD 50.001 INTRODUCTION TO INFORMATION SYSTEMS AND PROGRAMMING
+
 **1D Information Systems Design Project**
 # **Amigo Project**
 
 **Team 2-7**
-https://hackmd.io/new
 1004581	Toh Kai Feng
+
 1004288	Bryan Phengan Hengardi 
+
 1004628	Seah Qi Yan 
+
 1004116 	Goh Shao Cong Shawn
+
 1004241 	Amrish Dev Sandhu
 
 
@@ -27,7 +31,7 @@ Student Initiated projects are becoming an increasingly popular and validated wa
  \
 However, starting off such projects or finding a suitable project to join may be difficult due to a lack of connections and experience. We also know that most project teams are currently built up through referrals and word of mouth, and a lack of a platform to either find people to do projects with aggravates the problems for students. 
 
-We asked ourselves the following questions:  \
+We asked ourselves the following questions: 
 1. **Connect** - How might we connect interested and relevantly skilled students for self-initiated projects?
 
 2. **Empower** - How might we empower student-led project leads with project management skills?
