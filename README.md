@@ -1,7 +1,9 @@
 
 
 ISTD 50.001 INTRODUCTION TO INFORMATION SYSTEMS AND PROGRAMMING
+
 **1D Information Systems Design Project**
+
 # **Amigo Project**
 
 **Team 2-7**
