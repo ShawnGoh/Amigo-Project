@@ -14,9 +14,9 @@ import com.example.infosys1d_amigoproject.R;
 
 import java.util.ArrayList;
 
+//Adapter for onboarding process
+//As ViewPager2 was used as original viewpager was deprecated, the adapter has to extend recyclerviewAdapter instead.
 public class OnboardingViewPagerAdapter extends RecyclerView.Adapter<OnboardingViewPagerAdapter.ViewHolder> {
-
-
     Context context;
     ArrayList<OnboardingItem> OnboardingList;
 
@@ -46,12 +46,6 @@ public class OnboardingViewPagerAdapter extends RecyclerView.Adapter<OnboardingV
         holder.img.setImageResource(OnboardingList.get(position).getImage());
     }
 
-
-//    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.title.setText(OnboardingList.get(position).getTitle());
-//        holder.desc.setText(OnboardingList.get(position).getDescription());
-//        holder.img.setImageResource(OnboardingList.get(position).getImage());
-//    }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 

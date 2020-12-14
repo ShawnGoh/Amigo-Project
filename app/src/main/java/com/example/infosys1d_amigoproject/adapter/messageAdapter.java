@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
+//Adapter used for populating the message activity when a user clicks into a chat
+
 public class messageAdapter extends RecyclerView.Adapter<messageAdapter.Viewholder> {
 
     public static final int MSG_TYPE_LEFT = 0;
@@ -35,7 +37,6 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.Viewhold
         this.imageurlleft = imageurlleft;
         this.imageurlright = imageurlright;
     }
-
 
     public class Viewholder extends RecyclerView.ViewHolder{
         public TextView show_message;

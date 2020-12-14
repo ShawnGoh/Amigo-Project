@@ -18,9 +18,11 @@ import com.example.infosys1d_amigoproject.signinsignup.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//Splashscreen activity, shown when loading into app.
 public class SplashScreen extends AppCompatActivity {
 
     private static final String TAG = "SplashScreen";
+
     ImageView Splashimg;
     Animation fadein;
     ConstraintLayout SplashScreen;
@@ -37,8 +39,6 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setAllowEnterTransitionOverlap(false);
         getWindow().setAllowReturnTransitionOverlap(false);
 
-        //firebase
-
         setupfirebaseauth();
 
 
@@ -49,10 +49,6 @@ public class SplashScreen extends AppCompatActivity {
 
 
         Splashimg.setAnimation(fadein);
-
-
-
-
     }
 
     private boolean restorePrefData(){

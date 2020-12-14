@@ -1,7 +1,5 @@
 package com.example.infosys1d_amigoproject;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,12 +43,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//MainActivity, houses the container which holds all the different fragments of the app
 public class MainActivity extends AppCompatActivity {
 
-    // for testing purposes, Main Activity file should be compiled after every view has been completed.
-
     private static final String TAG = "MainActivity/Homescreen";
-    Button profilepagebutton;
     FirebaseMethods firebaseMethod = new FirebaseMethods(MainActivity.this);
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
@@ -79,22 +75,16 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, ProfileSetupAboutMe.class));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
 
-
+        //Instantiate widgets
         menu_bottom = findViewById(R.id.navigation);
 
         setupfirebaseauth();
-
-
-
-
-
 
         menu_bottom.setItemSelected(0, true);
 
@@ -122,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Changing of fragments when using bottom nav bar
         menu_bottom.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int id) {

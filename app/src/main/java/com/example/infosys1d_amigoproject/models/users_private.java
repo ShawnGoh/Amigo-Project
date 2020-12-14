@@ -2,6 +2,7 @@ package com.example.infosys1d_amigoproject.models;
 
 import androidx.annotation.NonNull;
 
+//Model to store private data of a user. Same model as the users_private node in Firebase.
 public class users_private {
     private String email;
     private String firstname;

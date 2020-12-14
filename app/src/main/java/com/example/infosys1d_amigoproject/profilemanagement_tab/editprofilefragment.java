@@ -36,12 +36,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link editprofilefragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+//Edit profile fragment used whenuser accesses their own profile and thereafter clicks the pen icon to edit.
 public class editprofilefragment extends Fragment {
+    private static final String TAG = "editprofilefragment";
+
     private TextView mName, mBio, mAboutme, mlookingfor, mcurrentproject, muserid, mEmail, mSkills;
     private ImageView mProfilepic;
     private ImageView backToProfile;
@@ -49,11 +47,7 @@ public class editprofilefragment extends Fragment {
     private Context mcontext;
     private String userID;
     private Userdataretrieval mUserSettings;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String TAG = "edit profile fragment";
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
 
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
@@ -66,45 +60,9 @@ public class editprofilefragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
     private FirebaseMethods firebaseMethods;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     FirebaseStorage storage;
     StorageReference storageref;
-
-
-    public editprofilefragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment editprofilefragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static editprofilefragment newInstance(String param1, String param2) {
-        editprofilefragment fragment = new editprofilefragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,8 +77,6 @@ public class editprofilefragment extends Fragment {
         mBio = view.findViewById(R.id.bio);
         mAboutme = view.findViewById(R.id.aboutme);
         mlookingfor = view.findViewById(R.id.lookingfor);
-//        mSkills = view.findViewById(R.id.collectionofskillchips);
-//        moreSkills = view.findViewById(R.id.moreSkills);
 
 
         mEmail = view.findViewById(R.id.email);
@@ -157,8 +113,6 @@ public class editprofilefragment extends Fragment {
             Chip newChip = (Chip) inflater_0.inflate(R.layout.chip_filter,null,false);
             newChip.setText(text);
             mskills.addView(newChip);}
-
-
         return view;
     }
 
@@ -180,19 +134,14 @@ public class editprofilefragment extends Fragment {
                 chip.setChecked(true);
             }
         }
-        mEmail.setText(privatedata.getEmail().toString());
-
-
-
-
-
+        mEmail.setText(privatedata.getEmail());
     }
+
     private void saveProfileSettings(){
         final String displayName = mName.getText().toString();
         final String Bio = mBio.getText().toString();
         final String aboutMe = mAboutme.getText().toString();
         final String lookingFor = mlookingfor.getText().toString();
-//        final String skillChipsString = mSkills.getText().toString();
 
         selectedChipData = "";
         for(int i = 0; i<mskills.getChildCount(); i++){
@@ -209,35 +158,22 @@ public class editprofilefragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-
                 if (!mUserSettings.getUsersdisplay().getName().equals(displayName)) {
                     checkIfNameExists(displayName);
                 }
                 if (!mUserSettings.getUsersdisplay().getBio().equals(Bio)){
                     firebaseMethods.updateBio(Bio);
-
                 }
                 if (!mUserSettings.getUsersdisplay().getAbout_me().equals(aboutMe)){
                     firebaseMethods.updateAboutMe(aboutMe);
-
                 }
                 if (!mUserSettings.getUsersdisplay().getLooking_for().equals(lookingFor)){
                     firebaseMethods.updateLookingFor(lookingFor);
-
                 }
 
                 if (!mUserSettings.getUsersdisplay().getSkills().toString().equals(skillChipsString)){
                     firebaseMethods.updateSkillChips(skillChipsString);
-
-
                 }
-
-//                if (!mUserSettings.getUsersprivate().getEmail().equals(Email)){
-//                    if(firebaseMethods.checkifemailexists(Email, dataSnapshot)== true){
-//                    firebaseMethods.updateEmail(Email);} else{Toast.makeText(getActivity(), "Email already exists!", Toast.LENGTH_SHORT).show();}
-//                }
-
 
                 Toast.makeText(getActivity(), "Saved Changes", Toast.LENGTH_SHORT).show();
 

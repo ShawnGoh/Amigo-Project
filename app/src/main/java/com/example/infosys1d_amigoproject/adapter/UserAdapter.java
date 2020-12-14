@@ -31,6 +31,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+//Adapter to populate users list in chats tab
+
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> implements Filterable {
 
     private Context mcontext;

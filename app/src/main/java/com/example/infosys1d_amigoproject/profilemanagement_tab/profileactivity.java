@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.infosys1d_amigoproject.R;
 
+//Activity for when a user clicks on another user's picture to show their profile, holds the viewprofilefragment
+//as viewing ow profile is different from viewing another person's profile.
 public class profileactivity extends AppCompatActivity {
 
     private static final String TAG = "profileactivity";
@@ -42,11 +44,7 @@ public class profileactivity extends AppCompatActivity {
             transaction.replace(R.id.profilecontainer, fragment);
             transaction.addToBackStack("viewprofilefragment");
             transaction.commit();
-            Toast.makeText(mcontext, "VIEWING PROFILE", Toast.LENGTH_SHORT).show();
             }
-//        else if{
-//                Toast.makeText(mcontext, "something went wrong", Toast.LENGTH_SHORT).show();
-//            }
 
         else{
             profilefragment fragment = new profilefragment();
@@ -54,7 +52,6 @@ public class profileactivity extends AppCompatActivity {
             transaction.replace(R.id.profilecontainer, fragment);
             transaction.addToBackStack("profilefragment");
             transaction.commit();
-            Toast.makeText(mcontext, "WRONGGGG", Toast.LENGTH_SHORT).show();
         }
 
     }

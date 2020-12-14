@@ -48,6 +48,7 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
+//Fragment to display the user's profile.
 public class profilefragment extends Fragment {
     MyAdapter myAdapter;
     private static final String TAG = "profilefragment";
@@ -69,8 +70,6 @@ public class profilefragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
     private FirebaseMethods firebaseMethods;
 
-//    RecyclerView recyclerView;
-
 
     private Uri imageUri, downloadUrl;
 
@@ -83,16 +82,11 @@ public class profilefragment extends Fragment {
         Log.d(TAG, "onCreateView: init widgets");
 
         mName = view.findViewById(R.id.profilenametextview);
-//      mBio = view.findViewById(R.id.profilebiotextview);
         mAboutme = view.findViewById(R.id.profileaboutmetextview);
         mlookingfor = view.findViewById(R.id.profilelookingfortextview);
         mProfilepic = view.findViewById(R.id.profilepic);
-//        recyclerView = view.findViewById(R.id.suggestedRecycler2);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mcontext = getActivity();
-//      muserid = view.findViewById(R.id.profileuserid);
         memail = view.findViewById(R.id.profileemailtextview);
-//      backtohomebutton = view.findViewById(R.id.backtohomepagebutton);
         changeProfilePic = view.findViewById(R.id.Changepicturebutton);
         mskills = view.findViewById(R.id.profileskillchipsgroup);
         editProfile = view.findViewById(R.id.editprofilebutton);
@@ -195,16 +189,9 @@ public class profilefragment extends Fragment {
         users_private privatedata = userSettings.getUsersprivate();
 
         mName.setText(displaydata.getName());
-//        mBio.setText(displaydata.getBio());
         mAboutme.setText(displaydata.getAbout_me());
         mlookingfor.setText(displaydata.getLooking_for());
-
-//        muserid.setText(privatedata.getUser_id());
         memail.setText(privatedata.getEmail());
-
-
-
-
 
         ArrayList<String> chipslist = displaydata.getSkills();
         LayoutInflater inflater = LayoutInflater.from(mcontext);

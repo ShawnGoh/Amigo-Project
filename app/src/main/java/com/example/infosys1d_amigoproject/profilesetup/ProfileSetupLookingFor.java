@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//profile setup looking for activity
 public class ProfileSetupLookingFor extends AppCompatActivity {
     private static final String TAG = "ProfileSetupAboutMe";
     TextInputLayout aboutme;

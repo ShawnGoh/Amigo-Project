@@ -1,7 +1,5 @@
 package com.example.infosys1d_amigoproject.profilesetup;
 
-
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,6 +42,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
+//profile setup profile pic setup activity
 public class ProfileSetupProfilePic extends AppCompatActivity {
     ImageView profilepic;
     private static final String TAG = "ProfileSetupAboutMe";

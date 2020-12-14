@@ -1,5 +1,8 @@
 package com.example.infosys1d_amigoproject.models;
 
+
+//Chat model used to store to firebase and instantiate chat messages in MessageActivity.
+
 public class Chat {
     private String Sender;
     private String Receiver;

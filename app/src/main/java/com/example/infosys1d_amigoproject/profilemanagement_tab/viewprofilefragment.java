@@ -42,6 +42,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+//Fragment shown when a user is viewing another user's profile.
+
 public class viewprofilefragment extends Fragment {
     MyAdapter myAdapter;
     private static final String TAG = "profilefragment";
@@ -60,7 +62,6 @@ public class viewprofilefragment extends Fragment {
     private users_private user2;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
-
     //Firebase Auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthstatelistner;
@@ -68,14 +69,12 @@ public class viewprofilefragment extends Fragment {
 
     RecyclerView recyclerView;
 
-
     private Uri imageUri, downloadUrl;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewprofile, container,false);
-
 
         Log.d(TAG, "onCreateView: init widgets");
 
@@ -155,13 +154,10 @@ public class viewprofilefragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
             user= snapshot.getValue(users_display.class);
-
-
                 }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
             mref2.addValueEventListener(new ValueEventListener() {

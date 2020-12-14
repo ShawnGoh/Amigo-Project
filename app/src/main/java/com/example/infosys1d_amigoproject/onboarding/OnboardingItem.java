@@ -1,5 +1,6 @@
 package com.example.infosys1d_amigoproject.onboarding;
 
+//Model for onboarding pages
 public class OnboardingItem {
     private String title, description;
     private int image;

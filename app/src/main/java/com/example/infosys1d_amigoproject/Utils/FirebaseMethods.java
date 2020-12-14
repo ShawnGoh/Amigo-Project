@@ -24,8 +24,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FirebaseMethods {
+//Utils class that holds frequently used firebase related methods.
+//Require only current context to instantiate and use in any class
 
+public class FirebaseMethods {
 
     final String TAG = "FirebaseMethods";
 
@@ -35,8 +37,6 @@ public class FirebaseMethods {
     private FirebaseDatabase mfirebasedatabase;
     private DatabaseReference myRef;
     private String[] cleanstring;
-
-
     private Context mContext;
 
     public FirebaseMethods(Context context){
@@ -45,11 +45,14 @@ public class FirebaseMethods {
         mfirebasedatabase = FirebaseDatabase.getInstance();
         myRef = mfirebasedatabase.getReference();
 
+        //No current user when signing up. If this check not done, the app will crash
         if(mAuth.getCurrentUser()!=null){
             userID = mAuth.getCurrentUser().getUid();
         }
     }
 
+    //updates the display name of the user by updating the name field in the database.
+    //Used when editing the user profile.
     public void updateName(String displayName){
         Log.d(TAG, "updateName: updating name to: " + displayName);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
@@ -58,6 +61,8 @@ public class FirebaseMethods {
                 .setValue(displayName);
     }
 
+    //updates the profile picture of the user by updating the name field in the database.
+    //Used when editing the user profile.
     public void updateProfilePicture(String pictureURL){
         Log.d(TAG, "updateProfilePicture: updating name to: " + pictureURL);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
@@ -66,6 +71,8 @@ public class FirebaseMethods {
                 .setValue(pictureURL);
     }
 
+    //updates the profile bio of the user by updating the name field in the database.
+    //Used when editing the user profile.
     public void updateBio(String Bio){
         Log.d(TAG, "updateName: updating name to: " + Bio);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
@@ -73,6 +80,9 @@ public class FirebaseMethods {
                 .child(mContext.getString(R.string.field_bio))
                 .setValue(Bio);
     }
+
+    //updates the about me section of the user by updating the name field in the database.
+    //Used when editing the user profile.
     public void updateAboutMe(String aboutMe){
         Log.d(TAG, "updateName: updating name to: " + aboutMe);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
@@ -80,6 +90,9 @@ public class FirebaseMethods {
                 .child(mContext.getString(R.string.field_aboutme))
                 .setValue(aboutMe);
     }
+
+    //updates the looking for section of the user by updating the name field in the database.
+    //Used when editing the user profile.
     public void updateLookingFor(String lookingfor){
         Log.d(TAG, "updateName: updating name to: " + lookingfor);
         myRef.child(mContext.getString(R.string.db_usersdisplay))
@@ -88,6 +101,8 @@ public class FirebaseMethods {
                 .setValue(lookingfor);
     }
 
+    //updates the skill chips of the user by updating the name field in the database.
+    //Used when editing the user profile.
     public void updateSkillChips(String skillChipsString){
         Log.d(TAG, "updateName: updating name to: " + skillChipsString);
         String[] str = skillChipsString.split(" ");
@@ -104,18 +119,8 @@ public class FirebaseMethods {
                 .setValue(al);
     }
 
-//    public void updateEmail(String Email){
-//        Log.d(TAG, "updateName: updating Email to: " + Email);
-//        myRef.child(mContext.getString(R.string.db_usersprivate))
-//                .child(userID)
-//                .child(mContext.getString(R.string.field_email))
-//                .setValue(Email);
-//    }
-
-
-
-
-
+    //Checks if the email used to register the account exists already in the system.
+    //Used in Signup page.
     public boolean checkifemailexists(String email, DataSnapshot dataSnapshot){
         Log.d(TAG, "checkifemailexists: checking if "+email+" is already in use");
 
@@ -133,18 +138,10 @@ public class FirebaseMethods {
                 Log.d(TAG, "checkifemailexists: Found a match!");
                 return true;
             }
-
-
         }
-
         return false;
 
     }
-
-
-
-
-
 
     /**
      * Register a new email and password to Firebase Authentication
@@ -179,6 +176,7 @@ public class FirebaseMethods {
     }
 
 
+    //Used to send a verification email to the user upon successful signup.
     public void sendVerificationEmail(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -203,26 +201,11 @@ public class FirebaseMethods {
      * @param lastname
      * @param email
      */
-
     public void addNewUser(String firstname, String lastname, String email){
         users_private usersprivate1 = new users_private(email, firstname, lastname, userID);
-
-
-
         myRef.child(mContext.getString(R.string.db_usersprivate)).child(userID).setValue(usersprivate1);
-
         users_display display = new users_display(firstname+" "+lastname);
-
-
-
-
-
         myRef.child(mContext.getString(R.string.db_usersdisplay)).child(userID).setValue(display);
-
-
-
-
-
     }
 
     /**
@@ -275,7 +258,7 @@ public class FirebaseMethods {
     }
 
 
-
+    //Retrieves an Arraylist of all users in the database and their profile information
     public ArrayList<Userdataretrieval> getuserlist(DataSnapshot dataSnapshot){
         Log.d(TAG, "getUserData: retrieving user information from firebase ");
 
@@ -332,6 +315,7 @@ public class FirebaseMethods {
 
 
         }
+
 
         for(int i =0 ; i<resultpart1.size();i++){
             users_display displayconsol = resultpart1.get(i);

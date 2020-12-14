@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//profile setup about me activity
 public class ProfileSetupAboutMe extends AppCompatActivity {
 
     private static final String TAG = "ProfileSetupAboutMe";

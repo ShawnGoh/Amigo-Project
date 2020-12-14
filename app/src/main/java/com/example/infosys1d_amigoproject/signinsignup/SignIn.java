@@ -25,9 +25,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//User sign in activity
 public class SignIn extends AppCompatActivity {
 
     private static final String TAG = "SignIn Activity";
+
     Button signinbutton;
     TextView donthaveaccount, welcomesignin, signininstru;
     TextInputLayout emailsignin, passwordsignin;
@@ -43,7 +45,6 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
 
         //initialize UI elements
         signinbutton = findViewById(R.id.signinconfirmbutton);
@@ -65,6 +66,7 @@ public class SignIn extends AppCompatActivity {
         init();
 
         //dont have account go to signup page
+        //pairs used for transition between signin/signup pages
         donthaveaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,10 +84,6 @@ public class SignIn extends AppCompatActivity {
                 startActivity((new Intent(getApplicationContext(), SignUp.class)),options.toBundle());
             }
         });
-
-
-
-
     }
 
     //------------------------------------------ Firebase ----------------------------------------------------------------------------------------------------

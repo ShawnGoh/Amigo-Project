@@ -28,29 +28,18 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
+//Parent fragment of the chat tablayout. Fragment of Main Activity
 
 public class ChatsFragment extends Fragment {
 
-
     private static final String TAG = "ChatActivity";
-
 
     private Context mContext = getContext();
 
     private FirebaseDatabase mFirebasedatabase;
     private DatabaseReference myRef;
-    ArrayList<Userdataretrieval> mUsers = new ArrayList<>();
-
-    //Firebase Auth
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthstatelistner;
 
     FirebaseUser fuser;
-
-    FirebaseUser currentuser = FirebaseAuth.getInstance().getCurrentUser();
-
-    ImageButton btn_send;
-    EditText text_send;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -63,8 +52,6 @@ public class ChatsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.activity_chat, container, false);
 
-
-
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         mFirebasedatabase = FirebaseDatabase.getInstance();
         myRef = mFirebasedatabase.getReference("users_display").child(fuser.getUid());
@@ -72,7 +59,7 @@ public class ChatsFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tablayout);
         viewPager = view.findViewById(R.id.viewpagerchat);
 
-
+        //childfragmentmanager used to instantiate and populate nested child fragments
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
 
 
@@ -96,10 +83,6 @@ public class ChatsFragment extends Fragment {
             this.fragments = new ArrayList<>();
             this.titles = new ArrayList<>();
         }
-
-
-
-
 
         @NonNull
         @Override

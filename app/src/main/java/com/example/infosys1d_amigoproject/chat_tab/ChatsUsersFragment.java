@@ -31,7 +31,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+// Nested child fragment of ChatsFragment TabLayout.
+// All users tab. Populates with all users to allow anyone to contact anyone
+
 public class ChatsUsersFragment extends Fragment {
+
+    private static final String TAG = "ChatsUsersFragment";
 
     private RecyclerView recyclerView;
 

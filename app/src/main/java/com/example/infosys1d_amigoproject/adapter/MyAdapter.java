@@ -25,12 +25,12 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
+//Adapter to implement search function in the home page
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implements Filterable {
         private List<Project> projectsList;
         private List<Project> projectListAll;
         private StorageReference storageReference,projectref;
-//        private Context mContext;
 
         public boolean isEmpty;
 
@@ -111,7 +111,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myholder> implemen
             results.values = filteredProjects;
             if (filteredProjects.isEmpty()) {
                 isEmpty = true;
-//                Toast.makeText(mContext, "Sorry, no such project yet! Why not create your own?", Toast.LENGTH_LONG).show();
             }
             return results;
 

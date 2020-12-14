@@ -3,6 +3,7 @@ package com.example.infosys1d_amigoproject.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+//Data retrieval model used to retrieve all the data about a user
 public class Userdataretrieval implements Parcelable {
 
     private users_display usersdisplay;

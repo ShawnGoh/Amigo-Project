@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
+//Onboarding tablayout container activity
 public class Onboarding extends AppCompatActivity {
 
     private ViewPager2 onboardingscroller;
@@ -37,11 +38,6 @@ public class Onboarding extends AppCompatActivity {
         SigninBtn = findViewById(R.id.OnboardingSigninButton);
         SignupBtn = findViewById(R.id.OnboardingSignupButton);
         tabindicator = findViewById(R.id.OnboardingPageIndicator);
-
-        //trybranch
-
-
-
 
         try //to remove top title bar
         {
@@ -92,8 +88,6 @@ public class Onboarding extends AppCompatActivity {
                 finish();
             }
         });
-
-
         }
 
     private boolean restorePrefData(){
@@ -109,11 +103,5 @@ public class Onboarding extends AppCompatActivity {
         editor.putBoolean("isIntroed", true);
         editor.commit();
     }
-
-
-
-
-
-
 
     }

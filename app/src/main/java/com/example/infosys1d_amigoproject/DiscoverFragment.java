@@ -30,12 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+//Home page fragment that stores the search bar and suggested projects recyclerview.
+
 public class DiscoverFragment extends Fragment {
 
+    private static final String TAG = "DiscoverFragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private Button seeAllButton;
     private SearchView searchView;
     MyAdapter myAdapter;

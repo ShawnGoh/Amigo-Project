@@ -6,6 +6,7 @@ import com.example.infosys1d_amigoproject.R;
 
 import java.util.ArrayList;
 
+//Model to store display data of a user. Same model as the users_display node in Firebase.
 public class users_display {
 
     private String about_me = "Hi";

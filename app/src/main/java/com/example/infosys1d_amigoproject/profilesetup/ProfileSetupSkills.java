@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+//profile setup skill chips activity
 public class ProfileSetupSkills extends AppCompatActivity {
 
     private static final String TAG = "ProfileSetupAboutMe";

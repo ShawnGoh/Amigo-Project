@@ -2,6 +2,7 @@ package com.example.infosys1d_amigoproject.chat_tab;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,16 +39,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//MessagActivity is activity where chat between 2 users is populated.
 
 public class MessageActivity extends AppCompatActivity {
+
+    private static final String TAG = "MessageActivity";
 
     TextView personyoutalkingto;
     EditText chatMessage;
     ImageButton sendbutton, backbutton;
     RecyclerView pastmessages;
     ImageView profilepic, icon_on, icon_off;
-
-
 
     FirebaseUser fuser;
     DatabaseReference mref;
@@ -159,6 +161,8 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+
+    // When send buttonclicked, add new chats item into the database
     private void SendMessage(String sender, String receiver, String message){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -168,10 +172,10 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         reference.child("Chats").push().setValue(hashMap);
-
     }
 
-
+    // To parse and instantiate all messages of the current chat. Observer-ish design whereby wll update upon change
+    // using firebase inbuilt onDataChanged method.
     private void ReadMessages(final String myid, final String userid, final String imgurl, final String imgurlright){
         mChat = new ArrayList<>();
 

@@ -30,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+// Nested child fragment of ChatsFragment TabLayout.
+// Active chats tab. Will populate if there is an active chat with another user, else, will be empty
 
 public class ActiveChatsFragment extends Fragment {
 
@@ -56,14 +58,18 @@ public class ActiveChatsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
 
 
+        //Widgets instantiation
+        noChatsError = view.findViewById(R.id.noChats);
         activechats = view.findViewById(R.id.activechatsrecycler);
         activechats.setHasFixedSize(true);
         activechats.setLayoutManager(new LinearLayoutManager(mcontext));
 
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
-        userslist = new ArrayList<>();
 
-        noChatsError = view.findViewById(R.id.noChats);
+        //Firebase Instantiation
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //Empty Arraylist instantiated. To hold all active chats.
+        userslist = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Chats");
         reference.addValueEventListener(new ValueEventListener() {
@@ -89,6 +95,7 @@ public class ActiveChatsFragment extends Fragment {
         return view;
     }
 
+    //Parse chats to check if the current user is either sender/receiver
     private void readChats(){
         Log.d(TAG, "readChats: init read chats");
         mUsers = new ArrayList<>();

@@ -30,9 +30,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Pattern;
 
+//User sign up activity
 public class SignUp extends AppCompatActivity {
 
-    private static final String TAG = "";
+    private static final String TAG = "SignUp";
+
     private Button signupbutton;
     private TextView haveaccount, signupinstru, welcomesignup;
     private TextInputLayout emailsignup, passwordsignup, firstname, lastname;
@@ -44,9 +46,6 @@ public class SignUp extends AppCompatActivity {
     //store some strings for use through class
     private String firstnamesignup,lastnamesignup,email,password;
     boolean emailexists;
-
-
-
 
     //Firebase Database
     private FirebaseDatabase mFirebasedatabase;
@@ -88,7 +87,8 @@ public class SignUp extends AppCompatActivity {
 
         init();
 
-        //dont have account go to signup page
+        //dont have account go to signin page
+        //pairs used for animation between SignIn/SignUp pages
         haveaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -20,21 +20,9 @@ import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+//Search fragment that is opened when the search bar is clicked on.
 public class SearchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private SearchView searchView;
     private Button cancelButton;
     private Context mcontext;
@@ -42,37 +30,6 @@ public class SearchFragment extends Fragment {
     private ArrayList<String> selectedChipData;
     private String filterString;
     private Button searchButton;
-
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,8 +49,7 @@ public class SearchFragment extends Fragment {
                 MainActivity.menu_bottom.setVisibility(View.VISIBLE);
             }
         });
-//        String filterChipsList = getString(R.string.skill_chips_list);
-//        String[] filterSplit = filterChipsList.split(" ");
+
         mcontext = getActivity();
         String[] filterList = mcontext.getResources().getStringArray(R.array.skills_list);
 
@@ -105,12 +61,6 @@ public class SearchFragment extends Fragment {
             newChip.setText(text);
             mfilters.addView(newChip);}
 
-//        // Associate searchable configuration with the SearchView
-//        SearchManager searchManager =
-//                (SearchManager) mcontext.getSystemService(Context.SEARCH_SERVICE);
-//
-//        searchView.setSearchableInfo(
-//                searchManager.getSearchableInfo(getComponentName()));
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -142,17 +92,6 @@ public class SearchFragment extends Fragment {
 
     private ArrayList<String> submitFilters() {
         selectedChipData = new ArrayList<String>();
-//        CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    selectedChipData.add(buttonView.getText().toString());
-//                }
-//                else{
-//                    selectedChipData.remove(buttonView.getText().toString());
-//                }
-//            }
-//        };
 
         for(int i = 0; i<mfilters.getChildCount(); i++){
             Chip chip = (Chip)mfilters.getChildAt(i);
@@ -161,11 +100,6 @@ public class SearchFragment extends Fragment {
                 }
         }
 
-//        List<Integer> ids = mfilters.getCheckedChipIds();
-//        for (Integer id:ids) {
-//            Chip chip = mfilters.findViewById(id);
-//            selectedChipData.add(chip.getText().toString());
-//        }
         return selectedChipData;
 
     }
