@@ -1,49 +1,16 @@
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-<a href="#gdcalert7">alert7</a>
-<a href="#gdcalert8">alert8</a>
-<a href="#gdcalert9">alert9</a>
-<a href="#gdcalert10">alert10</a>
-<a href="#gdcalert11">alert11</a>
-<a href="#gdcalert12">alert12</a>
-<a href="#gdcalert13">alert13</a>
-<a href="#gdcalert14">alert14</a>
-<a href="#gdcalert15">alert15</a>
-<a href="#gdcalert16">alert16</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
 
 
 ISTD 50.001 INTRODUCTION TO INFORMATION SYSTEMS AND PROGRAMMING
-
 **1D Information Systems Design Project**
-
-
 # **Amigo Project**
 
 **Team 2-7**
-
+https://hackmd.io/new
 1004581	Toh Kai Feng
-
 1004288	Bryan Phengan Hengardi 
-
 1004628	Seah Qi Yan 
-
 1004116 	Goh Shao Cong Shawn
-
 1004241 	Amrish Dev Sandhu
-
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.jpg "image_tooltip")
-
 
 
 # **Table of Contents**
@@ -52,8 +19,6 @@ ISTD 50.001 INTRODUCTION TO INFORMATION SYSTEMS AND PROGRAMMING
 [TOC]
 
 
-
-# 
 
 
 # **Problem Statement**
@@ -71,18 +36,11 @@ We asked ourselves the following questions:  \
 
 Old User Journey:
 
+![](https://i.imgur.com/iVkilVW.png)
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
 
 
 Students find it hard to initiate a project to collaborate on with people outside of their social circle.
-
-
-# 
 
 
 # **Solution - Our Application**
@@ -103,18 +61,10 @@ In detail Amigo Project can first be broken down into the following sections:
 
 The diagram below illustrates how we envision the average user would use the app to connect with other individuals to participate or kickstart student-initiated projects.
 
-
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
+![](https://i.imgur.com/BJuu8T7.png)
 
 
 Diagram  1: Onboarding Screen Grabs invite and introduces new users to the app
-
 
 ## **1 | Onboarding**
 
@@ -127,11 +77,8 @@ Like many other apps, users can choose to skip past this by clicking the signup 
 Pre-existing users that have previously used the app on a different phone can choose to move to the sign in page and thereafter continue using the app.
 
 
+![](https://i.imgur.com/HrOrNIi.png)
 
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
 
 
 Fig 1: Onboarding Screen Grabs invite and introduces new users to the app
@@ -139,11 +86,9 @@ Fig 1: Onboarding Screen Grabs invite and introduces new users to the app
 *This section was done to enhance the “completeness” and aesthetics of the entire app and does not contain any main features of the app pertaining to the problem statement
 
 
-## 
 
 
 ## **2 | Sign Up/Sign In**
-
 For users that are not opening the app for the first time (this state saved within an attribute called isintroed in the phone’s system preferences), instead of the onboarding section, they will be greeted with the sign in page.
 
 In this page/section, users are able to do exactly what it sounds like: Sign In/Sign up!
@@ -154,12 +99,7 @@ We have included unitary testing of the email and password(email must be in emai
 
 Thereafter, users are then able to use their account’s email and password to sign in to the app. If the account exists in the Firebase authentication and the user has verified their email before, the user will be able to access the app.
 
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image5.png "image_tooltip")
+![](https://i.imgur.com/RM0ABz4.png)
 
 
 Fig 2: Screen Grabs From left, Sign Up, Sign In, Email Verification
@@ -183,11 +123,7 @@ The setup process will be as follows (Shown in screengrab below, left to right):
 4. Lastly, the user will have to add a profile photo to show others how they look like for easier identification and connections.
 
 
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image6.png "image_tooltip")
+![](https://i.imgur.com/9xqyJNG.jpg)
 
 
 Fig 3: Profile Setup Screen Grabs
@@ -203,11 +139,7 @@ Additionally, within the homepage itself, there is a preview of projects under_ 
 We can also see a custom Chip navigation bar implemented through the use of the library _Ismael Divita Chip Navigation Bar ([https://github.com/ismaeldivita/chip-navigation-bar](https://github.com/ismaeldivita/chip-navigation-bar))_, which improved the aesthetics of the user interface. Clicking on the respective chips/icons in the navigation bar would bring the user to the 4 main pages of the application - Explore (Home page), Chats, My Projects, and Profile. This was implemented through the use of fragments with the navigation bar, where clicking on the navigation bar would change the view of the app (i.e. a different fragment is shown) through using a Fragment Container, allowing the user to cycle through the views. 
 
 
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image7.png "image_tooltip")
+![](https://i.imgur.com/CmOUKHv.png)
 
 
 Fig 4: Home-page and search function
@@ -223,18 +155,12 @@ The Chat tab was implemented as a nested fragment with 2 tabs using a tablayout 
 
 Users are able to speak to one another live using the app and all information of their chat is stored and retrieved from firebase. They are stored as a chatitem that has 3 information: The message, the sender and the receiver. With these 3 information, we are able to instantiate the chat between users through parsing the database. While this is a primitive way of creating a chat function, it allows us to expand on the data and information we can store and use in future expansion (ability to store date time, last read etc… to add more functionalities.)
 
+![](https://i.imgur.com/LFSBFj0.png)
 
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image8.png "image_tooltip")
 
 
 Fig 5: Chat Tab, All Users Display and an example of a chat between two users.
 
-
-## 
 
 
 ## **6 | Project Application/Management**
@@ -250,20 +176,14 @@ The project lead who posted the project would be able to view the applicants who
 Upon acceptance, the one who applied for the project would be able to see the project move from the “Applied Projects” tab to the “Projects” tab, which serves as verification that his application was successful.
 
 
+![](https://i.imgur.com/JDIb32s.jpg)
 
-
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image9.png "image_tooltip")
 
 
 Fig 6: From left: Create Project listing, Applicant Viewing Activity, Project Management Activity, 
 
 my activeprojects and my applied projects tab.
 
-
-## 
 
 
 ## **7 | Profile Viewing/Management**
@@ -275,16 +195,11 @@ This can be done via the profile page, where by clicking on the edit function th
 The goal of allowing users to edit their profile as and when they want is to allow the accounts of the users to accurately present their progress, current skills and what they are looking for for the app to better meet their needs.
 
 
-
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image10.png "image_tooltip")
+![](https://i.imgur.com/YCwww7o.jpg)
 
 
 Fig 7: Profile View and Fields under Edit Profile
 
-**		**
 
 
 
@@ -295,11 +210,8 @@ Fig 7: Profile View and Fields under Edit Profile
 ## **System Overview**
 
 
+![](https://i.imgur.com/FYdlG7v.png)
 
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image11.png "image_tooltip")
 
 
 Diagram 2. System Architecture
@@ -316,12 +228,7 @@ As seen in the diagram above, our system architecture only relies on a single da
 
 We used Google’s Firebase to act as our database, using 2 main functions: Firebase Authentication for account management and Firebase Real-time Database for data storage and retrieval.The database is set up with 4 main child nodes attached to the root node. These correspond to respective custom classes in our project. 
 
-
-
-<p id="gdcalert12" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image12.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert13">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image12.png "image_tooltip")
+![](https://i.imgur.com/qhnmPNi.png)
 
 
 Fig. 8 Database Overview
@@ -335,10 +242,8 @@ In each child message node, there will be 3 attributes: 1. The message, 2. The s
 
 
 
-<p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+![](https://i.imgur.com/n01f21M.png)
 
-
-![alt_text](images/image13.png "image_tooltip")
 
 
 Fig. 9 Chat child message node
@@ -354,11 +259,8 @@ Similar to how the chat node instantiates a unique id for each chat message, the
 One thing to note is that the applicantsinProject, category, skills required and usersinProject are all stored as arrays as there can be multiple data entries for those fields.
 
 
+![](https://i.imgur.com/QqzNnhE.png)
 
-<p id="gdcalert14" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image14.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert15">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image14.png "image_tooltip")
 
 
 Fig. 10 Projects child message node
@@ -382,12 +284,7 @@ This corresponds to a custom class with the same title shown in the diagram belo
 
 Each user has a node that is named using their user id that is generated when an account is created in the authentication section of Firebase.
 
-
-
-<p id="gdcalert15" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image15.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert16">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image15.png "image_tooltip")
+![](https://i.imgur.com/fvYUzvH.png)
 
 
 Fig. 11 users_display node
@@ -397,12 +294,7 @@ Fig. 11 users_display node
 
 Similar to the users_display node, however, it stores potentially sensitive information such as the user’s email. Future implementation that might enquire the user’s sensitive information such as user’s phone number or credit card information (should they be required) can also be stored here to segregate the private information.
 
-
-
-<p id="gdcalert16" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image16.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert17">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image16.png "image_tooltip")
+![](https://i.imgur.com/y1ftvFK.png)
 
 
 Fig. 11 users_private node
