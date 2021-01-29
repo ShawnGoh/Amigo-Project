@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".projectmanagement_tab.EditPojects"></activity>
+        <activity android:name=".projectmanagement_tab.InfintieScrolling"></activity>
+        <activity android:name=".projectmanagement_tab.EditPojects" />
         <activity android:name=".projectmanagement_tab.CreateNewProject" />
         <activity android:name=".profilemanagement_tab.profileactivity" />
         <activity android:name=".chat_tab.MessageActivity" />
