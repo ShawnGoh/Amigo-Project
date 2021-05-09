@@ -5,7 +5,7 @@ ISTD 50.001 INTRODUCTION TO INFORMATION SYSTEMS AND PROGRAMMING
 **1D Information Systems Design Project**
 # **Amigo Project**
 
-**Team 2-7**
+
 1004581	Toh Kai Feng
 
 1004288	Bryan Phengan Hengardi 
@@ -16,11 +16,6 @@ ISTD 50.001 INTRODUCTION TO INFORMATION SYSTEMS AND PROGRAMMING
 
 1004241 	Amrish Dev Sandhu
 
-
-# **Table of Contents**
-
-
-[TOC]
 
 
 
